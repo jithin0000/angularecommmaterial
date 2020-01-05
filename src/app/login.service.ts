@@ -6,16 +6,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  url="http://localhost:50308/api/Auth/login/"
+  url = 'http://localhost:50308/api/Auth/login/';
 
   header = new HttpHeaders({
-    'Authorization':'token'+localStorage.getItem('token')
-  })
+    Authorization: 'token' + localStorage.getItem('token')
+  });
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
-  loginuser(body){
-    return this.http.post(this.url,body,{headers:this.header})
+  loginuser(body) {
+    return this.http.post(this.url, body, {headers: this.header});
   }
 }

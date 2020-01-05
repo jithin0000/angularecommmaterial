@@ -26,6 +26,9 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashComponent } from './dash/dash.component';
+import { AddressComponent } from './address/address.component';
+import { PaymentComponent } from './payment/payment.component';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -44,6 +47,9 @@ import { DashComponent } from './dash/dash.component';
     AdmindashboardComponent,
     SidebarComponent,
     DashComponent,
+    AddressComponent,
+    PaymentComponent,
+    CartComponent,
 
     
   ],

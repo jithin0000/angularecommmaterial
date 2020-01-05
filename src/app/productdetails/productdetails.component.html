@@ -12,19 +12,22 @@
   <div class="col-lg-8" >
 
 
-      <div class="card flex-row flex-wrap">
-        <div class="card-header border-0">
-          <img src="{{Details.imageurl}}" width="200px" alt="">
-        </div>
-        <div class="card-block px-2">
-          <h4 class="card-title">{{Details.name}}</h4>
-          <p class="card-text">{{Details.price}}</p>
-          <p class="card-text">{{Details.description}}</p>
-        </div>
-        
-        <div class="card-block mt-5 px-2">
-            <button (click)="AddtoCart(Details)" style="float: right" class="btn btn-primary mb-2 ">AddtoCart</button>
 
+      <div class="card ">
+        <div class="detail">
+          <div class="card-header border-0">
+            <img src="{{Details.imageurl}}" width="200px" alt="">
+          </div>
+          <div class="card-block px-2 mx-2">
+            <h4 class="card-title">{{Details.name}}</h4>
+            <p class="card-text">{{Details.price}}&#36;</p>
+            <p class="card-text">{{Details.description}}</p>
+          </div>
+          
+          <div class="card-block mt-5 px-2">
+              <button (click)="AddtoCart(Details)" style="float: right" class="btn btn-primary mb-2 ">AddtoCart</button>
+  
+          </div>
         </div>
       </div>
       

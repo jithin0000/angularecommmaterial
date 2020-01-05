@@ -13,6 +13,8 @@ import { UpdateproductsComponent } from './updateproducts/updateproducts.compone
 import { ViewcartComponent } from './viewcart/viewcart.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AddressComponent } from './address/address.component';
+import {PaymentComponent} from './payment/payment.component';
 
 const routes: Routes = [
 
@@ -20,13 +22,15 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'category',component:CategoryComponent},
   {path:'updatecategory/:id',component:UpdatecategoryComponent},
-  {path:'',component:HomeComponent, canActivate :[AuthguardGuard] },
+  {path:'',component:HomeComponent },
   {path:'product',component:ProductComponent},
   {path:'productdetails/:id',component:ProductdetailsComponent},
   {path:'updateproducts/:id',component:UpdateproductsComponent},
   {path:'viewcart',component:ViewcartComponent},
   {path:'admindashboard',component:AdmindashboardComponent},
-  
+  {path:'address',component:AddressComponent, canActivate:[AuthguardGuard]},
+  {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthguardGuard]},
+
 ];
 
 @NgModule({

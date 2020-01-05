@@ -1,0 +1,39 @@
+<div class="container mt-5">
+
+
+  <div class="row">
+    <div class="col center">
+      <div class="alert alert-success center " *ngIf="paid"><h1>Paid SuccessFully</h1></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h4>Cart</h4>
+      <p class="items">
+
+      </p>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <h3>Shipping to : </h3>
+      <div *ngIf="address !== undefined " class="card">
+        <div class="card-content">
+          <p  *ngIf="user !== undefined"  class="card-text">Name : {{user.email}}</p>
+          <p>{{ address.LineFirst }} {{ address.LineSecond }}
+            {{ address.City }}  {{address.Place}}
+            {{ address.PostalCode }}  {{address.PhoneNumber}}  </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col lg-4">
+      <div #paypal></div>
+    </div>
+  </div>
+
+</div>

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ToastHelper } from 'src/Utils/ToastHelper';
 import { ToasthelperService } from '../helper/toasthelper.service';
 import { ConnectionService } from 'ng-connection-service';
+import {AuthService} from '../auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,32 +15,31 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private loginservice:LoginService,
-    private router:Router,
-    private toasthelperservice:ToasthelperService,
-    ) { 
+    private authService: AuthService,
+    private router: Router,
+    private toasthelperservice: ToasthelperService,
+    ) {
 
-      
+
     }
 
   ngOnInit() {
   }
 
- 
 
-  onSubmit(login){
-    this.loginservice.loginuser(login.value).subscribe(res=>{
-      console.log(res)
-      localStorage.setItem('token',res['Token'])
-      
-      this.router.navigate(['/'])
+
+  onSubmit(login) {
+    this.authService.loginUser(login.value).subscribe(res => {
+      localStorage.setItem('token', res['token']);
+
+      this.router.navigate(['/']);
       // this.toast.success("Logged in Success")
-      this.toasthelperservice.showSuccess("logged in successfuly")
+      this.toasthelperservice.showSuccess('logged in successfuly');
     },
     //  err=>this.toast.error("error encoutered"+err.message)
 
-    err=>this.toasthelperservice.showError(err.message)
-    )
+    err => this.toasthelperservice.showError(err.message)
+    );
   }
 
 }

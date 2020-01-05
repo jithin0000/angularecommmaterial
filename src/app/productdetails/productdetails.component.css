@@ -1,3 +1,9 @@
 .cartcol{
     float: right;
 }
+
+.detail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

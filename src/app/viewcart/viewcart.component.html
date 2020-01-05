@@ -20,13 +20,17 @@
        <tr style="background-color:gainsboro;">
          <td>Total</td>
          <td></td>
-         <td>{{totalPrice}}</td>
+         <td style="font-weight: bold;" >{{totalPrice}}&#36;</td>
          <td></td>
        </tr>
+       <tr >
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button [routerLink]="[ '/address' ]" class="btn btn-success">pay now</button></td>
+      </tr>
      </tbody>
 
    
   </table>
-  <!-- <button (click)="onClick(payment)"  class="btn btn-primary">Pay Now</button> -->
-  <a (click)="onPay(totalPrice)" class="btn btn-success">Pay now <ngx-paypal [config]="payPalConfig"></ngx-paypal>  </a>
   </div>
