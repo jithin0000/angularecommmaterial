@@ -10,9 +10,11 @@
   <div class="row">
     <div class="col-lg-4">
       <h4>Cart</h4>
-      <p class="items">
+        <ul *ngIf="cart !== undefined " class="list-group">
+          <li class="list-group-item" *ngFor="let pdt of cart.Products"  >{{pdt.name}}  <span class="badge badge-secondary" >{{pdt.price}}&#36;</span></li>
 
-      </p>
+          <li class="list-group right"> <h6>Toatal</h6> <span class="badge badge-primary">{{cart.Total}} &#36;</span> </li>
+    </ul>
       <hr>
     </div>
   </div>

@@ -18,18 +18,18 @@ import {PaymentComponent} from './payment/payment.component';
 
 const routes: Routes = [
 
-  {path:'register',component:RegisterComponent},
-  {path:'login',component:LoginComponent},
-  {path:'category',component:CategoryComponent},
-  {path:'updatecategory/:id',component:UpdatecategoryComponent},
-  {path:'',component:HomeComponent },
-  {path:'product',component:ProductComponent},
-  {path:'productdetails/:id',component:ProductdetailsComponent},
-  {path:'updateproducts/:id',component:UpdateproductsComponent},
-  {path:'viewcart',component:ViewcartComponent},
-  {path:'admindashboard',component:AdmindashboardComponent},
-  {path:'address',component:AddressComponent, canActivate:[AuthguardGuard]},
-  {path: 'payment/:id', component: PaymentComponent, canActivate: [AuthguardGuard]},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'category', component: CategoryComponent},
+  {path: 'updatecategory/:id', component: UpdatecategoryComponent},
+  {path: '', component: HomeComponent },
+  {path: 'product', component: ProductComponent},
+  {path: 'productdetails/:id', component: ProductdetailsComponent},
+  {path: 'updateproducts/:id', component: UpdateproductsComponent},
+  {path: 'viewcart', component: ViewcartComponent},
+  {path: 'admindashboard', component: AdmindashboardComponent},
+  {path: 'address', component: AddressComponent, canActivate: [AuthguardGuard]},
+  {path: 'payment', component: PaymentComponent, canActivate: [AuthguardGuard]},
 
 ];
 

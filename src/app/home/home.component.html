@@ -15,7 +15,7 @@
     </div>
 
 <div class="conatiner mt-5">
-   
+
 
   <div class="row">
     <div class="col-sm-4  " >
@@ -27,7 +27,7 @@
        </div>
        <div *ngFor ="let cat of CategoryList" (click)="filterbyCategory(cat.CategoryId)" class="list-group-item">{{cat.categoryname}}</div>
      </ul>
-     
+
     </div>
 
     <div class="col-lg-8" >
@@ -40,12 +40,12 @@
             <h4 class="card-title">{{item.name}}</h4>
             <p class="card-text">{{item.description}}</p>
             <p class="card-text">Price :{{item.price}}</p>
-            <button routerLink="/productdetails/{{item.productId}}" class="btn btn-primary">Details </button>
+            <button routerLink="/productdetails/{{item.ProductId}}" class="btn btn-primary">Details </button>
             <!-- <button (click)="onSubmit(item)"  class="btn btn-primary">AddtoCart </button> -->
       </div>
     </div>
        </div>
-      
+
     </div>
     <div class="row">
       <div class="col">

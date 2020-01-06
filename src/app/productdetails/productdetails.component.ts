@@ -4,6 +4,8 @@ import { ProductService } from '../product.service';
 import { Product } from '../Models/Product';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
+import {Cart} from '../Models/Cart';
+import {CartService} from '../cart.service';
 
 @Component({
   selector: 'app-productdetails',
@@ -11,98 +13,91 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./productdetails.component.css']
 })
 export class ProductdetailsComponent implements OnInit {
- 
-  id=0;
-  Details:Product ={} ;      
-  Cart:any[]=[];   
-  Cartcount=0;                                                                     
+
+  id = 0;
+  details: Product  ;
+  Cartcount = 0;
+
+  cart: Cart;
+  itemInCart  = false;
+
+
   constructor(
-    private router:ActivatedRoute,
-    private productservice:ProductService,
+    private router: ActivatedRoute,
+    private productservice: ProductService,
     private cookieService: CookieService,
-    
-    
+    private  cartService: CartService
+
     ) { }
 
 
   ngOnInit() {
 
-    
+    const cart = localStorage.getItem('cart');
 
-    let cart = localStorage.getItem('cart')
-    let cartlist = JSON.parse(cart)
+    if (cart !== null) {
+      // tslint:disable-next-line:radix
+      const cartId = parseInt(cart);
+      this.cartService.getCartbyid(cartId)
+        .subscribe(res => {
+          this.cart = res;
+        },
+          error => { console.log(error); }
+        );
 
-    if(cartlist !== null){
-
-      this.Cart = cartlist
-
-      this.Cart.forEach(
-        item => {
-
-          this.Cartcount += item.quantity 
-        }
-      )
-
-      
-
-
-    }else{
-      this.Cart = []
     }
 
-
-
-
-
-    this.router.params.subscribe(res=>{
-      this.id=res['id']
-      this.getbyid(this.id)
-    })
+    this.router.params.subscribe(res => {
+      this.id = res.id;
+      this.getbyid(this.id);
+    });
   }
 
-  getbyid(id){
-    this.productservice.getproductbyid(id).subscribe(res=>{
-      console.log(res)
-      this.Details=res
-    })
+  getbyid(id) {
+    this.productservice.getproductbyid(id).subscribe(res => {
+      this.details = res;
+      this.checkItemAlreadyInCart(res);
+    });
   }
 
-  AddtoCart(product){
+  private checkItemAlreadyInCart(product: Product) {
 
-        let CartItem = {
-          'productId':product.productId,
-          'productname':product.name,
-          'productprice':product.price,
-          'quantity':1
+    if (this.cart.Products.length === 0) {
+      this.itemInCart = false;
+      return;
+    }
 
-        }
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.cart.Products.length; i++) {
 
-        let duplicate = false;
-    this.Cart.forEach( cartitem => duplicate = cartitem.productId === CartItem.productId);
+      const item = this.cart.Products[i];
 
-    if(duplicate){
-
-      this.Cart.forEach(
-        element =>  { if (element.productId === CartItem.productId ) {
-          element.quantity = element.quantity + 1
-        }
+      if (item.ProductId === product.ProductId) {
+        this.itemInCart = true;
+        break;
       }
-      )
-      this.Cartcount ++
 
-    }else{
-      this.Cart.push(CartItem)
-
-      this.Cartcount ++
-
+      this.itemInCart = false;
 
     }
-    localStorage.setItem('cart' , JSON.stringify(this.Cart))
 
-    console.log(duplicate)
-
-      
   }
 
-  
+  AddtoCart(productId) {
+
+    const body = {
+      ProductId : productId
+    };
+
+    this.cartService.addToCart(this.cart.CartId, body).subscribe( res => {
+      this.cart = res;
+      this.checkItemAlreadyInCart(this.details);
+    },
+      error => {
+      console.log(error);
+      });
+
+  }
+
+
 }

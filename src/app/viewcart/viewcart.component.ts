@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IPayPalConfig,ICreateOrderRequest } from 'ngx-paypal';
+import {CartService} from '../cart.service';
+import {Product} from '../Models/Product';
 
 @Component({
   selector: 'app-viewcart',
@@ -8,26 +10,34 @@ import { IPayPalConfig,ICreateOrderRequest } from 'ngx-paypal';
 })
 export class ViewcartComponent implements OnInit {
 
-  CartList:any[];
+  cartProductList: Product[];
   totalPrice=0;
   public payPalConfig ? : IPayPalConfig;
   showSuccess: boolean;
   showCancel: boolean;
   showError: boolean;
-  constructor() { }
+  constructor(
+    private  cartService: CartService
+  ) { }
 
 
 
   ngOnInit() {
+    // tslint:disable-next-line:prefer-const
     var viewcart = localStorage.getItem('cart')
-    let viewcartList = JSON.parse(viewcart)
-    console.log(viewcartList)
-    this.CartList=viewcartList
-    this.CartList.forEach(item=>{
-      this.totalPrice +=item.productprice * item.quantity
-    })
 
-    this.initConfig()
+    // tslint:disable-next-line:radix
+    this.cartService.getCartbyid(parseInt(viewcart)).subscribe(res => {
+      this.cartProductList = res.Products
+
+      res.Products.forEach(item => {
+        this.totalPrice += item.price
+      })
+
+    },
+      error => { console.log(error)})
+
+    this.initConfig();
   }
 
   initConfig(){

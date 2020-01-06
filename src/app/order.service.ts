@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Address} from './Models/Address';
+import {Order} from './Models/Order';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddressService {
+export class OrderService {
 
-  url = 'http://localhost:50308/api/Addresses/';
+  url = 'http://localhost:50308/api/orders/';
 
   constructor(private http: HttpClient) { }
 
@@ -19,30 +19,30 @@ export class AddressService {
     Authorization: 'Bearer ' +  this.token
   });
 
-  addAddress(body) {
-    return this.http.post<Address>(this.url, body, {headers: this.header}).pipe(
+  createOrder(body: Order) {
+    return this.http.post<Order>(this.url, body, {headers: this.header}).pipe(
       catchError(this.handleError)
     );
   }
 
-  getallAddress() {
-    return this.http.get<Address[]>(this.url, {headers: this.header}).pipe(
+  getallOrder() {
+    return this.http.get<Order[]>(this.url, {headers: this.header}).pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteAddress(id) {
+  deleteOrder(id) {
     return this.http.delete(this.url + id, {headers: this.header}).pipe(
       catchError(this.handleError)
     );
 
   }
-  getAddressbyid(id: number) {
-    return this.http.get<Address>(this.url + id + '/', {headers: this.header}).pipe(
+  getOrderbyid(id: number) {
+    return this.http.get<Order>(this.url + id + '/', {headers: this.header}).pipe(
       catchError(this.handleError)
     );
   }
-  updateAddress(id, body) {
+  updateOrder(id, body) {
     return this.http.put(this.url + id + '/', body, {headers: this.header}).pipe(
       catchError(this.handleError)
     );
@@ -77,4 +77,5 @@ export class AddressService {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
 }

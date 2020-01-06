@@ -5,6 +5,10 @@ import {Address} from '../Models/Address';
 import {UserService} from '../user.service';
 import {User} from '../Models/User';
 import {async} from '@angular/core/testing';
+import {CartService} from '../cart.service';
+import {Cart} from '../Models/Cart';
+import {OrderService} from '../order.service';
+import {Order} from '../Models/Order';
 
 declare var paypal;
 
@@ -21,25 +25,27 @@ export class PaymentComponent implements OnInit {
   address: Address;
   user: User;
 
-  cart: {} = {};
+  cart: Cart;
    paid = false ;
+  private totalPrice = 0;
 
   constructor(
-    private addressService: AddressService, private userService: UserService,
+    private orderService: OrderService,
+    private cartService: CartService, private userService: UserService,
     private  activatedRoute: ActivatedRoute) {
-     this.activatedRoute.params.subscribe(res => {
-       // tslint:disable-next-line:radix
-      this.id = parseInt(res.id);
 
-      this.addressService.getAddressbyid(this.id).subscribe(
-        // tslint:disable-next-line:no-shadowed-variable
-        res => {
-          this.address = res;
-        },
-        error => console.log(error)
-      );
-    });
+    const cart = localStorage.getItem('cart');
 
+    if (cart !== null) {
+      // tslint:disable-next-line:radix
+      this.cartService.getCartbyid(parseInt(cart)).subscribe(res => {
+        this.cart = res;
+
+        res.Products.forEach(item => {
+          this.totalPrice += item.price;
+        });
+      });
+    }
   }
 
   ngOnInit() {
@@ -53,17 +59,38 @@ export class PaymentComponent implements OnInit {
                   description:  ' some description ',
                   amount:  {
                     currency_code: 'USD',
-                    value: 25
+                    value:  this.totalPrice
                   }
 
                 }
               ]
-            })
+            });
         },
         onApprove: async  (data, actions) => {
           const order = await  actions.order.capture();
           this.paid = true;
-          console.log(order)
+          console.log(order);
+
+          const cart = localStorage.getItem('cart');
+
+          const  body: Order = {
+            OrderNumber : order.id,
+            CartId  : parseInt(cart),
+            UserId : 2,
+            User: null, Cart: null,
+            AddresLine1 : order.purchase_units[0].shipping.address.address_line_1,
+            AddresLine2 : order.purchase_units[0].shipping.address.address_line_2,
+            Area: order.purchase_units[0].shipping.address.admin_area_1,
+            PostalCode: order.purchase_units[0].shipping.address.postal_code,
+            CountryCode: order.purchase_units[0].shipping.address.country_code,
+          };
+
+          this.orderService.createOrder(body).subscribe( res => {
+              this.navigate_to_order_homel();
+          },
+            error => { console.log(error); }
+
+          );
         },
         onError: err => {
           console.log(err);
@@ -79,6 +106,12 @@ export class PaymentComponent implements OnInit {
     // },
     //   error => { console.log(error); }
     // );
+  }
+
+  private navigate_to_order_homel() {
+
+    localStorage.setItem('cart', null);
+
   }
 
 }

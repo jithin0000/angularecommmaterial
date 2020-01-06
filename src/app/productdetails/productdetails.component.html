@@ -3,9 +3,10 @@
   <div class="col"></div>
   <div class="col"></div>
   <div class="col cartcol">
-      <span routerLink="/viewcart" class="badge badge-primary"> <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>{{Cartcount}}</span>
+      <span routerLink="/viewcart" class="badge badge-primary mt-5 " *ngIf="cart !== undefined"  >
+        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>{{cart.Products.length}}</span>
   </div>
-  
+
 </div>
 <div class="container">
 <div class="row">
@@ -13,24 +14,25 @@
 
 
 
-      <div class="card ">
+      <div class="card " *ngIf="details !== undefined " >
         <div class="detail">
           <div class="card-header border-0">
-            <img src="{{Details.imageurl}}" width="200px" alt="">
+            <img src="{{details.imageurl}}" width="200px" alt="">
           </div>
           <div class="card-block px-2 mx-2">
-            <h4 class="card-title">{{Details.name}}</h4>
-            <p class="card-text">{{Details.price}}&#36;</p>
-            <p class="card-text">{{Details.description}}</p>
+            <h4 class="card-title">{{details.name}}</h4>
+            <p class="card-text">{{details.price}}&#36;</p>
+            <p class="card-text">{{details.description}}</p>
           </div>
-          
+
           <div class="card-block mt-5 px-2">
-              <button (click)="AddtoCart(Details)" style="float: right" class="btn btn-primary mb-2 ">AddtoCart</button>
-  
+              <button *ngIf="itemInCart" (click)="AddtoCart(details.ProductId)"  class="btn btn-danger">remove from cart</button>
+              <button *ngIf="!itemInCart" (click)="AddtoCart(details.ProductId)" class="btn btn-success">add to cart</button>
+
           </div>
         </div>
       </div>
-      
+
 
 
 
@@ -47,17 +49,17 @@
 
 
 
-<!-- 
+<!--
     <div class="card">
-      <img class="card-img-left" src="{{Details.imageurl}}" width="250px" height="auto" alt="">
+      <img class="card-img-left" src="{{details.imageurl}}" width="250px" height="auto" alt="">
       <div class="card-body">
-        <h4 class="card-title">{{Details.name}}</h4>
-        <p class="card-text">{{Details.price}}</p>
-        <p class="card-text">{{Details.description}}</p> -->
+        <h4 class="card-title">{{details.name}}</h4>
+        <p class="card-text">{{details.price}}</p>
+        <p class="card-text">{{details.description}}</p> -->
 
-      
-      <!-- <button (click)="AddtoCart(Details)" class="btn btn-primary">AddtoCart</button>
-    
+
+      <!-- <button (click)="AddtoCart(details)" class="btn btn-primary">AddtoCart</button>
+
       </div>
     </div> -->
 
@@ -74,9 +76,9 @@
 
 
     <div class="col-lg4">
-      
-      
-      
+
+
+
     </div>
   </div>
 </div>

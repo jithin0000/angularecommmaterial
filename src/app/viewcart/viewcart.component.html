@@ -1,36 +1,33 @@
-
 <div class="container">
   <table class="table table-stripped">
-   
+
      <tr>
-      
+
        <th></th>
        <th>Product Name</th>
        <th>Product Price</th>
-       <th>Quantity</th>
      </tr>
-  
+
      <tbody>
-       <tr *ngFor="let cat of CartList ; index as i; ">
+       <tr *ngFor="let product of cartProductList ; index as i; ">
          <td>{{i + 1}}</td>
-         <td>{{cat.productname}}</td>
-         <td>{{cat.productprice}}</td>
-         <td>{{cat.quantity}}</td>
+         <td>{{product.name}}</td>
+         <td>{{product.price}} &#36;</td>
        </tr>
        <tr style="background-color:gainsboro;">
          <td>Total</td>
          <td></td>
-         <td style="font-weight: bold;" >{{totalPrice}}&#36;</td>
          <td></td>
+         <td style="font-weight: bold;" >{{totalPrice}}&#36;</td>
        </tr>
        <tr >
         <td></td>
         <td></td>
         <td></td>
-        <td><button [routerLink]="[ '/address' ]" class="btn btn-success">pay now</button></td>
+        <td><button [routerLink]="[ '/payment' ]" class="btn btn-success">pay now</button></td>
       </tr>
      </tbody>
 
-   
+
   </table>
   </div>

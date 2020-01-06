@@ -29,9 +29,13 @@ export class CartService {
   }
 
   updateCart(id, body) {
-    return this.http.put(this.url + id + '/', body, {headers: this.header});
+    return this.http.put<Cart>(this.url + id + '/', body, {headers: this.header});
   }
 
+
+  addToCart(id, body) {
+    return this.http.post<Cart>(this.url  + 'add/' + id , body, {headers: this.header});
+  }
 
   deleteCarts(id) {
     return this.http.delete(this.url + id, {headers: this.header});

@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { ToasthelperService } from '../helper/toasthelper.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {AuthService} from '../auth.service';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {RegisterUser} from '../redux/actions/authAction';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +21,7 @@ export class RegisterComponent implements OnInit {
   errorMessage="";
 
   constructor(
+    private store: Store<AppState>,
     private authService:AuthService,
     private router:Router,
     private toasthelperservice:ToasthelperService,
@@ -27,6 +31,10 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+    this.store.select( store => store.user).subscribe(res => console.log(res))
+
+    this.store.dispatch(new RegisterUser("this is for testing"))
 
 this.GetUsers()
   }

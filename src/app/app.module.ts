@@ -21,7 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { ViewcartComponent } from './viewcart/viewcart.component'; 
+import { ViewcartComponent } from './viewcart/viewcart.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -29,8 +29,14 @@ import { DashComponent } from './dash/dash.component';
 import { AddressComponent } from './address/address.component';
 import { PaymentComponent } from './payment/payment.component';
 import { CartComponent } from './cart/cart.component';
+import { OrderComponent } from './order/order.component';
+import { StoreModule } from '@ngrx/store';
 
 
+import { reducers } from './redux/reducers/index'
+
+
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,8 +56,9 @@ import { CartComponent } from './cart/cart.component';
     AddressComponent,
     PaymentComponent,
     CartComponent,
+    OrderComponent,
 
-    
+
   ],
   imports: [
     BrowserModule,
@@ -64,9 +71,10 @@ import { CartComponent } from './cart/cart.component';
     AngularFireStorageModule,
     NgxPaginationModule,
     NgxPayPalModule,
-    
-    
-    
+    StoreModule.forRoot(reducers),
+
+
+
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
