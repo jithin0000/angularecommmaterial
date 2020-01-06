@@ -6,6 +6,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import {Cart} from '../Models/Cart';
 import {CartService} from '../cart.service';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {LoadProductDetail} from '../redux/actions/productDetail.action';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-productdetails',
@@ -14,90 +18,26 @@ import {CartService} from '../cart.service';
 })
 export class ProductdetailsComponent implements OnInit {
 
-  id = 0;
-  details: Product  ;
-  Cartcount = 0;
-
-  cart: Cart;
-  itemInCart  = false;
-
+  product$: Observable<Product>;
 
   constructor(
     private router: ActivatedRoute,
-    private productservice: ProductService,
-    private cookieService: CookieService,
-    private  cartService: CartService
-
+    private store: Store<AppState>
     ) { }
 
 
   ngOnInit() {
 
-    const cart = localStorage.getItem('cart');
-
-    if (cart !== null) {
-      // tslint:disable-next-line:radix
-      const cartId = parseInt(cart);
-      this.cartService.getCartbyid(cartId)
-        .subscribe(res => {
-          this.cart = res;
-        },
-          error => { console.log(error); }
-        );
-
-    }
-
     this.router.params.subscribe(res => {
-      this.id = res.id;
-      this.getbyid(this.id);
+      // tslint:disable-next-line:radix
+      const id = parseInt(res.id)
+      this.store.dispatch(new LoadProductDetail(id));
     });
-  }
 
-  getbyid(id) {
-    this.productservice.getproductbyid(id).subscribe(res => {
-      this.details = res;
-      this.checkItemAlreadyInCart(res);
-    });
-  }
-
-  private checkItemAlreadyInCart(product: Product) {
-
-    if (this.cart.Products.length === 0) {
-      this.itemInCart = false;
-      return;
-    }
-
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.cart.Products.length; i++) {
-
-      const item = this.cart.Products[i];
-
-      if (item.ProductId === product.ProductId) {
-        this.itemInCart = true;
-        break;
-      }
-
-      this.itemInCart = false;
-
-    }
+    this.product$ = this.store.select(state => state.productDetail.data);
 
   }
 
-  AddtoCart(productId) {
-
-    const body = {
-      ProductId : productId
-    };
-
-    this.cartService.addToCart(this.cart.CartId, body).subscribe( res => {
-      this.cart = res;
-      this.checkItemAlreadyInCart(this.details);
-    },
-      error => {
-      console.log(error);
-      });
-
-  }
 
 
 }

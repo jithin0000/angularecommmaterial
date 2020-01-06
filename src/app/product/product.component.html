@@ -3,7 +3,7 @@
 <div class="container">
   <div class="form-group">
     <label for="productImageurl">Product Imageurl</label>
-    <input  name="productImageurl" #productImageurl (change)="uploadimage(productImageurl)"   type="file" class="form-control" required id="productImageurl" placeholder="productImageurl">
+    <input  name="productImageurl" #productImageurl (change)="uploadImage(productImageurl)"   type="file" class="form-control" required id="productImageurl" placeholder="productImageurl">
     <!-- <div *ngIf="!productImageurl.valid && productImageurl.touched" class="alert alert-danger">This field is required</div> -->
   </div>
 </div>
@@ -28,11 +28,7 @@
       <input ngModel #description="ngModel" type="text" name="description" id="description" class="form-control" placeholder="Product description" />
       <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Product description required</div>
     </div>
-     <!-- <div class="form-group">
-      <label for="imageurl">Product imageurl</label>
-      <input ngModel #imageurl="ngModel" type="file" name="imageurl" id="imageurl" class="form-control"  />
 
-    </div>  -->
     <div class="form-group">
       <label for="stock">Product stock</label>
       <input ngModel #stock="ngModel"  type="text" name="stock" id="stock" class="form-control" placeholder="Product stock" />
@@ -61,9 +57,10 @@
     </div> -->
 
      <div class="form-group">
-            <label for="productCategory">product Category</label>
-            <select ngModel name="CategoryId" #productCategory="ngModel" required class="form-control">
-              <option *ngFor="let cat of catgoryList" [value]="cat.CategoryId" >{{cat.categoryname}}</option>
+            <label for="category">product Category</label>
+            <select id="category" ngModel name="CategoryId" #productCategory="ngModel" required class="form-control">
+              <option *ngFor="let cat of categoryList$ | async "
+                      [value]="cat.CategoryId" >{{cat.categoryname}}</option>
               <div *ngIf="!productCategory.valid && productCategory.touched" class="alert alert-danger">This field is required</div>
             </select>
           </div>
@@ -89,7 +86,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of productList" >
+    <tr *ngFor="let item of productList$|async " >
       <td ><img [src]="item.imageurl" style="width:100px;height: 100px;"></td>
       <td>{{item.name}}</td>
       <td>{{item.price}}</td>
@@ -99,10 +96,10 @@
       <td>{{item.color}}</td>
       <td>{{item.discount}}</td>
       <td>{{item.status}}</td>
-      <td>{{item.categoryId}}</td>
+      <td>{{item.CategoryId}}</td>
 
       <td> <button routerLink="/updateproducts/{{item.ProductId}}"  class="btn btn-success">Update</button></td>
-      <td> <button (click)="productdelete(item.ProductId)" class="btn btn-danger">Delete</button></td>
+      <td> <button (click)="deleteProduct(item.ProductId)" class="btn btn-danger">Delete</button></td>
 
   </tr>
 

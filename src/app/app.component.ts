@@ -36,34 +36,34 @@ export class AppComponent implements OnInit {
 
     const cart = localStorage.getItem('cart');
 
-    if (cart == null) {
-      this.cartService.createCart({}).subscribe(res =>{
-        console.log(res)
-        localStorage.setItem('cart',res.CartId.toString())
-      },
-        error => {console.log(error)})
-
-    } else {
-      // this.cartService.updateCart(parseInt(cart), )
-
-      this.cartService.getCartbyid(parseInt(cart))
-        .subscribe(res => {
-
-          console.log(res)
-
-          if (res.UserId == null){
-            console.log("in this")
-            const token = localStorage.getItem('token');
-            const data = this.jwtHelper.decodeToken(token)
-
-
-            res.UserId = parseInt(data['nameid'])
-            this.cartService.updateCart(res.CartId, res).subscribe(c => console.log(c));
-          }
-        })
-
-
-    }
+    // if (cart == null) {
+    //   this.cartService.createCart({}).subscribe(res =>{
+    //     console.log(res)
+    //     localStorage.setItem('cart',res.CartId.toString())
+    //   },
+    //     error => {console.log(error)})
+    //
+    // } else {
+    //   // this.cartService.updateCart(parseInt(cart), )
+    //
+    //   this.cartService.getCartbyid(parseInt(cart))
+    //     .subscribe(res => {
+    //
+    //       console.log(res)
+    //
+    //       if (res.UserId == null){
+    //         console.log("in this")
+    //         const token = localStorage.getItem('token');
+    //         const data = this.jwtHelper.decodeToken(token)
+    //
+    //
+    //         res.UserId = parseInt(data['nameid'])
+    //         this.cartService.updateCart(res.CartId, res).subscribe(c => console.log(c));
+    //       }
+    //     })
+    //
+    //
+    // }
 
   }
 

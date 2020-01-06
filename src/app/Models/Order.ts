@@ -3,15 +3,15 @@ import {Cart} from './Cart';
 
 export  interface Order {
 
-  Id: number;
+  Id?: number;
   OrderNumber: number;
   UserId: number;
   User: User;
   CartId: number;
   Cart: Cart;
 
-  ShippingTotal: number;
-  OrderTotal: number;
+  ShippingTotal?: number;
+  OrderTotal?: number;
 
   AddresLine1: string;
   AddresLine2: string;

@@ -32,9 +32,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
 
-    this.store.select( store => store.user).subscribe(res => console.log(res))
-
-    this.store.dispatch(new RegisterUser("this is for testing"))
 
 this.GetUsers()
   }

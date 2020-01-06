@@ -23,31 +23,32 @@ export class DashComponent implements OnInit {
     private categoryservice:CategoryService,
     private productservice:ProductService,
     private userservice:RegisterService
-    
+
     ) { }
 
   ngOnInit() {
-    this.getallcategories()
-    this.getallproducts()
-    this.getallusers()
-    
+    this.getallcategories();
+    this.getallproducts();
+    this.getallusers();
+
   }
 
 getallcategories(){
-  this.categoryservice.getallCategory().subscribe(res=>{
-    this.CategoryList=res
-  })
+  this.categoryservice.getAll().subscribe(res => {
+    this.CategoryList = res;
+  });
 }
- getallproducts(){
-   this.productservice.getallProduct().subscribe(res=>{
-     this.ProductList=res
-   })
- }
+
+  getallproducts() {
+    this.productservice.getAll().subscribe(res => {
+      this.ProductList = res;
+    });
+  }
 
  getallusers(){
-   this.userservice.GetallUsers().subscribe(res=>{
-     this.userlist=res;
+   this.userservice.GetallUsers().subscribe(res => {
+     this.userlist = res;
 
-   })
+   });
  }
 }

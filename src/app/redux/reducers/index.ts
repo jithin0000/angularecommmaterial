@@ -1,15 +1,15 @@
 import * as fromProducts from './product.reducer';
-import {ActionReducerMap, createSelector} from '@ngrx/store';
-
-export interface ProductState {
-
-  products : fromProducts.ProductState;
-}
+import {ActionReducerMap} from '@ngrx/store';
+import * as fromCategories from './category.reducer';
+import * as fromProductDetail from './productDetail.reducer';
+import {AppState} from '../../Models/AppState';
 
 
-export const reducers: ActionReducerMap<ProductState> = {
+export const reducers: ActionReducerMap<AppState> = {
 
-  products: fromProducts.reducer
+  products: fromProducts.reducer,
+  categories: fromCategories.reducer,
+  productDetail : fromProductDetail.reducer
 };
 
 

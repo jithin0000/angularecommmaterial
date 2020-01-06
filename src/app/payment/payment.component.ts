@@ -19,7 +19,7 @@ declare var paypal;
 })
 export class PaymentComponent implements OnInit {
 
-  @ViewChild('paypal' ) paypalElement: ElementRef;
+  @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
 
   id = 0;
   address: Address;

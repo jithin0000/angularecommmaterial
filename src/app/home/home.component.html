@@ -10,7 +10,7 @@
 <div class="container mt-3">
     <div class="row">
       <div class="col-lg-6"></div>
-      <div class="col-lg-6 "> <input #sear1 (keyup)="search(sear1)" type="text" name="text" class="form-control" placeholder="search product"> </div>
+      <div class="col-lg-6 "> <input #sear1 (keyup)="search(sear1.value)" type="text" name="text" class="form-control" placeholder="search product"> </div>
     <div class="clearfix"></div>
     </div>
 
@@ -22,17 +22,17 @@
       <h6 class="cat ml-3">Category</h6>
       <hr>
      <ul class="list-group ml-3" >
-       <div (click)="getallproducts()" class="list-group-item">
+       <div (click)="getAll()" class="list-group-item">
         All
        </div>
-       <div *ngFor ="let cat of CategoryList" (click)="filterbyCategory(cat.CategoryId)" class="list-group-item">{{cat.categoryname}}</div>
+       <div *ngFor ="let cat of categoryList | async" (click)="filterByCategory(cat.CategoryId)" class="list-group-item">{{cat.categoryname}}</div>
      </ul>
 
     </div>
 
     <div class="col-lg-8" >
     <div class="row">
-      <div class="col-sm-4 mb-3" *ngFor="let item of filteredList | paginate: { itemsPerPage: 5, currentPage: p }" >
+      <div class="col-sm-4 mb-3" *ngFor="let item of productList | async | paginate: { itemsPerPage: 5, currentPage: p }" >
 
         <div class="card" >
           <img class="card-img-top" src="{{item.imageurl}}" alt="">
@@ -49,7 +49,7 @@
     </div>
     <div class="row">
       <div class="col">
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <pagination-controls (pageChange)=" $event"></pagination-controls>
         </div>
       </div>
     </div>

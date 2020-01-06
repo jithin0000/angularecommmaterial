@@ -34,6 +34,8 @@ import { StoreModule } from '@ngrx/store';
 
 
 import { reducers } from './redux/reducers/index'
+import {EffectsModule} from '@ngrx/effects';
+import {effects} from './redux/effects';
 
 
 // @ts-ignore
@@ -72,6 +74,7 @@ import { reducers } from './redux/reducers/index'
     NgxPaginationModule,
     NgxPayPalModule,
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects)
 
 
 

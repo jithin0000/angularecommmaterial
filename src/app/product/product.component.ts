@@ -6,6 +6,11 @@ import { CategoryService } from '../category.service';
 import { Category } from '../Models/Category';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {Observable} from 'rxjs';
+import {CreateProduct, DeleteProduct, LOAD_PRODUCTS} from '../redux/actions/product.action';
+import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 
 @Component({
   selector: 'app-product',
@@ -14,92 +19,58 @@ import { finalize } from 'rxjs/operators';
 })
 export class ProductComponent implements OnInit {
 
-  catgoryList:Category[]=[];
-  productList:Product[]=[];
-  imgurl="";
+  imageUrl = '';
+  productList$: Observable<Product[]>;
+  categoryList$: Observable<Category[]>;
+
   constructor(
+    private store: Store<AppState>,
     private storage: AngularFireStorage,
-    private productservice:ProductService,private fileuploadservice:FileuploadService,private categoryservice:CategoryService) { }
+    private fileuploadservice: FileuploadService,
+    ) { }
 
   ngOnInit() {
-    this.categoryservice.getallCategory().subscribe(res=>{
-      console.log(res)
-      this.catgoryList=res
-    })
-    this.geAllproducts()
+    this.productList$ = this.store.select(state => state.products.data);
+    this.categoryList$ = this.store.select(state => state.categories.data);
+
+    this.store.dispatch(new LOAD_PRODUCTS());
+    this.store.dispatch(new LOAD_CATEGORIES());
   }
 
 
-  uploadimage(imagefile:HTMLInputElement){
 
-    const image = imagefile.files[0]
-    let filePath = "fileapth"+Date.now
+  onSubmit(product) {
+    // console.log(product.value)
+    const formdata = {
+      ...product.value,
+
+      imageurl: this.imageUrl
+    };
+
+    this.store.dispatch(new CreateProduct(formdata));
+  }
+
+
+
+
+  deleteProduct(id) {
+    this.store.dispatch(new DeleteProduct(id));
+  }
+
+  uploadImage(productImageUrl) {
+
+    const image = productImageUrl.files[0];
+    const filePath = 'fileapth' + Date.now();
     const fileRef = this.storage.ref(filePath);
 
-    const task = this.storage.upload(filePath, image)
+    const task = this.storage.upload(filePath, image);
 
     task.snapshotChanges().pipe(
-      finalize(() =>  fileRef.getDownloadURL().subscribe(
-        res =>this.imgurl = res
-      ) )
-   )
-  .subscribe()
-
-
-
-
-
-
-
-
-//     let request = new FormData()
-
-//     request.append("file",image)
-// //uploaded
-//     this.fileuploadservice.imageupload(request).subscribe(res=>{
-//       console.log(res)
-//       //response
-//       this.imgurl=res['path']
-    // })
-  }
-
-  // createImgPath(imageurl){
-  //   return "http://localhost:50308/Images/ "+imageurl;}
-
-  onSubmit(product){
-    // console.log(product.value)
-    const formdata ={
-      ...product.value,
-      
-      "imageurl":this.imgurl
-    }
-    console.log(formdata)
-
-    this.productservice.createProduct(formdata).subscribe(res=>{
-      console.log(res)
-      this.productList.push(res)
-    },
-    
-    err=>{
-      console.log(err)
-    
-    }
+      finalize(() => fileRef.getDownloadURL().subscribe(
+        res => this.imageUrl = res
+      ))
     )
-  }
+      .subscribe();
 
-  
-  geAllproducts(){
-    this.productservice.getallProduct().subscribe(res=>{
-      console.log(res)
-      this.productList=res
-    })
-  }
-
-
-  productdelete(id){
-    this.productservice.deleteproducts(id).subscribe(res=>{
-      console.log(res)
-      this.geAllproducts()
-    })
   }
 }

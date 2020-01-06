@@ -21,18 +21,18 @@ export class UpdatecategoryComponent implements OnInit {
     })
   }
 
- 
+
   onUpdate(cupdate){
     console.log(cupdate.value);
  var formdata = {...cupdate.value,categoryId:this.id}
-    
-    this.categoryservice.updatecategory(this.id, formdata ).subscribe(
-      res => {console.log(res)
-      
-      
-      }
-      
-    )
+
+    // this.categoryservice.updatecategory(this.id, formdata ).subscribe(
+    //   res => {console.log(res)
+    //
+    //
+    //   }
+    //
+    // )
     this.route.navigate(['/category'])
   }
 
@@ -42,11 +42,11 @@ export class UpdatecategoryComponent implements OnInit {
      this.cname = res['categoryname']
      this.cdescription = res['description']
     })
-    
+
   }
 
 }
-  
+
 
 
 

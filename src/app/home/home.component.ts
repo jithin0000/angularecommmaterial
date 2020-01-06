@@ -3,6 +3,12 @@ import { ProductService } from '../product.service';
 import { Product } from '../Models/Product';
 import { CategoryService } from '../category.service';
 import { Category } from '../Models/Category';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {FilterProductsByCategory, FilterProductsByName, LOAD_PRODUCTS} from '../redux/actions/product.action';
+import {ProductState} from '../redux/reducers';
+import {Observable} from 'rxjs';
+import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 
 @Component({
   selector: 'app-home',
@@ -11,53 +17,48 @@ import { Category } from '../Models/Category';
 })
 export class HomeComponent implements OnInit {
 
-  filteredList:Product[]=[];
 
-  p: number = 1;
+  productList: Observable<Product[]>;
 
-  productList:Product[]=[];
-  Cart: any[]=[];
+  categoryList: Observable<Category[]>;
 
-  CategoryList:Category[]=[];
-  constructor(private productservice:ProductService,private categoryservice:CategoryService) { }
+  constructor(
+    private store: Store<AppState>
+  ) {
+  }
 
   ngOnInit() {
-    this.getallproducts()
-    this.getallCategory()
-  }
 
-  getallCategory(){
-    this.categoryservice.getallCategory().subscribe(res=>{
-      console.log(res)
-      this.CategoryList=res
-    })
-  }
-  getallproducts(){
-    this.productservice.getallProduct().subscribe(res=>{
-      console.log(res)
-      this.filteredList=this.productList=res
-    },
-    err=>{
-      console.log(err)
-    
-    })
-  }
+    this.productList = this.store.select(state => state.products.data);
+    this.categoryList = this.store.select(state => state.categories.data);
 
-  
+    this.store.dispatch(new LOAD_PRODUCTS());
+    this.store.dispatch(new LOAD_CATEGORIES());
 
-
-  filterbyCategory(id){
-    console.log(id)
-   this.filteredList=  this.productList.filter(item=>item.CategoryId === id)
 
   }
 
- search(sear1){
-  this.filteredList=  this.productList.filter(
-      item=>item.name.toLowerCase().includes(sear1.value)
-    )
-    
+  getAll() {
+    this.store.dispatch(new LOAD_PRODUCTS());
   }
 
- 
+  filterByCategory(id: number) {
+    this.store.dispatch(new FilterProductsByCategory(id));
+  }
+
+  search(productName) {
+    if (productName !== '') {
+    this.store.dispatch(new FilterProductsByName(productName));
+    } else {
+      this.store.dispatch(new LOAD_PRODUCTS());
+    }
+  }
 }
+
+
+
+
+
+
+
+
