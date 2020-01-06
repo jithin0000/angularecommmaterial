@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product.service';
 import { Product } from '../Models/Product';
-import { FileuploadService } from '../fileupload.service';
-import { CategoryService } from '../category.service';
 import { Category } from '../Models/Category';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
@@ -26,7 +23,6 @@ export class ProductComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private storage: AngularFireStorage,
-    private fileuploadservice: FileuploadService,
     ) { }
 
   ngOnInit() {
@@ -40,7 +36,6 @@ export class ProductComponent implements OnInit {
 
 
   onSubmit(product) {
-    // console.log(product.value)
     const formdata = {
       ...product.value,
 

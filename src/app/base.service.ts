@@ -29,6 +29,9 @@ export class BaseService<T> {
     return this.http.delete<T>(`${this.url}/${id}`);
   }
 
+  update(id: number, body: T) {
+    return this.http.put<T>(`${this.url}/${id}`, body);
+  }
 
 }
 

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {LoadCategoryDetail} from '../redux/actions/categoryDetailAction';
+import {UpdateCategory} from '../redux/actions/category.action';
+import {Observable} from 'rxjs';
+import {Category} from '../Models/Category';
 
 @Component({
   selector: 'app-updatecategory',
@@ -8,42 +14,33 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./updatecategory.component.css']
 })
 export class UpdatecategoryComponent implements OnInit {
-  id=0;
-  cname=""
-  cdescription=""
-  categoryId=0;
-  constructor(private categoryservice:CategoryService,private router:ActivatedRoute,private route:Router) { }
+
+  id = 0;
+  category$: Observable<Category>;
+  constructor(
+    private store: Store<AppState>,
+    private router: ActivatedRoute,
+    private route: Router) { }
 
   ngOnInit() {
-    this.router.params.subscribe(res=>{
-      this.id=res['id']
-  this.getcategoryByid(this.id)
-    })
+    this.router.params.subscribe(res => {
+      this.id = + res.id;
+      this.store.dispatch(new LoadCategoryDetail(this.id));
+
+    });
+
+
+    this.category$ = this.store.select(state => state.categoryDetail.data);
   }
 
 
-  onUpdate(cupdate){
-    console.log(cupdate.value);
- var formdata = {...cupdate.value,categoryId:this.id}
+  onUpdate(catUpdate) {
 
-    // this.categoryservice.updatecategory(this.id, formdata ).subscribe(
-    //   res => {console.log(res)
-    //
-    //
-    //   }
-    //
-    // )
-    this.route.navigate(['/category'])
+    const body = { ...catUpdate.value, CategoryId: this.id};
+    this.store.dispatch(new UpdateCategory(this.id, body));
+    this.route.navigate(['/category']);
   }
 
-  getcategoryByid(id){
-    this.categoryservice.getcategorybyid(id).subscribe(res=>{
-     console.log(res)
-     this.cname = res['categoryname']
-     this.cdescription = res['description']
-    })
-
-  }
 
 }
 

@@ -6,7 +6,6 @@ import { Category } from '../Models/Category';
 import {Store} from '@ngrx/store';
 import {AppState} from '../Models/AppState';
 import {FilterProductsByCategory, FilterProductsByName, LOAD_PRODUCTS} from '../redux/actions/product.action';
-import {ProductState} from '../redux/reducers';
 import {Observable} from 'rxjs';
 import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 

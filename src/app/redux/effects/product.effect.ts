@@ -30,9 +30,21 @@ export class ProductEffect {
   createProduct$ = this.actions$.pipe(
     ofType(productActions.CREATE_PRODUCT),
     switchMap((payload) => {
-      return this.productService.create(payload["payload"]).pipe(
+      return this.productService.create(payload['payload']).pipe(
         map(product => new productActions.CreateProductSuccess(product)),
         catchError(err => of(new productActions.CreateProductFailure(err)))
+      );
+    })
+  );
+
+
+  @Effect()
+  deleteProduct = this.actions$.pipe(
+    ofType(productActions.DELETE_PRODUCT),
+    switchMap((payload) => {
+      return this.productService.deleteById(payload["id"]).pipe(
+        map(product => new productActions.DeleteProductSuccess(product.ProductId)),
+        catchError(err => of(new productActions.DeleteProductFailure(err)))
       );
     })
   );
@@ -50,14 +62,4 @@ export class ProductEffect {
   );
 
 
-  @Effect()
-  deleteProduct = this.actions$.pipe(
-    ofType(productActions.DELETE_PRODUCT),
-    switchMap((payload) => {
-      return this.productService.deleteById(payload["id"]).pipe(
-        map(product => new productActions.DeleteProductSuccess(product.ProductId)),
-        catchError(err => of(new productActions.DeleteProductFailure(err)))
-      );
-    })
-  );
 }

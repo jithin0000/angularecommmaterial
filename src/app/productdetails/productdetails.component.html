@@ -8,7 +8,7 @@
       <div class="card " *ngIf="product$ | async as product " >
         <div class="detail">
           <div class="card-header border-0">
-            <img src="{{product}}" width="200px" alt="">
+            <img [src]="product.imageurl" width="200px" alt="">
           </div>
           <div class="card-block px-2 mx-2">
             <h4 class="card-title">{{product.name}}</h4>

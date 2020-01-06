@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {User} from './Models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ constructor(private http: HttpClient) {
   }
 
   public  registerUser(user) {
-  return this.http.post(this.url + '/register', user);
+  return this.http.post<User>(this.url + '/register', user);
   }
 
   public loginUser(user) {

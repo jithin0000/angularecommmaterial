@@ -15,7 +15,6 @@
 <button [disabled]="category.invalid" class="btn btn-primary">Add Category</button>
 
     </form>
- <div *ngIf="isError" class="alert alert-danger">{{errorMessage}}</div>
 </div>
 
 <hr>
@@ -29,13 +28,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of categorylist" >
+    <tr *ngFor="let item of categoryList$ | async" >
       <td>{{item.CategoryId}}</td>
       <td>{{item.categoryname}}</td>
       <td>{{item.description}}</td>
       <td><button routerLink="/updatecategory/{{item.CategoryId}}" class="btn btn-success">Update</button></td>
-      <td><button (click)="categorydelete(item.CategoryId)" class="btn btn-danger">Delete</button></td>
-      
+      <td><button (click)="deleteCategory(item.CategoryId)" class="btn btn-danger">Delete</button></td>
+
     </tr>
   </tbody>
   </table>

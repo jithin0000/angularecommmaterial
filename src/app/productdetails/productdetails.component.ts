@@ -30,11 +30,12 @@ export class ProductdetailsComponent implements OnInit {
 
     this.router.params.subscribe(res => {
       // tslint:disable-next-line:radix
-      const id = parseInt(res.id)
+      const id = parseInt(res.id);
       this.store.dispatch(new LoadProductDetail(id));
     });
 
     this.product$ = this.store.select(state => state.productDetail.data);
+
 
   }
 

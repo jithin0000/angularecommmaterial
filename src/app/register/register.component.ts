@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Register } from '../Models/Register';
-import { RegisterService } from '../register.service';
-import { ToastrService } from 'ngx-toastr';
 import { ToasthelperService } from '../helper/toasthelper.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {AuthService} from '../auth.service';
 import {Store} from '@ngrx/store';
 import {AppState} from '../Models/AppState';
 import {RegisterUser} from '../redux/actions/authAction';
@@ -16,49 +12,31 @@ import {RegisterUser} from '../redux/actions/authAction';
 })
 export class RegisterComponent implements OnInit {
 
-  userList:Register[]=[];
-  isError=false;
-  errorMessage="";
-
   constructor(
     private store: Store<AppState>,
-    private authService:AuthService,
-    private router:Router,
-    private toasthelperservice:ToasthelperService,
-
-
+    private router: Router,
+    private toastHelper: ToasthelperService,
 
     ) { }
 
   ngOnInit() {
 
+    this.store.select(state => state.auth)
+      .subscribe(res => console.log(res));
 
-this.GetUsers()
+    this.store.select(state => state.auth).subscribe(res => {
+      if (res.registered) {
+        this.toastHelper.showSuccess('successfully registered');
+        this.router.navigate(['/login']);
+      }
+    });
+
   }
 
 
-  GetUsers(){
-    // this.authServi.GetallUsers().subscribe(res=>{
-    //   this.userList=res;
-    // })
-  }
+  onSubmit(register) {
 
-  onSubmit(register){
-    this.authService.registerUser(register.value).subscribe(res=>{
-      console.log(res)
-      // this.userList.push(res)
-      // this.isError=false;
-      this.toasthelperservice.showSuccess("Successfully registered")
-      this.router.navigate(['/'])
-
-
-    },
-    err=>{
-      // this.isError=true;
-      // this.errorMessage=err;
-      this.toasthelperservice.showError(err.toString())
-    }
-    )
+    this.store.dispatch(new RegisterUser(register.value));
 
   }
 }

@@ -6,6 +6,9 @@ import { ToastHelper } from 'src/Utils/ToastHelper';
 import { ToasthelperService } from '../helper/toasthelper.service';
 import { ConnectionService } from 'ng-connection-service';
 import {AuthService} from '../auth.service';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {LoginUser, RegisterUser} from '../redux/actions/authAction';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,31 +18,32 @@ export class LoginComponent implements OnInit {
 
 
   constructor(
-    private authService: AuthService,
+    private store: Store<AppState>,
     private router: Router,
-    private toasthelperservice: ToasthelperService,
+    private toastHelper: ToasthelperService,
     ) {
 
 
     }
 
   ngOnInit() {
+
+    this.store.select(state => state.auth)
+      .subscribe(res => console.log(res));
+
+    this.store.select(state => state.auth).subscribe(res => {
+      if (res.authenticated) {
+        this.toastHelper.showSuccess('login successfull');
+        this.router.navigate(['/']);
+      }
+    });
   }
 
 
 
   onSubmit(login) {
-    this.authService.loginUser(login.value).subscribe(res => {
-      localStorage.setItem('token', res['token']);
+    this.store.dispatch(new LoginUser(login.value));
 
-      this.router.navigate(['/']);
-      // this.toast.success("Logged in Success")
-      this.toasthelperservice.showSuccess('logged in successfuly');
-    },
-    //  err=>this.toast.error("error encoutered"+err.message)
-
-    err => this.toasthelperservice.showError(err.message)
-    );
   }
 
 }

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { Category } from '../Models/Category';
+import {Observable} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {CreateCategory, DeleteCategory, LOAD_CATEGORIES} from '../redux/actions/category.action';
 
 @Component({
   selector: 'app-category',
@@ -9,64 +13,24 @@ import { Category } from '../Models/Category';
 })
 export class CategoryComponent implements OnInit {
 
-  categorylist:Category[]=[];
-  isError=false;
-  errorMessage="";
+  categoryList$: Observable<Category[]>;
 
-  constructor(private categoryservice:CategoryService) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.getall()
+
+    this.categoryList$ = this.store.select(state => state.categories.data);
+
+    this.store.dispatch(new LOAD_CATEGORIES());
   }
 
 
-  onSubmit(category){
+  onSubmit(category) {
 
-    this.categoryservice.addCategory(category.value).subscribe(res=>{
-      // console.log(res)
-      this.categorylist.push(res)
-      this.isError=false
-    },
-    err=>{
-      // console.log(err)
-    this.isError=true;
-    this.errorMessage=err;
-    
-    }
-    
-    
-    )
-
+    this.store.dispatch(new CreateCategory(category.value));
   }
 
-  getall(){
-    this.categoryservice.getallCategory().subscribe(
-      res=>{
-      this.categorylist=res
-      this.isError=false;
-    },
-    err=>{
-      // console.log(err)
-      this.isError=true;
-    this.errorMessage=err;
-    }
-    )
-  }
-
-
-  categorydelete(id){
-    // console.log(id)
-    this.categoryservice.deleteCategory(id).subscribe(res=>{
-      // console.log(res)
-      this.getall()
-   this.isError=false;
-    },
-    err=>{
-      // console.log(err)
-      this.isError=true;
-      this.errorMessage=err;
-    
-    })
-
+  deleteCategory(id) {
+    this.store.dispatch(new DeleteCategory(id));
   }
 }
