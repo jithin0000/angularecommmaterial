@@ -5,6 +5,13 @@ import { Category } from '../Models/Category';
 import { Product } from '../Models/Product';
 import { RegisterService } from '../register.service';
 import { Register } from '../Models/Register';
+import {Observable} from 'rxjs';
+import {User} from '../Models/User';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {LOAD_CATEGORIES} from '../redux/actions/category.action';
+import {LOAD_PRODUCTS} from '../redux/actions/product.action';
+import {LOAD_USERS} from '../redux/actions/user.action';
 
 @Component({
   selector: 'app-dash',
@@ -13,42 +20,34 @@ import { Register } from '../Models/Register';
 })
 export class DashComponent implements OnInit {
 
-  CategoryList:Category[]=[];
-  ProductList:Product[]=[];
-  CategoryLength=0;
-  ProductLegth=0;
-  useLength=0;
-  userlist:Register[]=[];
+  categories$: Observable<Category[]>;
+  products$: Observable<Product[]>;
+  users$: Observable<User[]>;
   constructor(
-    private categoryservice:CategoryService,
-    private productservice:ProductService,
-    private userservice:RegisterService
-
+    private store: Store<AppState>
     ) { }
 
   ngOnInit() {
-    this.getallcategories();
-    this.getallproducts();
-    this.getallusers();
+    this.store.dispatch(new LOAD_CATEGORIES());
+    this.store.dispatch(new LOAD_PRODUCTS());
+    this.store.dispatch(new LOAD_USERS());
+
+    this.categories$ = this.store.select(state => state.categories.data);
+    this.products$ = this.store.select(state => state.products.data);
+    this.users$ = this.store.select(state => state.users.data);
 
   }
 
-getallcategories(){
-  this.categoryservice.getAll().subscribe(res => {
-    this.CategoryList = res;
-  });
+
 }
 
-  getallproducts() {
-    this.productservice.getAll().subscribe(res => {
-      this.ProductList = res;
-    });
-  }
 
- getallusers(){
-   this.userservice.GetallUsers().subscribe(res => {
-     this.userlist = res;
 
-   });
- }
-}
+
+
+
+
+
+
+
+

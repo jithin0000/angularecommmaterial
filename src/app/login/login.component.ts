@@ -9,6 +9,8 @@ import {AuthService} from '../auth.service';
 import {Store} from '@ngrx/store';
 import {AppState} from '../Models/AppState';
 import {LoginUser, RegisterUser} from '../redux/actions/authAction';
+import {CartUtils} from '../utils/CartUtils';
+import {UpdateCart} from '../redux/actions/cart.action';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,10 +35,19 @@ export class LoginComponent implements OnInit {
 
     this.store.select(state => state.auth).subscribe(res => {
       if (res.authenticated) {
-        this.toastHelper.showSuccess('login successfull');
+        this.toastHelper.showSuccess('login successful');
+        localStorage.setItem('token', res.data.token);
+
+        if (res.data !== null) {
+          CartUtils.getOrCreateCart(this.store);
+        }
+
+
         this.router.navigate(['/']);
       }
     });
+
+
   }
 
 

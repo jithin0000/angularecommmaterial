@@ -7,10 +7,12 @@ export interface ProductState {
   data: Product[];
   loaded: boolean;
   loading: boolean;
+  added: boolean;
+  updated: boolean;
 }
 
 export const initialState: ProductState = {
-  data: [] , loading: false, loaded: false
+  data: [] , loading: false, loaded: false, added: false, updated: false
 };
 
 export function reducer(
@@ -18,27 +20,27 @@ export function reducer(
 ): ProductState {
   switch (action.type) {
     case pdtAction.LOAD_PRODUCT:
-      return { ...state,  loading: true}
+      return { ...state,  loading: true};
 
     case pdtAction.LOAD_PRODUCT_SUCCESS:
-      return { ...state, data: action.payload,   loading: false, loaded: true}
+      return { ...state, data: action.payload, loading: false, loaded: true};
 
     case pdtAction.LOAD_PRODUCT_FAILURE:
-      return { ...state,   loading: false, loaded: false}
+      return { ...state,   loading: false, loaded: false};
 
 
     case pdtAction.FILTER_PRODUCT_BY_CATEGORY:
-      return { ...state, data: state.data.filter(item => item.ProductId !== action.categoryId)}
+      return { ...state, data: state.data.filter(item => item.ProductId !== action.categoryId)};
 
       case pdtAction.FILTER_PRODUCT_BY_NAME:
       return { ...state, data: state.data
-          .filter(item => item.name.toLowerCase().includes(action.name.toLowerCase()))}
+          .filter(item => item.name.toLowerCase().includes(action.name.toLowerCase()))};
 
     case pdtAction.CREATE_PRODUCT:
       return {...state, loaded: false, loading: true};
 
     case pdtAction.CREATE_PRODUCT_SUCCESS:
-      return { ...state , data: [...state.data, action.product], loading: false, loaded: true}
+      return { ...state , data: [...state.data, action.product], loading: false, loaded: true};
 
     case pdtAction.CREATE_PRODUCT_FAILURE:
       return {...state, loading: false, loaded: false};
@@ -48,10 +50,20 @@ export function reducer(
 
     case pdtAction.DELETE_PRODUCT_SUCCESS:
       return { ...state , data: state.data.filter(item => item.ProductId !== action.id),
-        loading: false, loaded: true}
+        loading: false, loaded: true};
 
     case pdtAction.DELETE_PRODUCT_FAILURE:
       return {...state, loading: false, loaded: false};
+      case pdtAction.UPDATE_PRODUCT:
+      return {...state, loaded: false, loading: true, updated: false, added: false};
+
+    case pdtAction.UPDATE_PRODUCT_SUCCESS:
+      console.log(action.payload)
+      return { ...state , updated: true};
+
+    case pdtAction.UPDATE_PRODUCT_FAILURE:
+      console.log(action.payload)
+      return {...state, loading: false, loaded: false, updated: false};
 
 
 

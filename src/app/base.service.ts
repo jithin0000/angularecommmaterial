@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 
 @Injectable({
@@ -9,12 +9,27 @@ export class BaseService<T> {
 
   url = '';
 
+  token = localStorage.getItem('token');
+
+  header = new HttpHeaders({
+    Authorization: 'Bearer ' +  this.token,
+    'Content-Type': 'application/json'
+  });
+
   constructor(private http: HttpClient, private endpoint: string) {
     this.url = environment.url + endpoint;
   }
 
+  public get httpClient() {
+    return this.http;
+  }
+
+  public get serverUrl() {
+    return this.url;
+  }
+
   public getAll() {
-    return this.http.get<T[]>(this.url);
+    return this.http.get<T[]>(this.url, {headers: this.header});
   }
 
   getById(id: number) {

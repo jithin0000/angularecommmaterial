@@ -7,6 +7,7 @@ import * as productDetailActions from '../actions/productDetail.action';
 import {ProductService} from '../../product.service';
 import {catchError, map, switchMap} from 'rxjs/internal/operators';
 import {of} from 'rxjs';
+import {Product} from '../../Models/Product';
 
 
 // @ts-ignore
@@ -29,8 +30,8 @@ export class ProductEffect {
   @Effect()
   createProduct$ = this.actions$.pipe(
     ofType(productActions.CREATE_PRODUCT),
-    switchMap((payload) => {
-      return this.productService.create(payload['payload']).pipe(
+    switchMap((payload: {payload: Product}) => {
+      return this.productService.create(payload.payload).pipe(
         map(product => new productActions.CreateProductSuccess(product)),
         catchError(err => of(new productActions.CreateProductFailure(err)))
       );
@@ -41,8 +42,8 @@ export class ProductEffect {
   @Effect()
   deleteProduct = this.actions$.pipe(
     ofType(productActions.DELETE_PRODUCT),
-    switchMap((payload) => {
-      return this.productService.deleteById(payload["id"]).pipe(
+    switchMap((payload: {id: number}) => {
+      return this.productService.deleteById(payload.id).pipe(
         map(product => new productActions.DeleteProductSuccess(product.ProductId)),
         catchError(err => of(new productActions.DeleteProductFailure(err)))
       );
@@ -53,13 +54,26 @@ export class ProductEffect {
   @Effect()
   loadProductDetail$ = this.actions$.pipe(
     ofType(productDetailActions.LOAD_PRODUCT_DETAIL),
-    switchMap((payload) => {
-      return this.productService.getById(payload["productId"]).pipe(
+    switchMap((payload: {productId: number}) => {
+      return this.productService.getById(payload.productId).pipe(
         map(product => new productDetailActions.LoadProductDetailSuccess(product)),
         catchError(err => of(new productDetailActions.LoadProductDetailFailure(err)))
       );
     })
   );
+
+  @Effect()
+  updateProduct = this.actions$.pipe(
+    ofType(productActions.UPDATE_PRODUCT),
+    switchMap((payload: {id: number, body: Product}) => {
+      return this.productService.update(payload.id, payload.body).pipe(
+        map(product => new productActions.UpdateProductSuccess(product)),
+        catchError(err => of(new productActions.UpdateProductFailure(err)))
+      );
+    })
+  );
+
+
 
 
 }

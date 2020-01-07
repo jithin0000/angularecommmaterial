@@ -1,44 +1,28 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Cart} from './Models/Cart';
+import {BaseService} from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
-  url = 'http://localhost:50308/api/carts/';
+export class CartService extends BaseService<Cart>{
 
-  token = localStorage.getItem('token');
 
-  constructor(private http: HttpClient) { }
+  constructor( http: HttpClient) {
+    super(http, '/carts');
+  }
 
   header = new HttpHeaders({
     Authorization: 'Bearer ' + this.token
   });
 
-  createCart(body) {
-    return this.http.post<Cart>(this.url, body);
-  }
-
-  getallCart() {
-    return this.http.get<Cart[]>(this.url, {headers: this.header});
-  }
-
-  getCartbyid(id) {
-    return this.http.get<Cart>(this.url + id);
-  }
-
-  updateCart(id, body) {
-    return this.http.put<Cart>(this.url + id + '/', body, {headers: this.header});
-  }
-
-
   addToCart(id, body) {
-    return this.http.post<Cart>(this.url  + 'add/' + id , body, {headers: this.header});
+    return this.httpClient.post<Cart>(this.url  + 'add/' + id , body, {headers: this.header});
   }
 
   deleteCarts(id) {
-    return this.http.delete(this.url + id, {headers: this.header});
+    return this.httpClient.delete(this.url + id, {headers: this.header});
   }
 
 }

@@ -26,16 +26,16 @@ export class ViewcartComponent implements OnInit {
     // tslint:disable-next-line:prefer-const
     var viewcart = localStorage.getItem('cart')
 
-    // tslint:disable-next-line:radix
-    this.cartService.getCartbyid(parseInt(viewcart)).subscribe(res => {
-      this.cartProductList = res.Products
-
-      res.Products.forEach(item => {
-        this.totalPrice += item.price
-      })
-
-    },
-      error => { console.log(error)})
+    // // tslint:disable-next-line:radix
+    // this.cartService.getCartbyid(parseInt(viewcart)).subscribe(res => {
+    //   this.cartProductList = res.Products
+    //
+    //   res.Products.forEach(item => {
+    //     this.totalPrice += item.price
+    //   })
+    //
+    // },
+    //   error => { console.log(error)})
 
     this.initConfig();
   }

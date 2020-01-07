@@ -12,6 +12,8 @@ export const LOGIN_USER =  ' [USER] Login User ';
 export const LOGIN_USER_SUCCESS =  ' [USER] Login User Success ';
 export const LOGIN_USER_FAILURE = ' [USER] Login User Failure ';
 
+export const IS_AUTHENTICATED = ' [USER] Login User is authenticated ';
+
 
 // tslint:disable-next-line:class-name
 export class RegisterUser  implements Action {
@@ -57,5 +59,12 @@ export class LoginUserFailure implements Action {
   }
 }
 
+// tslint:disable-next-line:class-name
+export class IsUserAuthenticated implements Action {
+  readonly type = IS_AUTHENTICATED;
+  constructor() {
+  }
+}
+
 export type AuthAction = RegisterUser | RegisterUserSuccess | RegisterUserFailure |
-  LoginUser | LoginUserSuccess | LoginUserFailure;
+  LoginUser | LoginUserSuccess | LoginUserFailure | IsUserAuthenticated ;

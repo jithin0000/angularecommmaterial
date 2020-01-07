@@ -4,6 +4,13 @@ import { ProductService } from '../product.service';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { Category } from '../Models/Category';
 import { ToasthelperService } from '../helper/toasthelper.service';
+import {Observable} from 'rxjs';
+import {Product} from '../Models/Product';
+import {Store} from '@ngrx/store';
+import {AppState} from '../Models/AppState';
+import {LoadProductDetail} from '../redux/actions/productDetail.action';
+import {UpdateProduct} from '../redux/actions/product.action';
+import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 
 @Component({
   selector: 'app-updateproducts',
@@ -11,72 +18,49 @@ import { ToasthelperService } from '../helper/toasthelper.service';
   styleUrls: ['./updateproducts.component.css']
 })
 export class UpdateproductsComponent implements OnInit {
-  id=0;
-  pname="";
-  pprice=0;
-  pdescription="";
-  pstock=0;
-  psize="";
-  pcolor="";
-  pdiscount=0;
-  pCategoryId=0;
-  categorylist:Category[]=[];
-  productId=0;
+  id = 0;
+  product$: Observable<Product>;
+  categoryList$: Observable<Category[]>;
+
   constructor(
-    private categoryservice:CategoryService,
-    private productservice:ProductService,
-    private route:Router,
-    private router:ActivatedRoute,
-    private toasthelperservice:ToasthelperService
-    
-    
+    private store: Store<AppState>,
+    private route: Router,
+    private router: ActivatedRoute,
+    private toastHelper: ToasthelperService
+
+
     ) { }
 
+
   ngOnInit() {
-    this.router.params.subscribe(res=>{
-      console.log(res['id'])
-      this.id = res['id']
-      this.getProductById(this.id)
-      this.getallCategory()
-    })
-    
+    this.router.params.subscribe(res => {
+      // tslint:disable-next-line:radix
+      this.id = parseInt(res.id);
+      this.store.dispatch(new LoadProductDetail(this.id));
+    });
+
+    this.categoryList$ = this.store.select(state => state.categories.data);
+    this.product$ = this.store.select(state => state.productDetail.data);
+
+    this.store.dispatch(new LOAD_CATEGORIES());
+
+    this.store.select(state => state.products).subscribe(
+      res => {
+        console.log(res);
+        if (res.updated) {
+          this.route.navigate(['/product']);
+        }
+      }
+    );
   }
-getallCategory(){
-  this.categoryservice.getallCategory().subscribe(res=>{
-    console.log(res)
-    this.categorylist=res
-  
-  })
-}
-
- getProductById(id){
-   this.productservice.getproductbyid(id).subscribe(res=>{
-   this.pname=res['name']
-   this.pprice=res['price']
-   this.pdescription =res['description']
-   this.pstock=res['stock']
-   this.psize =res['size']
-   this.pcolor=res['color']
-   this.pdiscount=res['discount']
-   
-   this.pCategoryId=res['CategoryId']
 
 
-  
-   })
- }
 
+ onSubmit(upproduct) {
 
- onSubmit(upproduct){
+   const body = {...upproduct.value, ProductId: this.id};
+   this.store.dispatch(new UpdateProduct(this.id, body));
 
-   var formdata={...upproduct.value,productId:this.id}
-   console.log("form data is"+JSON.stringify(formdata))
-   this.productservice.updateproduct(this.id,formdata).subscribe(res=>{
-     console.log(res)
-    
-   })
-   this.route.navigate(['/product'])
-     this.toasthelperservice.showSuccess("Product Updated")
  }
 
 

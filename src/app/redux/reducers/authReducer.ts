@@ -38,6 +38,9 @@ export function reducer(
     case userActions.LOGIN_USER_FAILURE:
       return {...state, registered: false, authenticated: false};
 
+    case userActions.IS_AUTHENTICATED:
+      return {...state, registered: false, authenticated: localStorage.getItem('token') !== null};
+
     default:
       return state;
   }
