@@ -1,0 +1,11 @@
+.nav-link {
+  text-transform: uppercase;
+  font-size: 0.8em;
+}
+example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

@@ -7,6 +7,7 @@ import {CartService} from '../../cart.service';
 import {catchError, map, switchMap} from 'rxjs/internal/operators';
 import {of} from 'rxjs';
 import {Cart} from '../../Models/Cart';
+import {AddToCartRequestDto} from '../../Models/AddToCartRequestDto';
 
 
 // @ts-ignore
@@ -45,6 +46,17 @@ export class CartEffect {
       return this.cartService.update(payload.id, payload.cart).pipe(
         map(cart => new cartActions.UpdateCartSuccess(cart)),
         catchError(err => of(new cartActions.UpdateCartFailure(err)))
+      );
+    })
+  );
+
+  @Effect()
+  addToCart$ = this.actions$.pipe(
+    ofType(cartActions.ADD_TO_CART),
+    switchMap((payload: {id: number, body: AddToCartRequestDto}) => {
+      return this.cartService.addToCart(payload.id, payload.body).pipe(
+        map(cart => new cartActions.AddToCartSuccess(cart)),
+        catchError(err => of(new cartActions.AddToCartFailure(err)))
       );
     })
   );

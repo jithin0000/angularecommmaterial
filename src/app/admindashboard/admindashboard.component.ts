@@ -16,6 +16,6 @@ export class AdmindashboardComponent implements OnInit {
 
   onSubmit(event){
     console.log(event)
-    this.selected =event
+    this.selected = event;
   }
 }

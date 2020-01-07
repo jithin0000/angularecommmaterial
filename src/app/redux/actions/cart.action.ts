@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {Cart} from '../../Models/Cart';
+import {AddToCartRequestDto} from '../../Models/AddToCartRequestDto';
 
 export const CREATE_CART = '[CART] Create Cart';
 export const CREATE_CART_SUCCESS = '[CART] Create Cart Success';
@@ -72,9 +73,33 @@ export class UpdateCartFailure implements Action {
   }
 }
 
+export const ADD_TO_CART = '[CART] AddTo Cart';
+export const ADD_TO_CART_SUCCESS = '[CART] AddTo Cart Success';
+export const ADD_TO_CART_FAILURE = '[CART] AddTo Cart Failure';
+
+export class AddToCart implements Action {
+  readonly type = ADD_TO_CART;
+  constructor(public id: number, public body: AddToCartRequestDto) {
+  }
+}
+
+export class AddToCartSuccess implements Action {
+  readonly type = ADD_TO_CART_SUCCESS;
+  constructor(public cart: Cart) {
+  }
+}
+
+
+export class AddToCartFailure implements Action {
+  readonly type = ADD_TO_CART_FAILURE;
+  constructor(public payload: any ) {
+  }
+}
+
 
 
 
 export type CartActions = CreateCart | CreateCartFailure | CreateCartSuccess |
   GetCart | GetCartSuccess |GetCartFailure |
-  UpdateCart | UpdateCartSuccess |UpdateCartFailure ;
+  UpdateCart | UpdateCartSuccess |UpdateCartFailure |
+  AddToCart | AddToCartSuccess |AddToCartFailure ;

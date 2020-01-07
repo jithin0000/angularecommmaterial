@@ -66,5 +66,6 @@ export class IsUserAuthenticated implements Action {
   }
 }
 
+
 export type AuthAction = RegisterUser | RegisterUserSuccess | RegisterUserFailure |
   LoginUser | LoginUserSuccess | LoginUserFailure | IsUserAuthenticated ;

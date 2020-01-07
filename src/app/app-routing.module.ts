@@ -13,6 +13,11 @@ import { ViewcartComponent } from './viewcart/viewcart.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AddressComponent } from './address/address.component';
 import {PaymentComponent} from './payment/payment.component';
+import {OrderComponent} from './order/order.component';
+import {ProfileComponent} from './profile/profile.component';
+import {AddProductComponent} from './add-product/add-product.component';
+
+
 
 const routes: Routes = [
 
@@ -25,9 +30,15 @@ const routes: Routes = [
   {path: 'productdetails/:id', component: ProductdetailsComponent},
   {path: 'updateproducts/:id', component: UpdateproductsComponent},
   {path: 'viewcart', component: ViewcartComponent},
-  {path: 'admindashboard', component: AdmindashboardComponent},
+  {path: 'admindashboard',
+    component: AdmindashboardComponent,
+    data: {roles: ['Admin']}, canActivate: [AuthguardGuard]
+    },
   {path: 'address', component: AddressComponent, canActivate: [AuthguardGuard]},
   {path: 'payment', component: PaymentComponent, canActivate: [AuthguardGuard]},
+  {path: 'order', component: OrderComponent, canActivate: [AuthguardGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthguardGuard]},
+  {path: 'add-product', component: AddProductComponent, canActivate: [AuthguardGuard]},
 
 ];
 

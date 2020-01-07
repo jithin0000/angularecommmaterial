@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ToasthelperService } from '../helper/toasthelper.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {AppState} from '../Models/AppState';
 import {RegisterUser} from '../redux/actions/authAction';
+import {AppToastService} from '../app-toast.service';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +15,9 @@ export class RegisterComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private router: Router,
-    private toastHelper: ToasthelperService,
-
-    ) { }
+    private toastService: AppToastService,
+  ) {
+  }
 
   ngOnInit() {
 
@@ -26,8 +26,10 @@ export class RegisterComponent implements OnInit {
 
     this.store.select(state => state.auth).subscribe(res => {
       if (res.registered) {
-        this.toastHelper.showSuccess('successfully registered');
+
+        this.toastService.show('Registration ', 'Successful');
         this.router.navigate(['/login']);
+
       }
     });
 
@@ -35,8 +37,9 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit(register) {
-
     this.store.dispatch(new RegisterUser(register.value));
 
   }
+
+
 }

@@ -1,57 +1,127 @@
-
- <!-- <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col cartcol">
-        <span class="badge badge-primary"> <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>{{Cartcount}}</span>
-    </div>
-</div> -->
-
-<div class="container mt-3">
-    <div class="row">
-      <div class="col-lg-6"></div>
-      <div class="col-lg-6 "> <input #sear1 (keyup)="search(sear1.value)" type="text" name="text" class="form-control" placeholder="search product"> </div>
-    <div class="clearfix"></div>
-    </div>
-
-<div class="conatiner mt-5">
-
+<div class="e-container">
 
   <div class="row">
-    <div class="col-sm-4  " >
-      <h6 class="cat ml-3">Category</h6>
-      <hr>
-     <ul class="list-group ml-3" >
-       <div (click)="getAll()" class="list-group-item">
-        All
-       </div>
-       <div *ngFor ="let cat of categoryList | async" (click)="filterByCategory(cat.CategoryId)" class="list-group-item">{{cat.categoryname}}</div>
-     </ul>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-8">
 
+      <mat-form-field class="example-full-width">
+        <mat-icon matPrefix color="primary">search</mat-icon>
+        <input type="text" #searchInput (keyup)="search(searchInput.value)" matInput placeholder="Search ....">
+      </mat-form-field>
+    </div>
+  <
+
+  <mat-divider></mat-divider>
+
+
+  <div class="row mt-5">
+
+    <div *ngIf="categoryList | async as categories" class="col-lg-3">
+      <mat-list>
+        <h3 mat-subheader>Categories</h3>
+        <mat-list-item (click)="getAll()" >
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <h4 class="cat-list" mat-line>All</h4>
+        </mat-list-item>
+        <mat-list-item (click)="filterByCategory(cat.CategoryId)" *ngFor="let cat of categories">
+          <mat-icon mat-list-icon>folder</mat-icon>
+          <h4 class="cat-list" mat-line>{{cat.categoryname}}</h4>
+        </mat-list-item>
+      </mat-list>
     </div>
 
-    <div class="col-lg-8" >
-    <div class="row">
-      <div class="col-sm-4 mb-3" *ngFor="let item of productList | async | paginate: { itemsPerPage: 5, currentPage: p }" >
+    <div class="col">
+      <div class="row">
 
-        <div class="card" >
-          <img class="card-img-top" src="{{item.imageurl}}" alt="">
-          <div class="card-body" >
-            <h4 class="card-title">{{item.name}}</h4>
-            <p class="card-text">{{item.description}}</p>
-            <p class="card-text">Price :{{item.price}}</p>
-            <button routerLink="/productdetails/{{item.ProductId}}" class="btn btn-primary">Details </button>
-            <!-- <button (click)="onSubmit(item)"  class="btn btn-primary">AddtoCart </button> -->
+        <div *ngIf="loading$ | async as loading" class="col-lg-12 align-center">
+          <mat-spinner *ngIf="loading" color="warn"></mat-spinner>
+        </div>
       </div>
-    </div>
-       </div>
 
-    </div>
-    <div class="row">
-      <div class="col">
-          <pagination-controls (pageChange)=" $event"></pagination-controls>
+      <div *ngIf="productList$ | async as products" class="row">
+        <div *ngFor="let product of products" class="col-lg-4">
+
+          <mat-card class="product-card" [routerLink]="['/productdetails/',product.ProductId]" >
+            <mat-card-header>
+              <mat-card-title class="u-title">{{product.name}}</mat-card-title>
+              <mat-card-subtitle class="c-title">{{product.Category.categoryname}}</mat-card-subtitle>
+            </mat-card-header>
+
+            <img [src]="product.imageurl" alt="" mat-card-image>
+            <mat-card-content>
+              <p>{{product.description}}</p>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button color="primary" mat-button>view more</button>
+            </mat-card-actions>
+          </mat-card>
+
         </div>
       </div>
     </div>
+
   </div>
 </div>
+
+
+<!--<div class="container mt-3">-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-6"></div>-->
+<!--    <div class="col-lg-6 "><input #sear1 (keyup)="search(sear1.value)" class="form-control" name="text" placeholder="search product"-->
+<!--                                  type="text"></div>-->
+<!--    <div class="clearfix"></div>-->
+<!--  </div>-->
+
+<!--  <div class="conatiner mt-5">-->
+
+
+<!--    <div class="row">-->
+<!--      <div class="col-sm-4  ">-->
+<!--        <h6 class="cat ml-3">Category</h6>-->
+<!--        <hr>-->
+<!--        <ul class="list-group ml-3">-->
+<!--          <div (click)="getAll()" class="list-group-item">-->
+<!--            All-->
+<!--          </div>-->
+<!--          <div (click)="filterByCategory(cat.CategoryId)" *ngFor="let cat of categoryList | async"-->
+<!--               class="list-group-item">{{cat.categoryname}}</div>-->
+<!--        </ul>-->
+
+<!--      </div>-->
+
+<!--      <div class="col-lg-8">-->
+<!--        <div class="row">-->
+
+<!--          <div *ngIf="loading$ | async as loading" class="col-lg-12 align-center">-->
+<!--            <mat-spinner *ngIf="loading" color="warn" ></mat-spinner>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="row" *ngIf="productList$ | async as products" >-->
+<!--          <div *ngFor="let product of products" class="col-lg-6">-->
+
+<!--            <mat-card class="product-card">-->
+<!--              <mat-card-header>-->
+<!--                <mat-card-title class="u-title" >{{product.name}}</mat-card-title>-->
+<!--                <mat-card-subtitle class="c-title" >{{product.Category.categoryname}}</mat-card-subtitle>-->
+<!--              </mat-card-header>-->
+
+<!--              <img mat-card-image [src]="product.imageurl" alt="">-->
+<!--              <mat-card-content>-->
+<!--                <p>{{product.description}}</p>-->
+<!--              </mat-card-content>-->
+
+<!--              <mat-card-actions>-->
+<!--                <button mat-button color="primary" >view more</button>-->
+<!--              </mat-card-actions>-->
+<!--            </mat-card>-->
+
+<!--          </div>-->
+<!--        </div>-->
+
+
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

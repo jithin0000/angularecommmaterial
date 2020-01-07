@@ -10,29 +10,16 @@
   <div class="row">
     <div class="col-lg-4">
       <h4>Cart</h4>
-        <ul *ngIf="cart !== undefined " class="list-group">
+        <ul *ngIf="cart$ | async as cart " class="list-group">
           <li class="list-group-item" *ngFor="let pdt of cart.Products"  >{{pdt.name}}  <span class="badge badge-secondary" >{{pdt.price}}&#36;</span></li>
 
-          <li class="list-group right"> <h6>Toatal</h6> <span class="badge badge-primary">{{cart.Total}} &#36;</span> </li>
+          <li class="list-group right"> <h6>Total</h6> <span class="alert alert-success py-2">{{cart.Total}} &#36;</span> </li>
     </ul>
       <hr>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-4">
-      <h3>Shipping to : </h3>
-      <div *ngIf="address !== undefined " class="card">
-        <div class="card-content">
-          <p  *ngIf="user !== undefined"  class="card-text">Name : {{user.email}}</p>
-          <p>{{ address.LineFirst }} {{ address.LineSecond }}
-            {{ address.City }}  {{address.Place}}
-            {{ address.PostalCode }}  {{address.PhoneNumber}}  </p>
-        </div>
-      </div>
-
-    </div>
-
     <div class="col lg-4">
       <div #paypal></div>
     </div>

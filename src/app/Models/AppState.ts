@@ -5,6 +5,7 @@ import {CategoryDetailState} from '../redux/reducers/categoryDetail.reducer';
 import {AuthState} from '../redux/reducers/authReducer';
 import {UserState} from '../redux/reducers/user.reducer';
 import {CartState} from '../redux/reducers/cart.reducer';
+import {UserDetailState} from '../redux/reducers/userDetailReducer';
 
 export interface AppState {
 
@@ -15,5 +16,6 @@ export interface AppState {
   readonly auth: AuthState;
   readonly users: UserState;
   readonly cart: CartState;
+  readonly userDetail: UserDetailState;
 
 }

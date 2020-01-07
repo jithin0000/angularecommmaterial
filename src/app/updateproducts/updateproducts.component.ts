@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../category.service';
-import { ProductService } from '../product.service';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { Category } from '../Models/Category';
-import { ToasthelperService } from '../helper/toasthelper.service';
 import {Observable} from 'rxjs';
 import {Product} from '../Models/Product';
 import {Store} from '@ngrx/store';
@@ -26,7 +23,6 @@ export class UpdateproductsComponent implements OnInit {
     private store: Store<AppState>,
     private route: Router,
     private router: ActivatedRoute,
-    private toastHelper: ToasthelperService
 
 
     ) { }

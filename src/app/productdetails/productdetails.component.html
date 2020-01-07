@@ -16,7 +16,8 @@
           </div>
 
           <div class="card-block mt-5 px-2">
-            <button class="btn btn-success">add to cart</button>
+            <button *ngIf="!inCart" (click)="addToCart(product.ProductId)"  class="btn btn-success">add to cart</button>
+
           </div>
         </div>
       </div>

@@ -52,7 +52,7 @@ export class CartUtils {
 
   }
 
-  private static get_user_id() {
+  public static get_user_id() {
     const token = localStorage.getItem('token');
     if (token === null || token === undefined) {
       return null;

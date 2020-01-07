@@ -17,9 +17,10 @@ import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 export class HomeComponent implements OnInit {
 
 
-  productList: Observable<Product[]>;
+  productList$: Observable<Product[]>;
 
   categoryList: Observable<Category[]>;
+  private loading$: Observable<boolean>;
 
   constructor(
     private store: Store<AppState>
@@ -28,8 +29,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.productList = this.store.select(state => state.products.data);
+    this.productList$ = this.store.select(state => state.products.data);
     this.categoryList = this.store.select(state => state.categories.data);
+
+    this.loading$ = this.store.select(state => state.products.loading);
 
     this.store.dispatch(new LOAD_PRODUCTS());
     this.store.dispatch(new LOAD_CATEGORIES());

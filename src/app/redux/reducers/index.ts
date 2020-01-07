@@ -5,6 +5,7 @@ import * as fromProductDetail from './productDetail.reducer';
 import * as fromCategoryDetail from './categoryDetail.reducer';
 import * as fromUsers from './user.reducer';
 import * as fromCarts from './cart.reducer';
+import * as fromUserDetail from './userDetailReducer';
 import * as auth from './authReducer';
 import {AppState} from '../../Models/AppState';
 
@@ -17,7 +18,8 @@ export const reducers: ActionReducerMap<AppState> = {
   categoryDetail: fromCategoryDetail.reducer,
   auth: auth.reducer,
   users: fromUsers.reducer,
-  cart: fromCarts.reducer
+  cart: fromCarts.reducer,
+  userDetail: fromUserDetail.reducer
 };
 
 

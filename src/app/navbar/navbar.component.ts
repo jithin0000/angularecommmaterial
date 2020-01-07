@@ -41,8 +41,10 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('cart');
     this.router.navigate(['/login']);
     this.store.dispatch(new IsUserAuthenticated());
+    CartUtils.getOrCreateCart(this.store);
 
   }
 

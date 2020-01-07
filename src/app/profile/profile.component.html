@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <img src="" alt="" class="img-responsive">
+
+      <div *ngIf="user$ | async as user"  class="personal-details">
+        <p class="semi-title">
+          User Name : <span class="primary-text">{{user.UserName}}</span>
+        </p>
+        <p class="semi-title">
+          Email : <span class="primary-text">{{user.Email}}</span>
+        </p>
+        <p class="semi-title">
+          Phone Number : <span class="primary-text">{{user.PhoneNumber}}</span>
+        </p>
+      </div>
+    </div>
+
+    <div *ngIf="user$ | async as user" class="col mt-5">
+      <h6>Total Orders: {{user.Orders.length}}</h6>
+      <ul  class="list-group">
+
+        <li *ngFor="let order of user.Orders" class="list-group-item">
+          Order Number: <span style="color: #2F96B4" >{{order.OrderNumber}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

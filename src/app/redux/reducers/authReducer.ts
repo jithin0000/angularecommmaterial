@@ -1,7 +1,7 @@
 import {User} from '../../Models/User';
 
 
-import * as userActions from '../actions/authAction';
+import * as authActions from '../actions/authAction';
 
 // tslint:disable-next-line:class-name
 export interface AuthState {
@@ -15,31 +15,31 @@ export const initialState: AuthState = {
 };
 
 export function reducer(
-  state = initialState, action: userActions.AuthAction
+  state = initialState, action: authActions.AuthAction
 ): AuthState {
   switch (action.type) {
 
-    case userActions.REGISTER_USER:
+    case authActions.REGISTER_USER:
 
-      return {...state, authenticated: false, registered: false};
+      return {...state, registered: false};
 
-    case userActions.REGISTER_USER_SUCCESS:
-      return { ...state , data: action.user, registered: true, authenticated: false};
+    case authActions.REGISTER_USER_SUCCESS:
+      return { ...state , data: action.user, registered: true};
 
-    case userActions.REGISTER_USER_FAILURE:
-      return {...state, registered: false, authenticated: false};
+    case authActions.REGISTER_USER_FAILURE:
+      return {...state, data: action.payload, registered: false};
 
-      case userActions.LOGIN_USER:
-      return {...state, authenticated: false, registered: true};
+      case authActions.LOGIN_USER:
+      return {...state, authenticated: false};
 
-    case userActions.LOGIN_USER_SUCCESS:
-      return { ...state , data: action.payload, registered: false, authenticated: true};
+    case authActions.LOGIN_USER_SUCCESS:
+      return { ...state , data: action.payload, authenticated: true};
 
-    case userActions.LOGIN_USER_FAILURE:
-      return {...state, registered: false, authenticated: false};
+    case authActions.LOGIN_USER_FAILURE:
+      return {...state, authenticated: false};
 
-    case userActions.IS_AUTHENTICATED:
-      return {...state, registered: false, authenticated: localStorage.getItem('token') !== null};
+    case authActions.IS_AUTHENTICATED:
+      return {...state, authenticated: localStorage.getItem('token') !== null};
 
     default:
       return state;

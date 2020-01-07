@@ -6,13 +6,15 @@ import {of} from 'rxjs';
 import {AuthService} from '../../auth.service';
 import {LoginRequest} from '../../Models/LoginRequest';
 import {User} from '../../Models/User';
+import {UserService} from '../../user.service';
 
 
 // @ts-ignore
 @Injectable()
 export class AuthEffect {
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(private actions$: Actions, private userService: UserService,
+              private authService: AuthService) {}
 
   @Effect()
   loadProduct$ = this.actions$.pipe(
@@ -35,6 +37,7 @@ export class AuthEffect {
       );
     })
   );
+
 
 
 

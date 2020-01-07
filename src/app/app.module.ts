@@ -14,7 +14,6 @@ import { ProductComponent } from './product/product.component';
 import { ProductdetailsComponent } from './productdetails/productdetails.component';
 import { UpdateproductsComponent } from './updateproducts/updateproducts.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AngularFireModule } from '@angular/fire';
@@ -33,9 +32,25 @@ import { OrderComponent } from './order/order.component';
 import { StoreModule } from '@ngrx/store';
 
 
-import { reducers } from './redux/reducers/index'
+import {reducers} from './redux/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './redux/effects';
+import { ProfileComponent } from './profile/profile.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { ToastComponent } from './toast/toast.component';
+import { NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatListModule} from '@angular/material/list';
+import {MatInputModule} from '@angular/material/input';
+
+
+
 
 
 // @ts-ignore
@@ -59,6 +74,9 @@ import {effects} from './redux/effects';
     PaymentComponent,
     CartComponent,
     OrderComponent,
+    ProfileComponent,
+    AddProductComponent,
+    ToastComponent,
 
 
   ],
@@ -68,15 +86,18 @@ import {effects} from './redux/effects';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     NgxPaginationModule,
     NgxPayPalModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot(effects)
-
-
+    EffectsModule.forRoot(effects),
+    NgbToastModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule, MatListModule, MatInputModule,
+    MatToolbarModule, MatIconModule, MatBadgeModule
 
   ],
   providers: [CookieService],
