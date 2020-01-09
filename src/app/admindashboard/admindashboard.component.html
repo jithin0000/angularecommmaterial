@@ -1,53 +1,37 @@
-<!--<div class="row">-->
-<!--  <div class="col-lg-2 side-menu">-->
-<!--<app-sidebar (voted)="onSubmit($event)"  ></app-sidebar>-->
-<!--  </div>-->
-<!--  <div class="col">-->
-<!--   <div *ngIf="selected == 1 " ><app-dash></app-dash> </div>-->
-<!--   <div *ngIf="selected == 2 " > <app-category></app-category> </div>-->
-<!--   <div *ngIf="selected == 3 " > <app-product></app-product> </div>-->
-
-<!--  </div>-->
-<!--</div>-->
-
 <mat-sidenav-container class="example-container">
-  <mat-sidenav class="sidenav" mode="side" opened class="mat-elevation-z8" >
+  <mat-sidenav class="sidenav" mode="side" opened class="mat-elevation-z8">
 
-    <div class="side-item-header">
+    <div class="side-item-header my-3">
       <h3 class="title">Dashboard</h3>
     </div>
     <mat-divider></mat-divider>
 
 
-    <mat-list>
-      <div class="side-item" *ngFor="let item of sideNavItemList" (click)="selectComponent(item.url)" >
-        <div>
-          <mat-icon class="side-icon" >{{item.icon}}</mat-icon>
-        </div>
-        <div class="u-title" >
-          {{item.title}}
-        </div>
-        <mat-icon class="side-icon">keyboard_arrow_right</mat-icon>
+    <div class="side-item" *ngFor="let item of sideNavItemList" (click)="selectComponent(item.url)">
+      <div class="side-title">
+        <mat-icon class="side-icon">{{item.icon}}</mat-icon>
+        <p class="mt-2">{{item.title}}</p>
       </div>
-    </mat-list>
+      <mat-icon class="side-icon">keyboard_arrow_right</mat-icon>
+    </div>
 
 
 
 
   </mat-sidenav>
-  <mat-sidenav-content class="main-content" >
-    <ng-container *ngIf="component === 0 " >
+  <mat-sidenav-content class="main-content">
+    <ng-container *ngIf="component === 0 ">
       <app-dash></app-dash>
     </ng-container>
-    <ng-container *ngIf="component === 1 " >
-<!--      <app-user></app-user>-->
+    <ng-container *ngIf="component === 1 ">
+      <!--      <app-user></app-user>-->
     </ng-container>
 
-    <ng-container *ngIf="component === 2 " >
+    <ng-container *ngIf="component === 2 ">
       <app-category></app-category>
     </ng-container>
 
-    <ng-container *ngIf="component === 3 " >
+    <ng-container *ngIf="component === 3 ">
       <app-product></app-product>
     </ng-container>
 

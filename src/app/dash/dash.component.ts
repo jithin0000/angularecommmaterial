@@ -20,7 +20,7 @@ export class DashComponent implements OnInit {
 
   @ViewChild('myChart', {static: true}) private chartRef;
   @ViewChild('pieChart', {static: true}) private pieChartRef;
-  // @ViewChild('aChar', {static: true}) private aChartRef;
+  @ViewChild('aChartRef', {static: true}) private aChartRef;
   @ViewChild('hBarChart', {static: true}) private hBarChartRef;
   @ViewChild('radarChart', {static: true}) private rChartRef;
   @ViewChild('sChart', {static: true}) private sChartRef;
@@ -50,13 +50,13 @@ export class DashComponent implements OnInit {
     this.store.dispatch(new LOAD_USERS());
 
     this.categories$ = this.store.select(state => state.categories.data);
-    this.products$ = this.store.select(state => state.products.data.Products);
+    this.products$ = this.store.select(state => state.products.data !== null ? state.products.data.Products : null  );
     this.users$ = this.store.select(state => state.users.data);
 
     this.createBarChart();
     this.createPieChart();
 
-    // this.createAnotherChart();
+    this.createAnotherChart();
 
     this.createHBarChart();
     this.createRadarChart();
@@ -69,30 +69,32 @@ export class DashComponent implements OnInit {
 
 
     this.chart = new Chart(this.chartRef.nativeElement, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June'],
         datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
           backgroundColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+            'rgba(70,168,49,0.5)',
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
+            'rgba(70,168,49,0.5)',
           ],
           borderWidth: 1
-        }]
+        }, {
+          label: 'Investment',
+          data: [22, 1, 12, 5, 12, 23],
+          type: 'line',
+          backgroundColor: [
+            'rgba(70,168,49,0)',
+          ],
+          borderColor: [
+            'rgba(70,168,49,0.5)',
+          ],
+        }
+
+        ]
       },
       options: {
         scales: {
@@ -116,12 +118,12 @@ export class DashComponent implements OnInit {
           label: '# of Votes',
           data: [12, 19],
           backgroundColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 206, 86, 1)',
+            'rgb(130,0,227)',
+            'rgb(255,125,15)',
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(255, 206, 86, 1)',
+            'rgba(255, 99, 132, 0)',
+            'rgba(255, 206, 86, 0)',
           ],
           borderWidth: 1
         }]
@@ -251,6 +253,33 @@ export class DashComponent implements OnInit {
         }
       }
     });
+  }
+
+  private createAnotherChart() {
+
+    this.polarchart = new Chart(this.aChartRef.nativeElement, {
+      type: 'pie',
+      data: {
+        labels: ['Order', 'Delivered', 'Not Delivered'],
+        datasets: [{
+          label: 'Customer satisfaction',
+          data: [12,23,55],
+          backgroundColor: [
+            'rgb(227,27,119)',
+            'rgb(255,125,15)',
+            'rgb(42,255,99)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 0)',
+            'rgba(255, 206, 86, 0)',
+            'rgba(255, 206, 86, 0)',
+          ],
+          borderWidth: 0.5
+        }]
+      },
+      options: {}
+    });
+
   }
 }
 

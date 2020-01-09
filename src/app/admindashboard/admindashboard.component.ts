@@ -15,9 +15,11 @@ export class AdmindashboardComponent implements OnInit {
     { icon: 'recent_actors', title: 'users', url: 1},
     { icon: 'category', title: 'category', url: 2},
     { icon: 'storefront', title: 'products', url: 3},
-    { icon: 'local_shipping', title: 'orders', url: 4},
-    { icon: 'invert_colors', title: 'theme', url: 4},
-    { icon: 'settings', title: 'settings', url: 5},
+    { icon: 'local_shipping', title: 'orders & shipping', url: 4},
+    { icon: 'invert_colors', title: 'theme', url: 5},
+    { icon: 'account_balance', title: 'Tax', url: 6},
+    { icon: 'email', title: 'Mail', url: 7},
+    { icon: 'settings', title: 'settings', url: 8},
   ];
   component: number;
 

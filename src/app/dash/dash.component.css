@@ -1,7 +1,23 @@
 .dash1{
     margin-top: 20px;
-    
+
 }
 .card-recatngle{
     border-radius: 10px;
+}
+
+.a-card {
+  padding: 16px 32px;
+  background-color: white;
+
+}
+
+.a-title{
+  color: #837f6f;
+}
+
+
+.line-chart {
+  padding: 16px 32px;
+  background-color: white;
 }

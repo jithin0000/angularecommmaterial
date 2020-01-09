@@ -1,15 +1,199 @@
+<div class="e-container">
+  <div class="row">
+    <div class="col  a-card  ml-3 mat-elevation-z8" >
+      <div class="row ">
+        <div class="col-lg-8" >
+          <h5 class="c-title a-title"  >Total sales</h5>
+          <h3 class="price-text">&#36;2045</h3>
+          <p class="mat-card-subtitle mt-4">+4.2% since last week</p>
+        </div>
+        <div class="col mt-3">
+          <img width="50px" height="50px" src="../../assets/images/sale-tag.png" alt="no images to show">
+        </div>
+      </div>
+    </div>
 
+    <div class="col  a-card  ml-3 mat-elevation-z8" >
+      <div class="row ">
+        <div class="col-lg-8" >
+          <h5 class="c-title a-title"  >Total Income</h5>
+          <h3 class="price-text">&#36;15267</h3>
+          <p class="mat-card-subtitle mt-4">+6.2% since last week</p>
+        </div>
+        <div class="col mt-3">
+          <img width="50px" height="50px" src="../../assets/images/pie-chart.png" alt="no images to show">
+        </div>
+      </div>
+    </div>
 
+    <div class="col  a-card  ml-3 mat-elevation-z8" >
+      <div class="row ">
+        <div class="col-lg-8" >
+          <h5 class="c-title a-title"  >Total Orders</h5>
+          <h3 class="price-text">&#36;8546</h3>
+          <p class="mat-card-subtitle mt-4">+26.2% since last week</p>
+        </div>
+        <div class="col mt-3">
+          <img width="50px" height="50px" src="../../assets/images/truck.png" alt="no images to show">
+        </div>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-lg-6">
-    <canvas  class="chart"
-             #myChart>{{chart}}</canvas>
+    <div class="col  a-card  ml-3 mr-3 mat-elevation-z8" >
+      <div class="row ">
+        <div class="col-lg-8" >
+          <h5 class="c-title a-title"  >New Customers</h5>
+          <h3 class="price-text">&#36;1235</h3>
+          <p class="mat-card-subtitle mt-4">+26.2% since last week</p>
+        </div>
+        <div class="col mt-3">
+          <img width="50px" height="50px" src="../../assets/images/user-profiles.png" alt="no images to show">
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
+
+
+<div class="row mt-5">
   <div class="col-lg-6">
-    <canvas  class="chart" #pieChart>{{piechart}}</canvas>
+    <div class="line-chart mat-elevation-z8 ">
+      <div class="row">
+        <div class="col-lg-10">
+          <h3 class="c-title">Revenue History</h3>
+        </div>
+        <div class="col">
+          <mat-icon>more_horiz</mat-icon>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-lg-2">
+          <h5 class="green-text">&#36;2035</h5>
+          <div>Revenue</div>
+        </div>
+        <div class="col">
+          <h5 class="price-text">&#36;6548</h5>
+          <div>Investment</div>
+        </div>
+      </div>
+
+      <canvas  class="mt-3"
+               #myChart>{{chart}}</canvas>
+    </div>
   </div>
+  <div class="col-lg-6 line-chart mat-elevation-z8">
+
+      <div class="row">
+        <div class="col-lg-6">
+          <canvas #pieChart>{{piechart}}</canvas>
+        </div>
+        <div class="col-lg-6">
+          <canvas #aChartRef  >{{polarchart}}</canvas>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col d-flex justify-content-between">
+          <div class="div d-flex align-center">
+            <button class="mat-elevation-z0" mat-mini-fab color="primary" ></button>
+            <div class="ml-2" >Male</div>
+          </div>
+          <div>1225</div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col d-flex justify-content-between">
+          <div class="div d-flex align-center">
+            <button  class="mat-elevation-z0" mat-mini-fab color="accent" ></button>
+            <div class="ml-2" >Female</div>
+          </div>
+          <div>1225</div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col d-flex justify-content-between">
+          <div class="div d-flex align-center">
+            <button  class="mat-elevation-z0" mat-mini-fab color="warn" ></button>
+            <div class="ml-2" >Not specified</div>
+          </div>
+          <div>1225</div>
+        </div>
+    </div>
+  </div>
+
 </div>
+
+  <div class="row mt-3">
+    <div *ngIf="products$ | async as products" class="col-lg-6 mat-elevation-z8 chart ">
+      <h3 class="mat-title pt-2" >Top selling products</h3>
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">No</th>
+          <th scope="col">image</th>
+          <th scope="col">name</th>
+          <th scope="col">description</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+
+        <tbody *ngIf="products.length>0" >
+        <tr  *ngFor="let cat of products.slice(0,8) ; let i =index;" >
+          <th>{{i+1}}</th>
+          <td><img width="50px" [src]="cat.imageurl" alt=""></td>
+          <td>{{cat.name}}</td>
+          <td>{{cat.description.substr(0,20)}}</td>
+          <td></td>
+        </tr>
+        </tbody>
+
+      </table>
+
+
+
+    </div>
+
+      <div *ngIf="categories$ | async as categories" class=" line-chart col-lg-5 ml-1 mat-elevation-z8  ">
+        <h3 class="mat-title pt-2" >Categories</h3>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">name</th>
+            <th scope="col">description</th>
+            <th scope="col">
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr  *ngFor="let cat of categories.slice(0,8) ; let i =index;" >
+            <th>{{i+1}}</th>
+            <td>{{cat.categoryname}}</td>
+            <td>{{cat.description.substr(0,20)}}</td>
+          </tr>
+          </tbody>
+
+        </table>
+
+
+
+      </div>
+
+  </div>
+
+
+
+
+
 
 
 <div class="row">
@@ -26,4 +210,5 @@
     <canvas  class="chart"
              #hBarChart>{{hchart}}</canvas>
   </div>
+</div>
 </div>

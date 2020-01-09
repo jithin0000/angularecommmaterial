@@ -1,10 +1,11 @@
 .example-container {
   position: absolute;
   top: 0;
+  /*margin-top: 50px;*/
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: white;
+  background-color: rgb(246, 240, 252);
 }
 
 mat-sidenav {
@@ -25,8 +26,15 @@ mat-sidenav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
-  margin: 8px;
+  padding: 8px 8px;
+  /* margin: 8px; */
+}
+
+.side-title{
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  text-transform:capitalize;
 }
 
 .side-item:hover{
@@ -40,5 +48,6 @@ mat-sidenav {
 
 .side-icon {
   color: #837f6f;
+  font-size: 16px;
 
 }
