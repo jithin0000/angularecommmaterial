@@ -12,6 +12,7 @@ import {User} from '../Models/User';
 })
 export class ProfileComponent implements OnInit {
    user$: Observable<User>;
+  loading$: Observable<boolean>;
 
 
   constructor(private store: Store<AppState>) {
@@ -21,8 +22,13 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(new GetUser());
 
     this.user$ = this.store.select(state => state.userDetail.data);
+    this.loading$ = this.store.select(state => state.userDetail.loading);
 
-    this.user$.subscribe(res => console.log(res));
+    this.store.select(state => state.userDetail).subscribe(res => {
+      if (res !== undefined) {
+        console.log(res);
+      }
+    });
 
   }
 

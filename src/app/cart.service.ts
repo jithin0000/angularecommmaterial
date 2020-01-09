@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Cart} from './Models/Cart';
 import {BaseService} from './base.service';
+import {AddToCartResponse} from './Models/AddToCartResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class CartService extends BaseService<Cart>{
   });
 
   addToCart(id, body) {
-    return this.httpClient.post<Cart>(this.url  + '/add/' + id , body, {headers: this.header});
+    return this.httpClient.post<AddToCartResponse>(this.url  + '/add/' + id , body, {headers: this.header});
   }
 
   deleteCarts(id) {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,12 +49,25 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 
+import { NgxImageZoomModule } from 'ngx-image-zoom';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu';
+import { DialogComponent } from './dialog/dialog.component';
+import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerInterceptor';
+
 
 
 
 
 // @ts-ignore
 @NgModule({
+  entryComponents: [DialogComponent],
+
   declarations: [
     AppComponent,
     RegisterComponent,
@@ -77,9 +90,12 @@ import {MatInputModule} from '@angular/material/input';
     ProfileComponent,
     AddProductComponent,
     ToastComponent,
+    DialogComponent,
 
 
   ],
+
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -95,12 +111,18 @@ import {MatInputModule} from '@angular/material/input';
     NgbToastModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatCardModule,
-    MatButtonModule, MatListModule, MatInputModule,
-    MatToolbarModule, MatIconModule, MatBadgeModule
+    MatCardModule, MatDialogModule, MatTableModule, MatMenuModule,
+    MatButtonModule, MatListModule, MatInputModule, MatDividerModule,
+    MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
+    MatGridListModule, MatPaginatorModule,
+    NgxImageZoomModule.forRoot()
+
 
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

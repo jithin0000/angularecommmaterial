@@ -42,11 +42,12 @@ export class AuthService {
 
     if (this.token !== null) {
 
+
       // tslint:disable-next-line:variable-name
       const user_role = this.jwtHelper.decodeToken(this.token).role as Array<string>;
-
+      console.log(user_role)
       roles.forEach(item => {
-        if (user_role.includes(item)) {
+        if (item.includes(user_role)) {
           isMatch = true;
           return;
         }

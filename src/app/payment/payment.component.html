@@ -7,22 +7,40 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-lg-4">
-      <h4>Cart</h4>
-        <ul *ngIf="cart$ | async as cart " class="list-group">
-          <li class="list-group-item" *ngFor="let pdt of cart.Products"  >{{pdt.name}}  <span class="badge badge-secondary" >{{pdt.price}}&#36;</span></li>
-
-          <li class="list-group right"> <h6>Total</h6> <span class="alert alert-success py-2">{{cart.Total}} &#36;</span> </li>
-    </ul>
-      <hr>
-    </div>
-  </div>
 
   <div class="row">
-    <div class="col lg-4">
-      <div #paypal></div>
+    <div class="col-lg-6">
+      <mat-card *ngIf="cart$ | async as cart" >
+        <mat-card-title>Cart</mat-card-title>
+        <mat-card-subtitle>Products</mat-card-subtitle>
+        <mat-card-content>
+          <mat-list  >
+            <mat-list-item *ngFor="let item of cart.Products" >
+              <div class="d-flex">
+                <h6 class="c-title">{{item.name}}</h6>
+                <span class="ml-5 price-text">&#36;{{item.price}}</span>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-button >Total</button>
+          <button mat-button color="warn" >&#36;{{cart.Total}}</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
+
+    <div class="col">
+      <mat-card>
+        <mat-card-title>Payment</mat-card-title>
+        <mat-card-content>
+          <div #paypal></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
   </div>
+
 
 </div>

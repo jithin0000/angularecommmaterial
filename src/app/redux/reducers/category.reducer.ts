@@ -24,33 +24,32 @@ export function reducer(
       return {...state, loading: false, loaded: false};
 
     case categoryActions.CREATE_CATEGORY:
-      return {...state, loaded: false, loading: true};
+      return {...state};
 
     case categoryActions.CREATE_CATEGORY_SUCCESS:
-      return {...state, data: [...state.data, action.product], loading: false, loaded: true};
+      return {...state, data: [...state.data, action.product]};
 
     case categoryActions.CREATE_CATEGORY_FAILURE:
-      return {...state, loading: false, loaded: false};
+      return {...state};
 
     case categoryActions.DELETE_CATEGORY:
-      return {...state, loaded: false, loading: true};
+      return {...state};
 
     case categoryActions.DELETE_CATEGORY_SUCCESS:
       return {
-        ...state, data: state.data.filter(item => item.CategoryId !== action.id),
-        loading: false, loaded: true
+        ...state, data: state.data.filter(item => item.CategoryId !== action.id)
       };
 
     case categoryActions.DELETE_CATEGORY_FAILURE:
-      return {...state, loading: false, loaded: false};
+      return {...state};
 
 
     case categoryActions.UPDATE_CATEGORY:
-      return {...state, loaded: false, loading: true};
+      return {...state};
 
     case categoryActions.UPDATE_CATEGORY_SUCCESS:
       return {
-        loading: false, loaded: true,
+        ...state,
         data: state.data.map(item => {
           if (item.CategoryId === action.payload.CategoryId) {
           item.categoryname = action.payload.categoryname;
@@ -61,7 +60,7 @@ export function reducer(
       };
 
     case categoryActions.UPDATE_CATEGORY_FAILURE:
-      return {...state, loading: false, loaded: false};
+      return {...state};
 
 
     default:

@@ -20,13 +20,13 @@ export function reducer(
   switch (action.type) {
 
     case authActions.GET_USER:
-      return {...state};
+      return {...state, loading: true, loaded: false};
 
     case authActions.GET_USER_SUCCESS:
-      return {...state, data: action.payload};
+      return {...state, data: action.payload, loading: false, loaded: true};
 
     case authActions.GET_USER_FAILURE:
-      return {...state, data: action.payload};
+      return {...state, data: action.payload,loading: false, loaded: false};
     default:
       return state;
   }

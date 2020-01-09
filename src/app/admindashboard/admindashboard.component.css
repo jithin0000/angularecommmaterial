@@ -1,9 +1,44 @@
-.side-menu {
-  -webkit-box-shadow: 5px 2px 5px 0px rgba(186, 173, 186, 1);
-  -moz-box-shadow: 5px 2px 5px 0px rgba(186, 173, 186, 1);
-  box-shadow: 5px 2px 5px 0px rgba(186, 173, 186, 1);
-
-  height: 100%;
-  min-height: 100vh;
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: white;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.main-content {
+  padding-left: 15px;
+  padding-top: 25px;
+}
+
+.sidenav{
+  margin: 8px 16px;
+}
+
+.side-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  margin: 8px;
+}
+
+.side-item:hover{
+  background-color: #8200e3;
+  color: white;
+}
+
+.side-item-header{
+  text-align: center;
+}
+
+.side-icon {
+  color: #837f6f;
+
 }

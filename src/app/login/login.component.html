@@ -1,7 +1,7 @@
 <div class="container">
 
 
-  
+
 
   <div class="row">
     <!-- <div class="col-lg-4"></div> -->
@@ -67,16 +67,15 @@
         </div>
         <br>
 
-        <button [disabled]="login.invalid" class="btn btn-block btn-primary">Login</button>
+        <button [disabled]="login.invalid" mat-raised-button color="primary" class="btn btn-block">Login</button>
 
 
 
 
       </form>
       <br>
-      <a routerLink="/register" class="btn btn-link-info">Register</a>
+      <a routerLink="/register" mat-flat-button color="accent" class="btn btn-link-info">Register</a>
 
-      <div *ngIf="isError" class="alert alert-danger">{{errorMessage}}</div>
     </div>
     <!-- <div class="col-lg-4"></div> -->
   </div>

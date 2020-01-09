@@ -20,3 +20,9 @@
 .example-full-width {
   width: 100%;
 }
+
+.sort-sec{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

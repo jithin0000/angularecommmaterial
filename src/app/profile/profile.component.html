@@ -1,7 +1,13 @@
 <div class="container">
-  <div class="row">
+
+  <div *ngIf="loading$ | async as loading" class="row">
+    <div *ngIf="loading" class="col align-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+
+  <div class="row mt-5">
     <div class="col-lg-4">
-      <img src="" alt="" class="img-responsive">
 
       <div *ngIf="user$ | async as user"  class="personal-details">
         <p class="semi-title">

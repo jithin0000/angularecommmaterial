@@ -9,7 +9,8 @@ import {LoginUser, RegisterUser} from '../redux/actions/authAction';
 import {CartUtils} from '../utils/CartUtils';
 import {UpdateCart} from '../redux/actions/cart.action';
 import {AppToastService} from '../app-toast.service';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {ToastComponent} from '../toast/toast.component';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
     private store: Store<AppState>,
     private router: Router,
     private toastService: AppToastService,
-    private snackBar: MatSnackBar
     ) {
 
 
@@ -33,13 +33,15 @@ export class LoginComponent implements OnInit {
 
     this.store.select(state => state.auth).subscribe(res => {
       if (res.authenticated) {
-        localStorage.setItem('token', res.data.token);
         if (res.data !== null) {
-          CartUtils.getOrCreateCart(this.store);
-        }
-        this.router.navigate(['/']);
+          localStorage.setItem('token', res.data.token);
+          if (res.data !== null) {
+            CartUtils.getOrCreateCart(this.store);
+          }
+          this.router.navigate(['/']);
 
-        this.openSnackBar();
+          this.openSnackBar();
+        }
       }
     });
 
@@ -53,9 +55,6 @@ export class LoginComponent implements OnInit {
   }
 
   private openSnackBar() {
-    this.snackBar.open('Login Successful', '', {
-      duration: 2000,
-      horizontalPosition: 'center'
-    });
+    this.toastService.show('Login successful');
   }
 }

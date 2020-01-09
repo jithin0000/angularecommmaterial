@@ -19,8 +19,11 @@ export class ProductEffect {
   @Effect()
   loadProduct$ = this.actions$.pipe(
     ofType(productActions.LOAD_PRODUCT),
-    switchMap(() => {
-      return this.productService.getAll().pipe(
+    switchMap((payload: { sortBy: string, pageNumber: number, pageSize: number}) => {
+      console.log(payload)
+      return this.productService
+        .getAllBySortedAndFilteredAndPaginated(payload.sortBy,
+          payload.pageNumber, payload.pageSize).pipe(
         map(product => new productActions.LOAD_PRODUCTS_SUCCESS(product)),
         catchError(err => of(new productActions.LOAD_PRODUCTS_FAIL(err)))
       );

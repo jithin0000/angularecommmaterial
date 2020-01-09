@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit {
 
     this.cart$ = this.store.select(state => state.cart.data);
     this.cart$.subscribe(res => {
-      if (res !== null) {
+      if (res !== null && res !== undefined) {
         localStorage.setItem('cart', res.CartId.toString());
       }
     });

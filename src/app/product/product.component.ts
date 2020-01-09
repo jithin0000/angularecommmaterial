@@ -17,13 +17,14 @@ import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 export class ProductComponent implements OnInit {
 
   productList$: Observable<Product[]>;
+  displayedColumns: string[] = ['position', 'avatar', 'name', 'description', 'category', 'actions'];
 
   constructor(
     private store: Store<AppState>,
     ) { }
 
   ngOnInit() {
-    this.productList$ = this.store.select(state => state.products.data);
+    this.productList$ = this.store.select(state => state.products.data !== null ? state.products.data.Products : null);
 
     this.store.dispatch(new LOAD_PRODUCTS());
   }

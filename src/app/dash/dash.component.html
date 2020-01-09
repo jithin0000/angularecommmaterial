@@ -1,64 +1,29 @@
 
 
-<div class="row dash1">
-  <div class="col">
 
-      <div class="card card-recatngle">
-          <div  class="card-body">
-            <h4 class="card-title">Total Categories</h4>
-            <p *ngIf="categories$ | async as categories" class="card-text">{{categories.length}}</p>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-lg-6">
+    <canvas  class="chart"
+             #myChart>{{chart}}</canvas>
   </div>
-  <div class="col">
-      <div class="card card-recatngle">
-          <div class="card-body">
-            <h4 class="card-title">Total Products</h4>
-            <p *ngIf="products$ | async as products" class="card-text">{{products.length}}</p>
-          </div>
-        </div>
-  </div>
-  <div class="col">
-      <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Total Users</h4>
-            <p *ngIf="users$ | async as users" class="card-text">{{users.length}}</p>
-          </div>
-        </div>
+  <div class="col-lg-6">
+    <canvas  class="chart" #pieChart>{{piechart}}</canvas>
   </div>
 </div>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-
-
-
-
-    </div>
-
-
-
+<div class="row">
+  <div class="col">
+    <canvas #radarChart>{{radarC}}</canvas>
   </div>
 </div>
-<div class="container">
-    <table class="table table-stripped">
-    <thead>
-      <tr>
 
-        <th>Username</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of users$ | async" >
-        <td>{{item.Email}}</td>
-        <td>{{item.UserName}}</td>
-
-
-
-      </tr>
-    </tbody>
-    </table>
+<div class="row">
+  <div class="col-lg-6">
+    <canvas  class="chart"
+             #sChart>{{schart}}</canvas>
+  </div>  <div class="col-lg-6">
+    <canvas  class="chart"
+             #hBarChart>{{hchart}}</canvas>
   </div>
+</div>

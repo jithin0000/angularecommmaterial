@@ -1,34 +1,86 @@
 
-<div class="container mt-5">
-<div class="row">
-  <div class="col-lg-8" >
+<div class="container">
 
-
-      <div class="card " *ngIf="product$ | async as product " >
-        <div class="detail">
-          <div class="card-header border-0">
-            <img [src]="product.imageurl" width="200px" alt="">
-          </div>
-          <div class="card-block px-2 mx-2">
-            <h4 class="card-title">{{product.name}}</h4>
-            <p class="card-text">{{product.price}}&#36;</p>
-            <p class="card-text">{{product.description}}</p>
-          </div>
-
-          <div class="card-block mt-5 px-2">
-            <button *ngIf="!inCart" (click)="addToCart(product.ProductId)"  class="btn btn-success">add to cart</button>
-
-          </div>
+  <div *ngIf="loading$ | async as loader" class="row">
+    <div *ngIf="loader" class="col-lg-12 align-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  <div *ngIf="product$ | async as pdt" class="row mt-5">
+    <div class="col lg-6">
+      <ngx-image-zoom
+        [thumbImage]="pdt.imageurl"
+        [fullImage]="pdt.imageurl"
+      ></ngx-image-zoom>
+<!--      <img [src]="pdt.imageurl" alt="">-->
+      <div class="row mt-2">
+        <div class="col-lg-3">
+          <img src="https://via.placeholder.com/150" alt="">
         </div>
+        <div class="col-lg-3">
+          <img src="https://via.placeholder.com/150" alt="">
+
+        </div>
+        <div class="col-lg-3">
+          <img src="https://via.placeholder.com/150" alt="">
+        </div>
+        <div class="col-lg-3">
+          <img src="https://via.placeholder.com/150" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="col lg-6">
+<!--      <h6 class="sub-title">{{pdt.Category.categoryname}}</h6>-->
+      <h3 class="title">{{pdt.name}}</h3>
+      <p class="price-text">&#36;{{pdt.price}}</p>
+
+      <mat-card-content>
+        <p>{{pdt.description}}</p>
+      </mat-card-content>
+      <div  class="rate-sec">
+        <mat-icon class="rate" >star</mat-icon>
+        <mat-icon class="rate" >star</mat-icon>
+        <mat-icon class="rate" >star_half</mat-icon>
+        <mat-icon class="rate" >star_half</mat-icon>
+        <mat-icon class="rate" >star_border</mat-icon>
       </div>
 
 
-    <div class="col-lg4">
+      <div class=" mt-5">
+        <h6>Available colors</h6>
+      </div>
+      <div class="color-bg-sec mt-2">
+        <div class="color-bg" >R</div>
+        <div class="color-bg" >Y</div>
+        <div class="color-bg">B</div>
+        <div class="color-bg">W</div>
+      </div>
+      <div class=" mt-5">
+        <h6>Available Sizes</h6>
+      </div>
+      <div class="color-bg-sec mt-2">
+        <div class="color-bg" >S</div>
+        <div class="color-bg" >M</div>
+        <div class="color-bg">L</div>
+        <div class="color-bg">XL</div>
+      </div>
+
+      <hr>
+
+      <div class="price-section" >
 
 
+        <button *ngIf="inCart"  (click)="addToCart(pdt.ProductId)" mat-raised-button color="warn" >
+          <mat-icon  matSuffix >add_shopping_cart</mat-icon>
+          remove from Cart
+        </button>
 
+        <button *ngIf="!inCart "  (click)="addToCart(pdt.ProductId)" mat-stroked-button color="primary" >
+          <mat-icon color="primary" matSuffix >add_shopping_cart</mat-icon>
+          add to Cart
+        </button>
+
+      </div>
     </div>
   </div>
-</div>
-
 </div>

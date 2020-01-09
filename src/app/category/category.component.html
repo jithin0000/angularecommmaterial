@@ -1,41 +1,126 @@
 <div class="container">
 
-    <form #category="ngForm"  (ngSubmit)="onSubmit(category)" >
-<div class="form-group">
-  <label for="categoryname">Categoryname</label>
-  <input type="text" ngModel  name="categoryname" #categoryname="ngModel" id="categoryname" required class="form-control" placeholder="categoryname" >
- <div *ngIf="!categoryname.valid && categoryname.touched" class="alert alert-danger">Category Name Required</div>
-</div>
 
-<div class="form-group">
-  <label for="description">Category Description</label>
-  <input type="text" ngModel  name="description" #description="ngModel" id="description" required class="form-control" placeholder="description" >
- <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Category Name Required</div>
-</div>
-<button [disabled]="category.invalid" class="btn btn-primary">Add Category</button>
+  <div class="row">
+    <div class="col">
+      <div class="mat-card p-3">
+        <h3 class="u-title">Add new Category</h3>
+        <form #category="ngForm" (ngSubmit)="onSubmit(category)">
+          <div class="form-group">
+            <label for="categoryname">Categoryname</label>
+            <input #categoryname="ngModel" class="form-control" id="categoryname" name="categoryname" ngModel
+                   placeholder="categoryname"
+                   required type="text">
+            <div *ngIf="!categoryname.valid && categoryname.touched" class="alert alert-danger">Category Name Required
+            </div>
+          </div>
 
-    </form>
-</div>
+          <div class="form-group">
+            <label for="description">Category Description</label>
+            <input #description="ngModel" class="form-control" id="description" name="description" ngModel
+                   placeholder="description"
+                   required type="text">
+            <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Category Name Required
+            </div>
+          </div>
+          <button [disabled]="category.invalid" color="primary" mat-raised-button>Add Category</button>
 
-<hr>
-<div class="container">
-  <table class="table table-stripped">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Category Name</th>
-      <th>Category Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of categoryList$ | async" >
-      <td>{{item.CategoryId}}</td>
-      <td>{{item.categoryname}}</td>
-      <td>{{item.description}}</td>
-      <td><button routerLink="/updatecategory/{{item.CategoryId}}" class="btn btn-success">Update</button></td>
-      <td><button (click)="deleteCategory(item.CategoryId)" class="btn btn-danger">Delete</button></td>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    </tr>
-  </tbody>
+
+  <hr>
+
+
+  <table *ngIf="categoryList$ | async as categories  "
+         [dataSource]="categories" class="mat-elevation-z8" mat-table>
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th *matHeaderCellDef mat-header-cell> No.</th>
+      <td *matCellDef="let element" mat-cell> {{element.CategoryId}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell> Name</th>
+      <td *matCellDef="let element" mat-cell> {{element.categoryname}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef mat-header-cell> Description</th>
+      <td *matCellDef="let element" mat-cell> {{element.description.substr(0, 55)}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="actions">
+      <th *matHeaderCellDef mat-header-cell> Actions</th>
+      <td *matCellDef="let element" mat-cell>
+        <button color="primary" mat-raised-button routerLink="/updatecategory/{{element.CategoryId}}">edit</button>
+        <button (click)="deleteCategory(element.CategoryId)" class="ml-2" color="warn"
+                mat-raised-button>delete
+        </button>
+      </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+
   </table>
+  <mat-paginator [length]="100"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+
+
 </div>
+
+
+<!--<div class="container">-->
+
+<!--    <form #category="ngForm"  (ngSubmit)="onSubmit(category)" >-->
+<!--<div class="form-group">-->
+<!--  <label for="categoryname">Categoryname</label>-->
+<!--  <input type="text" ngModel  name="categoryname" #categoryname="ngModel" id="categoryname" required class="form-control" placeholder="categoryname" >-->
+<!-- <div *ngIf="!categoryname.valid && categoryname.touched" class="alert alert-danger">Category Name Required</div>-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+<!--  <label for="description">Category Description</label>-->
+<!--  <input type="text" ngModel  name="description" #description="ngModel" id="description" required class="form-control" placeholder="description" >-->
+<!-- <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Category Name Required</div>-->
+<!--</div>-->
+<!--<button [disabled]="category.invalid" class="btn btn-primary">Add Category</button>-->
+
+<!--    </form>-->
+<!--</div>-->
+
+<!--<hr>-->
+<!--<div class="container">-->
+<!--  <table class="table table-stripped">-->
+<!--  <thead>-->
+<!--    <tr>-->
+<!--      <th>id</th>-->
+<!--      <th>Category Name</th>-->
+<!--      <th>Category Description</th>-->
+<!--    </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--    <tr *ngFor="let item of categoryList$ | async" >-->
+<!--      <td>{{item.CategoryId}}</td>-->
+<!--      <td>{{item.categoryname}}</td>-->
+<!--      <td>{{item.description}}</td>-->
+<!--      <td><button routerLink="/updatecategory/{{item.CategoryId}}" class="btn btn-success">Update</button></td>-->
+<!--      <td><button (click)="deleteCategory(item.CategoryId)" class="btn btn-danger">Delete</button></td>-->
+
+<!--    </tr>-->
+<!--  </tbody>-->
+<!--  </table>-->
+<!--</div>-->

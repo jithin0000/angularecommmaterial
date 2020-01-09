@@ -1,10 +1,11 @@
 import {Product} from '../../Models/Product';
 
 import * as pdtAction from '../actions/product.action';
+import {PaginatedResponseDto} from '../../Models/PaginatedResponseDto';
 
 // tslint:disable-next-line:class-name
 export interface ProductState {
-  data: Product[];
+  data: PaginatedResponseDto;
   loaded: boolean;
   loading: boolean;
   added: boolean;
@@ -12,7 +13,7 @@ export interface ProductState {
 }
 
 export const initialState: ProductState = {
-  data: [] , loading: false, loaded: false, added: false, updated: false
+  data: null , loading: false, loaded: false, added: false, updated: false
 };
 
 export function reducer(
@@ -30,17 +31,19 @@ export function reducer(
 
 
     case pdtAction.FILTER_PRODUCT_BY_CATEGORY:
-      return { ...state, data: state.data.filter(item => item.ProductId !== action.categoryId)};
+      return { ...state, data: { ...state.data,
+          Products: state.data.Products.filter(item => item.CategoryId === action.categoryId)}  };
 
       case pdtAction.FILTER_PRODUCT_BY_NAME:
-      return { ...state, data: state.data
-          .filter(item => item.name.toLowerCase().includes(action.name.toLowerCase()))};
+      return { ...state, data: { ...state.data,
+          Products: state.data.Products.filter(item => item.name
+            .toLowerCase().includes(action.name.toLowerCase()))}  };
 
     case pdtAction.CREATE_PRODUCT:
       return {...state, loaded: false, loading: true};
 
     case pdtAction.CREATE_PRODUCT_SUCCESS:
-      return { ...state , data: [...state.data, action.product], loading: false, loaded: true};
+      return { ...state , data: {...state.data, Products: [...state.data.Products, action.product]}, loading: false, loaded: true};
 
     case pdtAction.CREATE_PRODUCT_FAILURE:
       return {...state, loading: false, loaded: false};
@@ -49,7 +52,10 @@ export function reducer(
       return {...state, loaded: false, loading: true};
 
     case pdtAction.DELETE_PRODUCT_SUCCESS:
-      return { ...state , data: state.data.filter(item => item.ProductId !== action.id),
+      return { ...state , data: {
+        ...state.data,
+         Products: state.data.Products.filter(item => item.ProductId !== action.id)
+        },
         loading: false, loaded: true};
 
     case pdtAction.DELETE_PRODUCT_FAILURE:
@@ -58,11 +64,10 @@ export function reducer(
       return {...state, loaded: false, loading: true, updated: false, added: false};
 
     case pdtAction.UPDATE_PRODUCT_SUCCESS:
-      console.log(action.payload)
       return { ...state , updated: true};
 
     case pdtAction.UPDATE_PRODUCT_FAILURE:
-      console.log(action.payload)
+      console.log(action.payload);
       return {...state, loading: false, loaded: false, updated: false};
 
 

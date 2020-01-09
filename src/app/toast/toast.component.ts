@@ -8,7 +8,7 @@ import {AppToastService} from '../app-toast.service';
 })
 export class ToastComponent implements OnInit {
 
-  constructor(public toastService: AppToastService) { }
+  constructor() { }
 
   ngOnInit() {
   }

@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppToastService {
 
-  toasts: any[] = [];
 
-  constructor() {
+  constructor(private snackBar: MatSnackBar) {
   }
 
-  public show(header: string, body: string, className?: string) {
-    this.toasts.push({header , body, className});
+  public show(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 2000,
+      horizontalPosition: 'center'
+    });
   }
 
-  remove(toast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
-  }
 
 }
 

@@ -96,6 +96,7 @@ export class PaymentComponent implements OnInit {
   private navigate_to_order_homel() {
 
     localStorage.removeItem('cart');
+    CartUtils.getOrCreateCart(this.store)
 
     this.router.navigate(['/order']);
 

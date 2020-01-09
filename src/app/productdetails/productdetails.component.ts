@@ -11,6 +11,7 @@ import {AppState} from '../Models/AppState';
 import {LoadProductDetail} from '../redux/actions/productDetail.action';
 import {Observable} from 'rxjs';
 import {AddToCart} from '../redux/actions/cart.action';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-productdetails',
@@ -21,12 +22,15 @@ export class ProductdetailsComponent implements OnInit {
 
   product$: Observable<Product>;
   inCart: boolean;
-  private product: Product;
   private cart$: Observable<Cart>;
+  loading$: Observable<boolean>;
+
+  private productId = 0;
 
   constructor(
     private router: ActivatedRoute,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private dialog: MatDialog
     ) { }
 
 
@@ -42,7 +46,39 @@ export class ProductdetailsComponent implements OnInit {
     this.product$ = this.store.select(state => state.productDetail.data);
     this.cart$  = this.store.select(state => state.cart.data);
 
+    this.product$.subscribe(res => {
 
+      if (res !== null) {
+        this.productId = res.ProductId;
+        this.cart$.subscribe(c => {
+          if (c !== null) {
+            if (c.Products.length > 0) {
+
+              c.Products.forEach(item => {
+                if (item.ProductId === this.productId) {
+                  this.inCart = true;
+                  return;
+                }else {
+                  this.inCart = false;
+                }
+              });
+            }
+            return;
+          }
+        });
+      }
+    });
+
+
+
+    this.loading$ = this.store.select(state => state.productDetail.loading);
+
+    this.store.select(state => state.cart)
+      .subscribe(res => {
+        if (res !== null) {
+          this.inCart = res.added;
+        }
+      });
 
 
   }
@@ -52,7 +88,17 @@ export class ProductdetailsComponent implements OnInit {
     const cart = localStorage.getItem('cart');
 
     // tslint:disable-next-line:radix
+
     this.store.dispatch(new AddToCart(parseInt(cart), {ProductId}));
 
+  }
+
+  private openDialog() {
+    this.dialog.open(ProductdetailsComponent, {
+      width: '250px',
+      data: {
+        name: 'item added '
+      }
+    });
   }
 }

@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {Product} from '../../Models/Product';
+import {PaginatedResponseDto} from '../../Models/PaginatedResponseDto';
 
 
 export const LOAD_PRODUCT =  ' [PRODUCT] Load Product ';
@@ -27,6 +28,10 @@ export const UPDATE_PRODUCT_FAILURE = ' [PRODUCT] Update Product Failure ';
 
 // tslint:disable-next-line:class-name
 export class LOAD_PRODUCTS implements Action {
+  constructor(public sortBy?: string, public pageNumber?: number, public pageSize?: number) {
+
+  }
+
   readonly type = LOAD_PRODUCT;
 
 }
@@ -34,7 +39,7 @@ export class LOAD_PRODUCTS implements Action {
 // tslint:disable-next-line:class-name
 export class LOAD_PRODUCTS_SUCCESS  implements Action {
   readonly type = LOAD_PRODUCT_SUCCESS;
-  constructor(public payload: Product[]) {
+  constructor(public payload: PaginatedResponseDto) {
   }
 }
 

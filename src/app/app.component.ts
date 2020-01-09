@@ -25,11 +25,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
 
+
     CartUtils.getOrCreateCart( this.store);
 
     this.cart$ = this.store.select(state => state.cart.data);
     this.cart$.subscribe(res => {
-      if (res !== null) {
+      if (res !== null && res !== undefined) {
+
         localStorage.setItem('cart', res.CartId.toString());
       }
     });

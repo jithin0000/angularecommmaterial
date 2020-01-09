@@ -1,19 +1,25 @@
-<mat-toolbar color="primary" >
+<mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span routerLink="/" >Home</span>
+    <span routerLink="/"></span>
     <span class="example-spacer"></span>
 
     <mat-icon
-      routerLink="/viewcart"
       *ngIf="cart$ | async as cart"
-              [matBadge]="cart.Products.length" class="mr-5" matBadgeColor="warn">home</mat-icon>
+      [matBadge]="cart.Products.length"
+      class="mr-5 cart-icon" matBadgeColor="warn" routerLink="/viewcart">shopping_cart
+    </mat-icon>
 
-    <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+    <mat-icon *ngIf="isAuthenticated" style="cursor: pointer" aria-hidden="false" aria-label="Example home icon" routerLink="/profile">
+      account_circle
+    </mat-icon>
+    <li class="nav-link" aria-hidden="false" aria-label="Example home icon" routerLink="/">Home</li>
+    <li class="nav-link" aria-hidden="false" aria-label="Example home icon"
+        routerLink="/admindashboard">dashboard</li>
     <ng-template [ngIf]="isAuthenticated==false">
-        <li [routerLinkActive]="['active']" [routerLink]="['/register']" class="nav-link">Register</li>
-        <li [routerLinkActive]="['active']" [routerLink]="['/login']" class="nav-link">Login</li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/register']" class="nav-link active">Register</li>
+      <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/login']" class="nav-link">Login</li>
     </ng-template>
-        <li (click)="logout()" class="nav-link">Log Out</li>
+    <li (click)="logout()" class="nav-link">Log Out</li>
 
 
   </mat-toolbar-row>

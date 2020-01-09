@@ -1,6 +1,10 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from './auth.service';
+import {MatDialog} from '@angular/material';
+import {AppToastService} from './app-toast.service';
+import {ToastComponent} from './toast/toast.component';
+import {DialogComponent} from './dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +13,8 @@ export class AuthguardGuard implements CanActivate {
 
   constructor(
     private authService: AuthService,
+    private dialog: MatDialog,
+    private toast: AppToastService,
     private router: Router) {
   }
 
@@ -17,27 +23,31 @@ export class AuthguardGuard implements CanActivate {
 
     if (next !== null) {
 
-      // const roles = next.data.roles as Array<string>;
-      // console.log(roles)
-      // if (roles) {
-      //   const match = this.authService.checkRole(roles);
-      //   if (match) {
-      //     return true;
-      //   } else {
-      //     this.router.navigate(['/']);
-      //     alert('your have no authority to loggin here');
-      //   }
-      // }
+      const roles = next.data.roles as Array<string>;
+      console.log(roles)
+      if (roles) {
+        const match = this.authService.checkRole(roles);
+        if (match) {
+          return true;
+        } else {
+          this.dialog.open(DialogComponent,{
+            role: 'alertdialog',
+          });
+          this.router.navigate(['/login']);
+
+        }
+      }
 
     }
     if (this.authService.is_authenticated()) {
       return true;
     }
 
-    alert('you need to sign in to go on');
+    this.dialog.open(DialogComponent,{
+      role: 'alertdialog',
+    });
     this.router.navigate(['/login']);
     return false;
   }
-
 
 }

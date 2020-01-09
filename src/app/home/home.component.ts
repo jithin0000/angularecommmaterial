@@ -8,6 +8,8 @@ import {AppState} from '../Models/AppState';
 import {FilterProductsByCategory, FilterProductsByName, LOAD_PRODUCTS} from '../redux/actions/product.action';
 import {Observable} from 'rxjs';
 import {LOAD_CATEGORIES} from '../redux/actions/category.action';
+import {PaginatedResponseDto} from '../Models/PaginatedResponseDto';
+import {MatPaginator, PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +19,12 @@ import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 export class HomeComponent implements OnInit {
 
 
-  productList$: Observable<Product[]>;
+  productList$: Observable<PaginatedResponseDto>;
 
   categoryList: Observable<Category[]>;
   private loading$: Observable<boolean>;
+  pageEvent: PageEvent;
+  private sortBy: string = "";
 
   constructor(
     private store: Store<AppState>
@@ -54,6 +58,19 @@ export class HomeComponent implements OnInit {
     } else {
       this.store.dispatch(new LOAD_PRODUCTS());
     }
+  }
+
+  select(sortBy: string) {
+    this.sortBy = sortBy;
+    this.store.dispatch(new LOAD_PRODUCTS(sortBy));
+  }
+
+
+  paginate(event: PageEvent) {
+    console.log(event.pageSize)
+
+    this.store.dispatch(new LOAD_PRODUCTS(this.sortBy, event.pageIndex + 1, event.pageSize));
+
   }
 }
 

@@ -1,6 +1,7 @@
 import {Action} from '@ngrx/store';
 import {Cart} from '../../Models/Cart';
 import {AddToCartRequestDto} from '../../Models/AddToCartRequestDto';
+import {AddToCartResponse} from '../../Models/AddToCartResponse';
 
 export const CREATE_CART = '[CART] Create Cart';
 export const CREATE_CART_SUCCESS = '[CART] Create Cart Success';
@@ -85,7 +86,7 @@ export class AddToCart implements Action {
 
 export class AddToCartSuccess implements Action {
   readonly type = ADD_TO_CART_SUCCESS;
-  constructor(public cart: Cart) {
+  constructor(public cart: AddToCartResponse) {
   }
 }
 

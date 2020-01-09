@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
     this.store.select(state => state.auth).subscribe(res => {
       if (res.registered) {
 
-        this.toastService.show('Registration ', 'Successful');
+        this.toastService.show('SuccessFully registered ')
         this.router.navigate(['/login']);
 
       }

@@ -21,8 +21,8 @@ import {AddProductComponent} from './add-product/add-product.component';
 
 const routes: Routes = [
 
-  {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'category', component: CategoryComponent},
   {path: 'updatecategory/:id', component: UpdatecategoryComponent},
   {path: '', component: HomeComponent },
@@ -37,7 +37,7 @@ const routes: Routes = [
   {path: 'address', component: AddressComponent, canActivate: [AuthguardGuard]},
   {path: 'payment', component: PaymentComponent, canActivate: [AuthguardGuard]},
   {path: 'order', component: OrderComponent, canActivate: [AuthguardGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthguardGuard]},
+  {path: 'profile', component: ProfileComponent, data:{roles: ['Member']}, canActivate: [AuthguardGuard]},
   {path: 'add-product', component: AddProductComponent, canActivate: [AuthguardGuard]},
 
 ];

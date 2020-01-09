@@ -35,52 +35,25 @@ export class BaseService<T> {
   }
 
   public getAll() {
-    return this.http.get<T[]>(this.url, {headers: this.header}).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<T[]>(this.url, {headers: this.header});
   }
 
   getById(id: number) {
-    return this.http.get<T>(`${this.url}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<T>(`${this.url}/${id}`);
   }
 
   create(body: T) {
-    return this.http.post<T>(this.url, body).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.post<T>(this.url, body);
   }
 
   deleteById(id: number) {
-    return this.http.delete<T>(`${this.url}/${id}`).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.delete<T>(`${this.url}/${id}`);
   }
 
   update(id: number, body: T) {
-    return this.http.put<T>(`${this.url}/${id}`, body).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.put<T>(`${this.url}/${id}`, body);
   }
 
-  private handleError(error: HttpErrorResponse) {
-
-    if (error.error instanceof ErrorEvent) {
-      console.log('client side event');
-      console.log(error.error.message);
-      console.log(error.message);
-      console.log(error.status);
-    } else {
-      console.log('backend error', error.status);
-      console.log('backend error', error.message);
-
-      console.log('error man ', error.error.toString());
-    }
-
-    return throwError('something bad happened try again later');
-
-  }
 }
 
 

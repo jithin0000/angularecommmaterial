@@ -25,9 +25,9 @@ export class CartUtils {
     }
 
     store.select(state => state.cart).subscribe(res => {
-       if (res.data !== null) {
+       if ( res !== undefined && res.data !== undefined && res.data !== null) {
 
-         if (res.data.UserId === null) {
+         if ( res.data !== undefined && res.data.UserId === null) {
 
            if (this.get_user_id() !== null) {
 

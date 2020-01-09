@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../Models/AppState';
 import {CreateCategory, DeleteCategory, LOAD_CATEGORIES} from '../redux/actions/category.action';
 
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -13,13 +14,19 @@ import {CreateCategory, DeleteCategory, LOAD_CATEGORIES} from '../redux/actions/
 })
 export class CategoryComponent implements OnInit {
 
+  constructor(private store: Store<AppState>) { }
+
+
   categoryList$: Observable<Category[]>;
 
-  constructor(private store: Store<AppState>) { }
+  displayedColumns: string[] = ['position', 'name', 'description', 'actions'];
+  loader$: Observable<boolean>;
 
   ngOnInit() {
 
     this.categoryList$ = this.store.select(state => state.categories.data);
+
+    this.loader$ = this.store.select(state => state.categories.loading);
 
     this.store.dispatch(new LOAD_CATEGORIES());
   }
@@ -33,4 +40,5 @@ export class CategoryComponent implements OnInit {
   deleteCategory(id) {
     this.store.dispatch(new DeleteCategory(id));
   }
+
 }
