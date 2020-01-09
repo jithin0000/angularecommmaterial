@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit {
   productList$: Observable<PaginatedResponseDto>;
 
   categoryList: Observable<Category[]>;
-  private loading$: Observable<boolean>;
+   loading$: Observable<boolean>;
   pageEvent: PageEvent;
-  private sortBy: string = "";
+   sortBy: string = "";
 
   constructor(
     private store: Store<AppState>

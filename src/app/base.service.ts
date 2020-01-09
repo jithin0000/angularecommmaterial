@@ -4,9 +4,7 @@ import {environment} from '../environments/environment';
 import {catchError} from 'rxjs/operators';
 import {throwError} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+
 export class BaseService<T> {
 
   url = '';
