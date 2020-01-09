@@ -9,5 +9,5 @@ export const environment = {
     messagingSenderId: '104131095993',
     appId: '1:104131095993:web:3f4284837f58fb89'
   },
-  url: "http://localhost:50308/api"
+  url: "https://ecommang.herokuapp.com/api"
 };
