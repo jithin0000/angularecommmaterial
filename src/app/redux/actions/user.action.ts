@@ -1,5 +1,6 @@
 import {Action} from '@ngrx/store';
 import {User} from '../../Models/User';
+import { Register } from 'src/app/Models/Register';
 
 
 export const LOAD_USER =  ' [USER] Load User ';
@@ -56,7 +57,7 @@ export class FilterUsersByName implements Action {
 // tslint:disable-next-line:class-name
 export class CreateUser  implements Action {
   readonly type = CREATE_USER;
-  constructor(public payload: User) {
+  constructor(public payload: Register) {
   }
 }
 

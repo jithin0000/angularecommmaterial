@@ -1,9 +1,9 @@
 import {Category} from './Category';
 
 export interface Product {
-  Category?: Category;
+  category?: Category;
 
-    ProductId: number;
+    productId: number;
     name?: string;
     price?: number;
     description?: string;
@@ -13,5 +13,5 @@ export interface Product {
     color?: string;
     discount?: number;
     status?: string;
-    CategoryId?: number;
+    categoryId?: number;
 }

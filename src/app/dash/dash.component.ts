@@ -50,7 +50,7 @@ export class DashComponent implements OnInit {
     this.store.dispatch(new LOAD_USERS());
 
     this.categories$ = this.store.select(state => state.categories.data);
-    this.products$ = this.store.select(state => state.products.data !== null ? state.products.data.Products : null  );
+    this.products$ = this.store.select(state => state.products.data !== null ? state.products.data.products : null  );
     this.users$ = this.store.select(state => state.users.data);
 
     this.createBarChart();

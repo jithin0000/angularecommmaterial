@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
    firebaseConfig : {
-    apiKey: 'AIzaSyD_n6PEUJqgvlBOETEl8svnQdB139C7Vvo',
-    authDomain: 'firstrproject.firebaseapp.com',
-    databaseURL: 'https://firstrproject.firebaseio.com',
-    projectId: 'firstrproject',
-    storageBucket: 'firstrproject.appspot.com',
-    messagingSenderId: '104131095993',
-    appId: '1:104131095993:web:3f4284837f58fb89'
+    apiKey: "AIzaSyCIY5vUV2tynbV0ZOA_Zcqaa8Uny5KMtrQ",
+    authDomain: "ecommangular.firebaseapp.com",
+    databaseURL: "https://ecommangular.firebaseio.com",
+    projectId: "ecommangular",
+    storageBucket: "ecommangular.appspot.com",
+    messagingSenderId: "449982935673",
+    appId: "1:449982935673:web:e5436c9303e4f2d6851aa8"
   },
-  url: "https://ecommang.herokuapp.com/api"
+  url: "http://localhost:5000/api"
 };
 
 /*

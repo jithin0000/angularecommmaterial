@@ -1,25 +1,28 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="mat-elevation-z4" >
   <mat-toolbar-row>
     <span routerLink="/"></span>
     <span class="example-spacer"></span>
 
-    <mat-icon
-      *ngIf="cart$ | async as cart"
-      [matBadge]="cart.Products.length"
-      class="mr-5 cart-icon" matBadgeColor="warn" routerLink="/viewcart">shopping_cart
-    </mat-icon>
-
-    <mat-icon *ngIf="isAuthenticated" style="cursor: pointer" aria-hidden="false" aria-label="Example home icon" routerLink="/profile">
-      account_circle
-    </mat-icon>
-    <li class="nav-link" aria-hidden="false" aria-label="Example home icon" routerLink="/">Home</li>
+    <li *ngIf="user$ | async as user" class="d-flex align-center">{{user.userName}}
+      <mat-icon *ngIf="isAuthenticated" matSuffice style="cursor: pointer" aria-hidden="false" aria-label="Example home icon" routerLink="/profile">
+        account_circle
+      </mat-icon>
+    </li>
     <li class="nav-link" aria-hidden="false" aria-label="Example home icon"
         routerLink="/admindashboard">dashboard</li>
     <ng-template [ngIf]="isAuthenticated==false">
       <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/register']" class="nav-link active">Register</li>
       <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/login']" class="nav-link">Login</li>
     </ng-template>
+    <li *ngIf="isAuthenticated" routerLink="/order" class="nav-link">Orders</li>
+
     <li (click)="logout()" class="nav-link">Log Out</li>
+
+    <mat-icon
+    *ngIf="cart$ | async as cart"
+    [matBadge]="cart.products.length"
+    class="mr-5 cart-icon" matBadgeColor="warn" routerLink="/viewcart">shopping_cart
+  </mat-icon>
 
 
   </mat-toolbar-row>

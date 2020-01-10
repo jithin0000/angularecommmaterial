@@ -49,13 +49,13 @@ export class ProductdetailsComponent implements OnInit {
     this.product$.subscribe(res => {
 
       if (res !== null) {
-        this.productId = res.ProductId;
+        this.productId = res.productId;
         this.cart$.subscribe(c => {
           if (c !== null) {
-            if (c.Products.length > 0) {
+            if (c.products.length > 0) {
 
-              c.Products.forEach(item => {
-                if (item.ProductId === this.productId) {
+              c.products.forEach(item => {
+                if (item.productId === this.productId) {
                   this.inCart = true;
                   return;
                 }else {

@@ -1,84 +1,74 @@
 <div class="container">
 
 
+  <mat-grid-list cols="2" class="my-2" >
+    <mat-grid-tile colspan="1" >
+      <div class="register-left  ">
+        <h6 class="title">Sign in with</h6>
+        <hr>
+        <div class="d-flex align-center">
+          <button mat-mini-fab class="mx-2" ><i class="fab fa-facebook"></i></button>
+          <button mat-mini-fab class="mx-2" color="primary" ><i class="fab fa-google"></i></button>
+          <button mat-mini-fab class="mx-2" ><i class="fab fa-twitter"></i></button>
+        </div>
+      </div>
+    </mat-grid-tile>
+      <mat-grid-tile colspan="1"  class="mat-elevation-z8" >
+        <div class="p-2">
+          <h2 class="mat-title" >LOGIN HERE</h2>
+
+          <div class="example-container">
+            <form  #login="ngForm" (ngSubmit)="onSubmit(login)" >
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Email</mat-label>
+                  <input ngModel name="email" #email="ngModel"
+                         required matInput>
+                  <mat-icon class="form-icon" matSuffix>email</mat-icon>
+                  <mat-hint>"Enter valid Email"</mat-hint>
+                  <mat-error *ngIf="email.invalid && email.touched || email.dirty" >
+                    Email is required Field
+                  </mat-error>
+                </mat-form-field>
+              </p>
 
 
-  <div class="row">
-    <!-- <div class="col-lg-4"></div> -->
-    <div class="col-lg-4 main-col mx-auto">
 
-      <form #login="ngForm" (ngSubmit)="onSubmit(login)">
+              <p>
+                <mat-form-field appearance="standard">
+                  <mat-label>Password</mat-label>
+                  <input type="password" name="password" ngModel #password="ngModel"   required matInput placeholder="Enter Password Here">
+                  <mat-icon class="form-icon" matSuffix>lock</mat-icon>
+                  <mat-hint>"Password must contain minimum 6  alphanumeric characters,
+                    at least one upper character, one lower character and a number.
+                    "</mat-hint>
+                  <mat-error *ngIf="password.invalid && password.touched || password.dirty" >
+                    Password is required field
+                  </mat-error>
+                </mat-form-field>
+              </p>
 
-        <h4 class="register-text ">Login</h4><br>
+              <p>
+                <button [disabled]="login.invalid" class="mt-5"
+                        mat-raised-button color="accent" >Login</button>
 
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+              </p>
+
+              <p class="float-right">
+                <button mat-stroked-button color="primary" >register here</button>
+              </p>
+            </form>
+
+
           </div>
-          <input ngModel name="email" #email="ngModel" type="email" class="form-control" required
-            pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$" maxlength="50" placeholder="email"
-            aria-label="please enter email">
+
+
 
         </div>
-        <div *ngIf="email.errors && email.touched" class="alert alert-danger">
-          <div *ngIf="email.errors.required" class="div">
-            Email required
-          </div>
-          <div *ngIf="email.errors.pattern" class="div">
-            please enter a valid email
-          </div>
+      </mat-grid-tile>
 
+  </mat-grid-list>
 
-
-
-        </div>
-        <br>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon2"><i class="fas fa-lock"></i></span>
-          </div>
-          <input ngModel name="password" #password="ngModel" type="password" class="form-control" id="password"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[a-zA-Z0-9\S]{6,}$" minlength="6" required
-            placeholder="Enter password">
-
-        </div>
-        <small class="form-text text-muted">
-          Password must contain minimum 6 alphanumeric characters, at least one upper character, one lower character and
-          a number.
-
-        </small>
-        <div *ngIf="password.touched && password.errors" class="alert alert-danger">
-
-
-          <div *ngIf="password.errors.required" class="div">
-            password required
-          </div>
-          <div *ngIf="password.errors.minlength" class="div">
-            password must be at least 6 charectors long
-          </div>
-          <div *ngIf="password.errors.pattern" class="div">
-            password must contain alphanumeric characters, at least one upper character, one lower character and a
-            number.
-          </div>
-
-
-
-
-        </div>
-        <br>
-
-        <button [disabled]="login.invalid" mat-raised-button color="primary" class="btn btn-block">Login</button>
-
-
-
-
-      </form>
-      <br>
-      <a routerLink="/register" mat-flat-button color="accent" class="btn btn-link-info">Register</a>
-
-    </div>
-    <!-- <div class="col-lg-4"></div> -->
-  </div>
 
 
 

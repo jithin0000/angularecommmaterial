@@ -30,7 +30,7 @@ export function reducer(
       return {...state, data: action.payload, registered: false};
 
       case authActions.LOGIN_USER:
-      return {...state, authenticated: false};
+      return {...state, authenticated: false, registered: false};
 
     case authActions.LOGIN_USER_SUCCESS:
       return { ...state , data: action.payload, authenticated: true};
@@ -39,7 +39,7 @@ export function reducer(
       return {...state, authenticated: false};
 
     case authActions.IS_AUTHENTICATED:
-      return {...state, authenticated: localStorage.getItem('token') !== null};
+      return {...state,  authenticated: localStorage.getItem('token') !== null};
 
     default:
       return state;

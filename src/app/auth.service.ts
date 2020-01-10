@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {User} from './Models/User';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   private jwtHelper = new JwtHelperService();
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
 
     this.url = environment.url + '/auth';
   }
@@ -56,6 +57,11 @@ export class AuthService {
 
     return isMatch;
 
+  }
+
+
+  logout(){
+    this.afAuth.auth.signOut();
   }
 
 

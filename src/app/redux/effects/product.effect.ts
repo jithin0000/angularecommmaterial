@@ -47,7 +47,7 @@ export class ProductEffect {
     ofType(productActions.DELETE_PRODUCT),
     switchMap((payload: {id: number}) => {
       return this.productService.deleteById(payload.id).pipe(
-        map(product => new productActions.DeleteProductSuccess(product.ProductId)),
+        map(product => new productActions.DeleteProductSuccess(product.productId)),
         catchError(err => of(new productActions.DeleteProductFailure(err)))
       );
     })

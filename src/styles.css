@@ -4,6 +4,14 @@
 
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+.white{
+  color: #f8f8f9;
+}
+
+.title{
+  text-transform: capitalize;
+}
+
 .primary-text {
   color: indigo;
   font-weight: bold;
@@ -15,7 +23,7 @@
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: #141313; }
 
 .align-center {
   display: flex;
@@ -29,6 +37,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 table {
+  width: 100%;
+}
+
+.logo{
+  border-radius: 155px;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
   width: 100%;
 }
 
@@ -73,7 +94,7 @@ i{
 }
 
 .product-card {
-  min-height: 350px;
+  /* min-height: 350px; */
   margin-bottom: 16px;
 }
 

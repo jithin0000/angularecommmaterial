@@ -7,10 +7,13 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../Models/AppState';
 import {LoginUser, RegisterUser} from '../redux/actions/authAction';
 import {CartUtils} from '../utils/CartUtils';
-import {UpdateCart} from '../redux/actions/cart.action';
 import {AppToastService} from '../app-toast.service';
-import {MatDialog, MatSnackBar} from '@angular/material';
-import {ToastComponent} from '../toast/toast.component';
+
+import {auth} from 'firebase/app'
+import { AngularFireAuth } from '@angular/fire/auth';
+import { CreateUser } from '../redux/actions/user.action';
+
+import { generate } from 'generate-password'
 
 @Component({
   selector: 'app-login',
@@ -24,8 +27,10 @@ export class LoginComponent implements OnInit {
     private store: Store<AppState>,
     private router: Router,
     private toastService: AppToastService,
+    private afAuth: AngularFireAuth,
+    
     ) {
-
+      
 
     }
 
@@ -45,9 +50,11 @@ export class LoginComponent implements OnInit {
       }
     });
 
+  
 
   }
 
+ 
 
 
   onSubmit(login) {

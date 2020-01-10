@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     this.cart$.subscribe(res => {
       if (res !== null && res !== undefined) {
 
-        localStorage.setItem('cart', res.CartId.toString());
+        localStorage.setItem('cart', res.cartId.toString());
       }
     });
 

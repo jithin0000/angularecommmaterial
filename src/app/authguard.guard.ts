@@ -23,20 +23,20 @@ export class AuthguardGuard implements CanActivate {
 
     if (next !== null) {
 
-      // const roles = next.data.roles as Array<string>;
-      // console.log(roles)
-      // if (roles) {
-      //   const match = this.authService.checkRole(roles);
-      //   if (match) {
-      //     return true;
-      //   } else {
-      //     this.dialog.open(DialogComponent,{
-      //       role: 'alertdialog',
-      //     });
-      //     this.router.navigate(['/login']);
+      const roles = next.data.roles as Array<string>;
+      console.log(roles)
+      if (roles) {
+        const match = this.authService.checkRole(roles);
+        if (match) {
+          return true;
+        } else {
+          this.dialog.open(DialogComponent,{
+            role: 'alertdialog',
+          });
+          this.router.navigate(['/login']);
 
-      //   }
-      // }
+        }
+      }
 
     }
     if (this.authService.is_authenticated()) {

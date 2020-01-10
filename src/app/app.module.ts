@@ -60,6 +60,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { DialogComponent } from './dialog/dialog.component';
 import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerInterceptor';
 
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ProductCardComponent } from './product/product-card/product-card.component'
 
 
 
@@ -91,6 +93,7 @@ import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerIntercepto
     AddProductComponent,
     ToastComponent,
     DialogComponent,
+    ProductCardComponent,
 
 
   ],
@@ -104,6 +107,7 @@ import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerIntercepto
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    AngularFireAuthModule,
     NgxPaginationModule,
     NgxPayPalModule,
     StoreModule.forRoot(reducers),

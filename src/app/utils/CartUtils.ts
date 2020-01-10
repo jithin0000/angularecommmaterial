@@ -17,9 +17,9 @@ export class CartUtils {
       store.dispatch(new GetCart(id));
 
     } else {
-      let body = {UserId: null};
+      let body = {userId: null};
       if (this.get_user_id() !== null) {
-        body = { UserId: this.get_user_id() };
+        body = { userId: this.get_user_id() };
       }
       store.dispatch(new CreateCart(body));
     }
@@ -27,23 +27,23 @@ export class CartUtils {
     store.select(state => state.cart).subscribe(res => {
        if ( res !== undefined && res.data !== undefined && res.data !== null) {
 
-         if ( res.data !== undefined && res.data.UserId === null) {
+         if ( res.data !== undefined && res.data.userId === null) {
 
            if (this.get_user_id() !== null) {
 
 
-             if (res.data.UserId === null) {
+             if (res.data.userId === null) {
 
                const userId = this.get_user_id();
 
-               res.data.UserId = userId;
+               res.data.userId = userId;
                const body: Cart = {
-                 CartId : res.data.CartId,
-                 UserId : userId,
-                 Products : res.data.Products,
-                 Total: res.data.Total
+                 cartId : res.data.cartId,
+                 userId : userId,
+                 products : res.data.products,
+                 total: res.data.total
                };
-               store.dispatch(new UpdateCart(res.data.CartId, body));
+               store.dispatch(new UpdateCart(res.data.cartId, body));
              }
              }
          }

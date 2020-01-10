@@ -32,18 +32,18 @@ export function reducer(
 
     case pdtAction.FILTER_PRODUCT_BY_CATEGORY:
       return { ...state, data: { ...state.data,
-          Products: state.data.Products.filter(item => item.CategoryId === action.categoryId)}  };
+          products: state.data.products.filter(item => item.categoryId === action.categoryId)}  };
 
       case pdtAction.FILTER_PRODUCT_BY_NAME:
       return { ...state, data: { ...state.data,
-          Products: state.data.Products.filter(item => item.name
+          products: state.data.products.filter(item => item.name
             .toLowerCase().includes(action.name.toLowerCase()))}  };
 
     case pdtAction.CREATE_PRODUCT:
       return {...state, loaded: false, loading: true};
 
     case pdtAction.CREATE_PRODUCT_SUCCESS:
-      return { ...state , data: {...state.data, Products: [...state.data.Products, action.product]}, loading: false, loaded: true};
+      return { ...state , data: {...state.data, products: [...state.data.products, action.product]}, loading: false, loaded: true};
 
     case pdtAction.CREATE_PRODUCT_FAILURE:
       return {...state, loading: false, loaded: false};
@@ -54,7 +54,7 @@ export function reducer(
     case pdtAction.DELETE_PRODUCT_SUCCESS:
       return { ...state , data: {
         ...state.data,
-         Products: state.data.Products.filter(item => item.ProductId !== action.id)
+         products: state.data.products.filter(item => item.productId !== action.id)
         },
         loading: false, loaded: true};
 

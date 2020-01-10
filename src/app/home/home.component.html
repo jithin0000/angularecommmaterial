@@ -48,7 +48,7 @@
     <div class="col">
         <mat-paginator (page)="paginate($event)"
                        *ngIf="productList$ | async as paginatedResponseDto"
-                       [length]="150"
+                       [length]="paginatedResponseDto.totalItems"
                        [pageSize]="10"
                        [pageSizeOptions]="[5, 10, 25, 100]"
                        h
@@ -92,39 +92,9 @@
 
         <div *ngIf="productList$ | async as paginatedResponseDto" class="row">
           <div
-               *ngFor="let product of paginatedResponseDto.Products" class="col-lg-4">
+               *ngFor="let product of paginatedResponseDto.products" class="col-lg-4">
 
-            <mat-card class="product-card" [routerLink]="['/productdetails/',product.ProductId]" >
-              <img [src]="product.imageurl" alt="" mat-card-image>
-              <mat-card-content>
-                <mat-card-title class="u-title">{{product.name}}</mat-card-title>
-                <mat-card-subtitle class="c-title">{{product.Category.categoryname}}</mat-card-subtitle>
-
-
-                <div class="price-section">
-                  <h5 class="price-text" >&#36;{{product.price}}</h5>
-                  <div class="alert alert-success">in stock</div>
-                </div>
-
-                <div  class="rate-sec">
-                  <mat-icon class="rate" >star</mat-icon>
-                  <mat-icon class="rate" >star</mat-icon>
-                  <mat-icon class="rate" >star_half</mat-icon>
-                  <mat-icon class="rate" >star_half</mat-icon>
-                  <mat-icon class="rate" >star_border</mat-icon>
-                </div>
-
-              </mat-card-content>
-
-              <mat-card-actions>
-                <button color="primary" mat-stroked-button>view more</button>
-                <button color="primary" class="text-right" mat-icon-button  >
-                  <mat-icon>add_shopping_cart</mat-icon>
-                </button>
-              </mat-card-actions>
-            </mat-card>
-
-
+               <app-product-card [product]="product" ></app-product-card>
 
           </div>
 
@@ -140,7 +110,7 @@
       </ng-template>
       <mat-paginator (page)="paginate($event)"
                      *ngIf="productList$ | async as paginatedResponseDto"
-                     [length]="paginatedResponseDto.TotalItems"
+                     [length]="paginatedResponseDto.totalItems"
                      [pageSize]="10"
                      [pageSizeOptions]="[5, 10, 25, 100]"
                      h

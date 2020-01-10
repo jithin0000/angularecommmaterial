@@ -1,9 +1,9 @@
 import {Product} from './Product';
 
 export interface PaginatedResponseDto {
-  TotalItems: number;
+  totalItems: number;
 
-  Products: Product[];
-  PageIndex: number;
-  TotalPages: number;
+  products: Product[];
+  pageIndex: number;
+  totalPages: number;
 }

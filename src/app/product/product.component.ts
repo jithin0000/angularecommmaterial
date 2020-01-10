@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.productList$ = this.store.select(state => state.products.data !== null ? state.products.data.Products : null);
+    this.productList$ = this.store.select(state => state.products.data !== null ? state.products.data.products : null);
 
     this.store.dispatch(new LOAD_PRODUCTS());
   }
