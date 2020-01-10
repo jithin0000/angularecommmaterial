@@ -1,4 +1,4 @@
 export interface AddToCartRequestDto {
 
-  ProductId: number;
+  productId: number;
 }

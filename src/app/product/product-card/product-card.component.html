@@ -1,16 +1,7 @@
 <mat-card class="product-card" [routerLink]="['/productdetails/',product.productId]">
-    <mat-card-title class="u-title">{{product.name}}</mat-card-title>
-    <mat-card-subtitle class="c-title">{{product.category.categoryname}}</mat-card-subtitle>
-
-    <img [src]="product.imageurl" alt="" mat-card-sm-image>
+    <img [src]="product.imageurl" alt="" mat-card-image>
     <mat-card-content>
-       
-
-        <div class="price-section">
-            <h5 class="price-text">&#36;{{product.price}}</h5>
-            <div class="alert alert-success">in stock</div>
-        </div>
-
+        <h6 class="title">{{product.name}}</h6>
         <div class="rate-sec">
             <mat-icon class="rate">star</mat-icon>
             <mat-icon class="rate">star</mat-icon>
@@ -18,6 +9,12 @@
             <mat-icon class="rate">star_half</mat-icon>
             <mat-icon class="rate">star_border</mat-icon>
         </div>
+        <div class="price-section">
+            <p class="price-text">&#36;{{product.price}}</p>
+            <!-- <div class="alert alert-success">in stock</div> -->
+        </div>
+
+       
 
     </mat-card-content>
 

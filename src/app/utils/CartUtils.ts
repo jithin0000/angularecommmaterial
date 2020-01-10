@@ -50,6 +50,7 @@ export class CartUtils {
        }
      });
 
+
   }
 
   public static get_user_id() {

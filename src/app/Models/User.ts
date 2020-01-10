@@ -3,12 +3,12 @@ import {Order} from './Order';
 
 export interface User {
   token: string;
-  PhoneNumber?: number;
-  Id: number;
-  Email: string;
-  UserName: string;
-  UserRole?: any[];
-  Carts?: Cart[];
-  Orders?: Order[];
+  phoneNumber?: number;
+  id: number;
+  email: string;
+  userName: string;
+  userRole?: any[];
+  carts?: Cart[];
+  orders?: Order[];
 
 }

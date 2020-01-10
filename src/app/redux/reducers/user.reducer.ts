@@ -32,7 +32,7 @@ export function reducer(
     case userAction.FILTER_USER_BY_NAME:
       return {
         ...state, data: state.data
-          .filter(item => item.UserName.toLowerCase().includes(action.name.toLowerCase()))
+          .filter(item => item.userName.toLowerCase().includes(action.name.toLowerCase()))
       };
 
     case userAction.CREATE_USER:
@@ -49,7 +49,7 @@ export function reducer(
 
     case userAction.DELETE_USER_SUCCESS:
       return {
-        ...state, data: state.data.filter(item => item.Id !== action.id),
+        ...state, data: state.data.filter(item => item.id !== action.id),
         loading: false, loaded: true
       };
 

@@ -51,7 +51,7 @@ export class ProductdetailsComponent implements OnInit {
       if (res !== null) {
         this.productId = res.productId;
         this.cart$.subscribe(c => {
-          if (c !== null) {
+          if ( c!== undefined && c !== null ) {
             if (c.products.length > 0) {
 
               c.products.forEach(item => {
@@ -84,12 +84,10 @@ export class ProductdetailsComponent implements OnInit {
   }
 
 
-  addToCart(ProductId: number) {
+  addToCart(productId: number) {
     const cart = localStorage.getItem('cart');
 
-    // tslint:disable-next-line:radix
-
-    this.store.dispatch(new AddToCart(parseInt(cart), {ProductId}));
+    this.store.dispatch(new AddToCart(parseInt(cart), {productId}));
 
   }
 

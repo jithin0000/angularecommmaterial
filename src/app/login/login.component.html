@@ -1,15 +1,20 @@
 <div class="container">
 
 
-  <mat-grid-list cols="2" class="my-2" >
+  <mat-grid-list cols="2" class="my-3" >
     <mat-grid-tile colspan="1" >
-      <div class="register-left  ">
+      <div class="register-left">
+        <h4 class=" mt-3 title" >welcome to Ecom</h4>
+        <p class="mt-5 mat-body mat-body-1" >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illum expedita repellendus blanditiis rem.
+          Voluptate dolor ab, repudiandae ducimus sequi ex possimus ut iste minima.
+        </p>
         <h6 class="title">Sign in with</h6>
         <hr>
         <div class="d-flex align-center">
-          <button mat-mini-fab class="mx-2" ><i class="fab fa-facebook"></i></button>
-          <button mat-mini-fab class="mx-2" color="primary" ><i class="fab fa-google"></i></button>
-          <button mat-mini-fab class="mx-2" ><i class="fab fa-twitter"></i></button>
+          <button mat-mini-fab class="mx-2" color="primary" ><i class="fab fa-facebook"></i></button>
+          <button mat-mini-fab class="mx-2" style="background-color: white;color: #c91a1a;"  ><i class="fab fa-google"></i></button>
+          <button mat-mini-fab class="mx-2" color="primary" ><i class="fab fa-twitter"></i></button>
         </div>
       </div>
     </mat-grid-tile>
@@ -54,11 +59,11 @@
 
               </p>
 
-              <p class="float-right">
-                <button mat-stroked-button color="primary" >register here</button>
-              </p>
+              
             </form>
-
+          <p class="float-right">
+                <button routerLink="/register" mat-stroked-button color="primary" >register here</button>
+              </p>
 
           </div>
 

@@ -25,6 +25,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: #141313; }
 
+.text-accent{
+  font-weight: bold;
+  color: #202020;
+}
+
+
+
 .align-center {
   display: flex;
   align-items: center;
@@ -87,6 +94,9 @@ i{
   cursor: pointer;
 }
 
+mat-icon{
+  cursor: pointer;
+}
 
 .green-text {
   color: #1BBE84;
@@ -105,6 +115,7 @@ i{
 }
 
 .price-text{
+  font-family: 0.5em!important;
   color: #202020;
   font-weight: bolder;
 }
@@ -128,3 +139,40 @@ i{
 .c-title{
   text-transform: capitalize;
 }
+
+.red{
+  background-color: red;
+  padding:10px;
+}
+
+.white{
+  background-color: white;
+  padding:10px;
+}
+
+.black{
+  background-color: black;
+  padding:10px;
+}
+
+.green{
+  background-color: green;
+  padding:10px;
+}
+
+.blue{
+  background-color: blue;
+  padding:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

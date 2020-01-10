@@ -19,3 +19,11 @@
 .btn-link-info{
     float: right;
 }
+
+.register-left {
+    text-align: center;
+    padding: 15% 20%;
+    background-color: #795548;
+    height: 100%;
+    color: white;
+  }

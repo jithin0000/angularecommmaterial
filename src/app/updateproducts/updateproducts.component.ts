@@ -59,7 +59,7 @@ export class UpdateproductsComponent implements OnInit {
 
  onSubmit(upproduct) {
 
-   const body = {...upproduct.value, ProductId: this.id};
+   const body = {...upproduct.value, productId: this.id};
    this.store.dispatch(new UpdateProduct(this.id, body));
 
  }

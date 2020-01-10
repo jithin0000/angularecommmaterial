@@ -49,7 +49,8 @@ export function reducer(
       return {...state, added: false, data: state.data};
 
     case cartAction.ADD_TO_CART_SUCCESS:
-      return {...state, data: action.cart.Cart , added: action.cart.Added };
+      console.log(action.cart)
+      return {...state, data: action.cart.cart , added: action.cart.added };
 
     case cartAction.ADD_TO_CART_FAILURE:
       return {...state, removed: false, added: false};

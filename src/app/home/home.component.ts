@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit {
 
     this.loading$ = this.store.select(state => state.products.loading);
 
+
     this.store.dispatch(new LOAD_PRODUCTS());
     this.store.dispatch(new LOAD_CATEGORIES());
 

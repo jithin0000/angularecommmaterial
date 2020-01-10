@@ -37,7 +37,7 @@ export function reducer(
 
     case categoryActions.DELETE_CATEGORY_SUCCESS:
       return {
-        ...state, data: state.data.filter(item => item.CategoryId !== action.id)
+        ...state, data: state.data.filter(item => item.categoryId !== action.id)
       };
 
     case categoryActions.DELETE_CATEGORY_FAILURE:
@@ -51,7 +51,7 @@ export function reducer(
       return {
         ...state,
         data: state.data.map(item => {
-          if (item.CategoryId === action.payload.CategoryId) {
+          if (item.categoryId === action.payload.categoryId) {
           item.categoryname = action.payload.categoryname;
           item.description = action.payload.description;
           return item;

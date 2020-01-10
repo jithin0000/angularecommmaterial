@@ -1,185 +1,129 @@
-<div class="e-container">
-
-  <div class="row">
-    <div class="col-lg-4">
-      <mat-form-field class="example-full-width">
-        <mat-icon matPrefix color="primary">search</mat-icon>
-        <input type="text" #searchInput (keyup)="search(searchInput.value)" matInput placeholder="Search ....">
-      </mat-form-field>
-    </div>
-
-    <div class="col-lg-3">
-
-      <div class="sort-sec">
-        <h6>Sort By</h6>
-        <div>
-
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button (click)="select('name_desc')" mat-menu-item>
-              <mat-icon >arrow_downwards</mat-icon>
-              <span>Name Descending</span>
-            </button>
-
-            <button (click)="select('name_asc')" mat-menu-item>
-              <mat-icon >arrow_upwards</mat-icon>
-              <span>Name Ascending</span>
-            </button>
-
-            <button (click)="select('price_desc')" mat-menu-item>
-              <mat-icon >arrow_downwards</mat-icon>
-              <span>Price Descending</span>
-            </button>
-
-            <button (click)="select('price_asc')" mat-menu-item>
-              <mat-icon >arrow_upwards</mat-icon>
-              <span>Price Ascending</span>
-            </button>
-          </mat-menu>
-
-
-        </div>
+<div class="row py-2 mat-elevation-z8">
+  <div class="col-lg-12">
+    <div class="d-flex p-2 align-item-center justify-content-between">
+      <div *ngIf="productList$ | async as paginatedResponseDto" >
+        <p>1-16 over of {{paginatedResponseDto.totalItems}} result of <span class="text-accent"> "item" </span> </p>
       </div>
-
-    </div>
-
-    <div class="col">
-        <mat-paginator (page)="paginate($event)"
-                       *ngIf="productList$ | async as paginatedResponseDto"
-                       [length]="paginatedResponseDto.totalItems"
-                       [pageSize]="10"
-                       [pageSizeOptions]="[5, 10, 25, 100]"
-                       h
-        >
-        </mat-paginator>
-    </div>
-
-  </div>
-
-  <div class="row">
-    <div class="col float-right"></div>
-  </div>
-
-  <hr>
-
-
-  <div class="row">
-
-    <div *ngIf="categoryList | async as categories" class="col-lg-3">
-      <mat-list>
-        <h3 mat-header>Categories</h3>
-        <mat-list-item class="list-item" (click)="getAll()" >
-          <mat-icon mat-list-icon>folder</mat-icon>
-          <h4 class="cat-list" mat-line>All</h4>
-        </mat-list-item>
-        <mat-list-item class="list-item" (click)="filterByCategory(cat.CategoryId)" *ngFor="let cat of categories">
-          <mat-icon mat-list-icon>folder</mat-icon>
-          <h4 class="cat-list" mat-line>{{cat.categoryname}}</h4>
-        </mat-list-item>
-      </mat-list>
-    </div>
-
-    <div class="col">
-      <div class="row">
-
-        <div *ngIf="loading$ | async as loading ; else Loaded" class="col-lg-12 align-center">
-          <mat-spinner *ngIf="loading" color="warn"></mat-spinner>
-        </div>
+      <div>
+          <input class="form-control"
+           placeholder="search" #sinput (keyup)="search(sinput.value)" >
       </div>
-      <ng-template #Loaded >
-
-        <div *ngIf="productList$ | async as paginatedResponseDto" class="row">
-          <div
-               *ngFor="let product of paginatedResponseDto.products" class="col-lg-4">
-
-               <app-product-card [product]="product" ></app-product-card>
-
-          </div>
-
-          <ng-template #noData >
-            <div class="alert alert-primary">
-              No data to dispaly
-            </div>
-
-          </ng-template>
-
-        </div>
-
-      </ng-template>
-      <mat-paginator (page)="paginate($event)"
-                     *ngIf="productList$ | async as paginatedResponseDto"
-                     [length]="paginatedResponseDto.totalItems"
-                     [pageSize]="10"
-                     [pageSizeOptions]="[5, 10, 25, 100]"
-                     h
-      >
-      </mat-paginator>
+      <div>
+        <select class="form-control" #sort (change)="select(sort)" name="sortby" id="sort">
+          <option value="">Sort By </option>
+          <option value="name_asc">Name </option>
+          <option value="name_asc">Price </option>
+        </select>
+      </div>
     </div>
-
-
   </div>
 </div>
 
+<div class="row">
+  <div class="col-lg-2 mat-elevation-z8 ">
+    <mat-list>
+      <h3 mat-subheader>Departments</h3>
+      <mat-nav-list>
+        <mat-list>
+          <mat-list-item class="ml-3" >Mens T shirt</mat-list-item>
+          <mat-list-item class="ml-3" >Womens T shirt</mat-list-item>
+          <mat-list-item class="ml-3" >Mens polos</mat-list-item>
+          <mat-list-item class="ml-3" >Boys t shirt</mat-list-item>
+        </mat-list>
+      </mat-nav-list>
+    </mat-list>
+    <mat-list>
+      <h3 mat-subheader>Avg Customer Review</h3>
+        <mat-list-item class="ml-2">
+          <div class="rate-sec">
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="ml-2" >
+          <div class="rate-sec">
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="ml-2" >
+          <div class="rate-sec">
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+          </div>
+        </mat-list-item>
+        <mat-list-item class="ml-2" >
+          <div class="rate-sec">
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+            <mat-icon class="rate">star_half</mat-icon>
+          </div>
+        </mat-list-item>
+    </mat-list>
+    <mat-list>
+      <h3 mat-subheader >Brands</h3>
+      <mat-selection-list class="ml-2">
+        <mat-list-option >Katso</mat-list-option>
+        <mat-list-option >Nike</mat-list-option>
+        <mat-list-option >Addidas</mat-list-option>
+        <mat-list-option >Alsion</mat-list-option>
+        <mat-list-option >Mansud</mat-list-option>
+      </mat-selection-list>
+    </mat-list>
 
-<!--<div class="container mt-3">-->
-<!--  <div class="row">-->
-<!--    <div class="col-lg-6"></div>-->
-<!--    <div class="col-lg-6 "><input #sear1 (keyup)="search(sear1.value)" class="form-control" name="text" placeholder="search product"-->
-<!--                                  type="text"></div>-->
-<!--    <div class="clearfix"></div>-->
-<!--  </div>-->
+    <mat-list>
+      <h3 mat-subheader >Material</h3>
+      <mat-selection-list class="ml-2">
+        <mat-list-option >Cotton</mat-list-option>
+        <mat-list-option >Jeans</mat-list-option>
+      </mat-selection-list>
+    </mat-list>
+    <mat-list>
+      <h3 mat-subheader >Payment</h3>
+      <mat-selection-list class="ml-2">
+        <mat-list-option >Pay on delivery</mat-list-option>
+      </mat-selection-list>
+    </mat-list>
+    <mat-list>
+      <h3 mat-subheader >Available Colors</h3>
+      <mat-list-item>
+        <div class="d-flex">
+          <div class="ml-2 red"></div>
+          <div class="ml-2 white"></div>
+          <div class="ml-2 black"></div>
+          <div class="ml-2 green"></div>
+          <div class="ml-2 blue"></div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="col-lg-10 p-2" *ngIf="productList$ | async as paginatedResponseDto">
 
-<!--  <div class="conatiner mt-5">-->
-
-
-<!--    <div class="row">-->
-<!--      <div class="col-sm-4  ">-->
-<!--        <h6 class="cat ml-3">Category</h6>-->
-<!--        <hr>-->
-<!--        <ul class="list-group ml-3">-->
-<!--          <div (click)="getAll()" class="list-group-item">-->
-<!--            All-->
-<!--          </div>-->
-<!--          <div (click)="filterByCategory(cat.CategoryId)" *ngFor="let cat of categoryList | async"-->
-<!--               class="list-group-item">{{cat.categoryname}}</div>-->
-<!--        </ul>-->
-
-<!--      </div>-->
-
-<!--      <div class="col-lg-8">-->
-<!--        <div class="row">-->
-
-<!--          <div *ngIf="loading$ | async as loading" class="col-lg-12 align-center">-->
-<!--            <mat-spinner *ngIf="loading" color="warn" ></mat-spinner>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="row" *ngIf="productList$ | async as products" >-->
-<!--          <div *ngFor="let product of products" class="col-lg-6">-->
-
-<!--            <mat-card class="product-card">-->
-<!--              <mat-card-header>-->
-<!--                <mat-card-title class="u-title" >{{product.name}}</mat-card-title>-->
-<!--                <mat-card-subtitle class="c-title" >{{product.Category.categoryname}}</mat-card-subtitle>-->
-<!--              </mat-card-header>-->
-
-<!--              <img mat-card-image [src]="product.imageurl" alt="">-->
-<!--              <mat-card-content>-->
-<!--                <p>{{product.description}}</p>-->
-<!--              </mat-card-content>-->
-
-<!--              <mat-card-actions>-->
-<!--                <button mat-button color="primary" >view more</button>-->
-<!--              </mat-card-actions>-->
-<!--            </mat-card>-->
-
-<!--          </div>-->
-<!--        </div>-->
-
-
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+    <div class="row">
+      <div class="col-lg-3" *ngFor="let product of paginatedResponseDto.products" >
+        <app-product-card [product]="product" ></app-product-card>
+      </div>
+    </div>
+      <div class="row" *ngIf="loading$ | async as loader">
+        <mat-spinner *ngIf="loader"
+          [mode]="indeterminate">
+        </mat-spinner>
+      </div>
+      
+    
+   
+    <mat-paginator (page)="paginate($event)" *ngIf="productList$ | async as paginatedResponseDto"
+    [length]="paginatedResponseDto.totalItems" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" h>
+  </mat-paginator>
+  </div>

@@ -64,16 +64,16 @@ export class PaymentComponent implements OnInit {
           const cart = localStorage.getItem('cart');
 
           const body: Order = {
-            OrderNumber: order.id,
+            orderNumber: order.id,
             // tslint:disable-next-line:radix
-            CartId: parseInt(cart),
-            UserId: CartUtils.get_user_id(),
-            User: null, Cart: null,
-            AddresLine1: order.purchase_units[0].shipping.address.address_line_1,
-            AddresLine2: order.purchase_units[0].shipping.address.address_line_2,
-            Area: order.purchase_units[0].shipping.address.admin_area_1,
-            PostalCode: order.purchase_units[0].shipping.address.postal_code,
-            CountryCode: order.purchase_units[0].shipping.address.country_code,
+            cartId: parseInt(cart),
+            userId: CartUtils.get_user_id(),
+            user: null, cart: null,
+            addresLine1: order.purchase_units[0].shipping.address.address_line_1,
+            addresLine2: order.purchase_units[0].shipping.address.address_line_2,
+            area: order.purchase_units[0].shipping.address.admin_area_1,
+            postalCode: order.purchase_units[0].shipping.address.postal_code,
+            countryCode: order.purchase_units[0].shipping.address.country_code,
           };
 
           this.orderService.createOrder(body).subscribe(res => {

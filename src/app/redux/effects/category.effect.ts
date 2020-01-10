@@ -42,7 +42,7 @@ export class CategoryEffects {
     ofType(categoryActions.DELETE_CATEGORY),
     switchMap((payload) => {
       return this.categoryService.deleteById(payload['id']).pipe(
-        map(category => new categoryActions.DeleteCategorySuccess(category.CategoryId)),
+        map(category => new categoryActions.DeleteCategorySuccess(category.categoryId)),
         catchError(err => of(new categoryActions.DeleteCategoryFailure(err)))
       );
     })

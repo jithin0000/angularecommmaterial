@@ -43,7 +43,7 @@ export class UserEffect {
     ofType(userActions.DELETE_USER),
     switchMap((payload: {id: number}) => {
       return this.userService.deleteById(payload.id).pipe(
-        map(user => new userActions.DeleteUserSuccess(user.Id)),
+        map(user => new userActions.DeleteUserSuccess(user.id)),
         catchError(err => of(new userActions.DeleteUserFailure(err)))
       );
     })

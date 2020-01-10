@@ -1,6 +1,6 @@
-<mat-toolbar class="mat-elevation-z4" >
+<mat-toolbar color="primary" class="mat-elevation-z4" >
   <mat-toolbar-row>
-    <span routerLink="/"></span>
+    <span routerLink="/"><mat-icon>home</mat-icon></span>
     <span class="example-spacer"></span>
 
     <li *ngIf="user$ | async as user" class="d-flex align-center">{{user.userName}}

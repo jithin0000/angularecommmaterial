@@ -4,19 +4,19 @@ import {Cart} from './Cart';
 export  interface Order {
 
   Id?: number;
-  OrderNumber: number;
-  UserId: number;
-  User: User;
-  CartId: number;
-  Cart: Cart;
+  orderNumber: number;
+  userId: number;
+  user: User;
+  cartId: number;
+  cart: Cart;
 
-  ShippingTotal?: number;
-  OrderTotal?: number;
+  shippingTotal?: number;
+  orderTotal?: number;
 
-  AddresLine1: string;
-  AddresLine2: string;
-  Area: string;
-  PostalCode: string;
-  CountryCode: string;
+  addresLine1: string;
+  addresLine2: string;
+  area: string;
+  postalCode: string;
+  countryCode: string;
 
 }

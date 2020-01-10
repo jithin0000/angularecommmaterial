@@ -13,8 +13,6 @@ import {User} from '../Models/User';
 export class ProfileComponent implements OnInit {
    user$: Observable<User>;
   loading$: Observable<boolean>;
-
-
   constructor(private store: Store<AppState>) {
   }
 

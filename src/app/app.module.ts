@@ -62,6 +62,7 @@ import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerIntercepto
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ProductCardComponent } from './product/product-card/product-card.component'
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -118,7 +119,7 @@ import { ProductCardComponent } from './product/product-card/product-card.compon
     MatCardModule, MatDialogModule, MatTableModule, MatMenuModule,
     MatButtonModule, MatListModule, MatInputModule, MatDividerModule,
     MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
-    MatGridListModule, MatPaginatorModule,
+    MatGridListModule, MatPaginatorModule,MatExpansionModule,
     NgxImageZoomModule.forRoot()
 
 

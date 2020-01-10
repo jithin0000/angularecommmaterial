@@ -1,35 +1,48 @@
 <div class="container">
 
+  <div class="row mt-5">
+    <div class="col">
+      <h2 class="mat-header">Your Account</h2>
+    </div>
+  </div>
+
   <div *ngIf="loading$ | async as loading" class="row">
     <div *ngIf="loading" class="col align-center">
       <mat-spinner></mat-spinner>
     </div>
   </div>
 
-  <div class="row mt-5">
+  <div class="row mt-3">
     <div class="col-lg-4">
-
-      <div *ngIf="user$ | async as user"  class="personal-details">
-        <p class="semi-title">
-          User Name : <span class="primary-text">{{user.UserName}}</span>
-        </p>
-        <p class="semi-title">
-          Email : <span class="primary-text">{{user.Email}}</span>
-        </p>
-        <p class="semi-title">
-          Phone Number : <span class="primary-text">{{user.PhoneNumber}}</span>
-        </p>
+      <div class="d-flex alig-items-center p-3 mat-elevation-z1 ">
+        <img class="account-icon" src="../../assets/images/profile/order.svg" alt="">
+        <div class="ml-3" >
+          <h6 class="mat-header">Your Orders</h6>
+          <p class="mat-body mat-body-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non quos id neque quaerat cupiditate odio.</p>
+        </div>
       </div>
     </div>
 
-    <div *ngIf="user$ | async as user" class="col mt-5">
-      <h6>Total Orders: {{user.Orders.length}}</h6>
-      <ul  class="list-group">
-
-        <li *ngFor="let order of user.Orders" class="list-group-item">
-          Order Number: <span style="color: #2F96B4" >{{order.OrderNumber}}</span>
-        </li>
-      </ul>
+    <div class="col-lg-4">
+      <div class="d-flex alig-items-center p-3 mat-elevation-z1 ">
+        <img class="account-icon" src="../../assets/images/profile/login.svg" alt="">
+        <div class="ml-3" >
+          <h6 class="mat-header">Login and Security</h6>
+          <p class="mat-body mat-body-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non quos id neque quaerat cupiditate odio.</p>
+        </div>
+      </div>
     </div>
+
+    <div class="col-lg-4">
+      <div class="d-flex alig-items-center p-3 mat-elevation-z1 ">
+        <img class="account-icon" src="../../assets/images/profile/debit-card.svg" alt="">
+        <div class="ml-3" >
+          <h6 class="mat-header">Payment Methods</h6>
+          <p class="mat-body mat-body-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non quos id neque quaerat cupiditate odio.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 </div>
