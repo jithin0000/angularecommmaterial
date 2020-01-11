@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../product.service';
-import { Product } from '../Models/Product';
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient } from '@angular/common/http';
-import {Cart} from '../Models/Cart';
-import {CartService} from '../cart.service';
+import { Product } from '../../Models/Product';
+import {Cart} from '../../Models/Cart';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {LoadProductDetail} from '../redux/actions/productDetail.action';
+import {AppState} from '../../Models/AppState';
+import {LoadProductDetail} from '../../redux/actions/productDetail.action';
 import {Observable} from 'rxjs';
-import {AddToCart} from '../redux/actions/cart.action';
+import {AddToCart} from '../../redux/actions/cart.action';
 import {MatDialog} from '@angular/material';
 
 @Component({

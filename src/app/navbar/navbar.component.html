@@ -13,8 +13,8 @@
     <li class="nav-link" aria-hidden="false" aria-label="Example home icon"
         routerLink="/admindashboard">dashboard</li>
     <ng-template ngIf="isAuthenticated$ | async as isAuthenticated">
-      <li *ngIf="!isAuthenticated" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/register']" class="nav-link active">Register</li>
-      <li *ngIf="!isAuthenticated" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/login']" class="nav-link">Login</li>
+      <li *ngIf="!isAuthenticated"  routerLink="/auth/register" class="nav-link active">Register</li>
+      <li *ngIf="!isAuthenticated"  routerLink="/auth/login" class="nav-link">Login</li>
       <li *ngIf="isAuthenticated" routerLink="/order" class="nav-link">Orders</li>
     </ng-template>
 

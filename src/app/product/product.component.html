@@ -8,7 +8,7 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <button routerLink="/add-product" mat-raised-button color="primary" >add product</button>
+        <button routerLink="/product/add" mat-raised-button color="primary" >add product</button>
       </div>
     </div>
 
@@ -61,7 +61,7 @@
     <ng-container matColumnDef="actions">
       <th *matHeaderCellDef mat-header-cell> Actions</th>
       <td *matCellDef="let element" mat-cell>
-        <button color="primary" mat-raised-button routerLink="/updateproducts/{{element.productId}}">edit</button>
+        <button color="primary" mat-raised-button routerLink="/product/update/{{element.productId}}">edit</button>
         <button (click)="deleteProduct(element.CategoryId)" class="ml-2" color="warn"
                 mat-raised-button>delete
         </button>

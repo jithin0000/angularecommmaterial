@@ -1,21 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { CategoryComponent } from './category/category.component';
-import { UpdatecategoryComponent } from './updatecategory/updatecategory.component';
-import { ProductComponent } from './product/product.component';
-import { ProductdetailsComponent } from './productdetails/productdetails.component';
-import { UpdateproductsComponent } from './updateproducts/updateproducts.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CookieService } from 'ngx-cookie-service';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
@@ -36,37 +28,22 @@ import {reducers} from './redux/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {effects} from './redux/effects';
 import { ProfileComponent } from './profile/profile.component';
-import { AddProductComponent } from './add-product/add-product.component';
 import { ToastComponent } from './toast/toast.component';
 import { NgbToastModule} from '@ng-bootstrap/ng-bootstrap';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatListModule} from '@angular/material/list';
-import {MatInputModule} from '@angular/material/input';
 
 import { NgxImageZoomModule } from 'ngx-image-zoom';
-import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
-import {MatTableModule} from '@angular/material/table';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { MatDividerModule } from '@angular/material/divider';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatMenuModule} from '@angular/material/menu';
 import { DialogComponent } from './dialog/dialog.component';
 import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerInterceptor';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { ProductCardComponent } from './product/product-card/product-card.component'
-import {MatExpansionModule} from '@angular/material/expansion';
 import { UserComponent } from './user/user.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RoleDialogComponent } from './role-dialog/role-dialog.component';
-
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MaterialModule } from './material/material.module';
+import { ProductModule } from './product/product.module';
+import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
 
 
 
@@ -76,14 +53,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
   declarations: [
     AppComponent,
-    RegisterComponent,
-    LoginComponent,
     HomeComponent,
-    CategoryComponent,
-    UpdatecategoryComponent,
-    ProductComponent,
-    ProductdetailsComponent,
-    UpdateproductsComponent,
     NavbarComponent,
     ViewcartComponent,
     AdmindashboardComponent,
@@ -94,12 +64,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CartComponent,
     OrderComponent,
     ProfileComponent,
-    AddProductComponent,
     ToastComponent,
     DialogComponent,
-    ProductCardComponent,
     UserComponent,
     RoleDialogComponent,
+    PageNotFoundComponent,
 
 
   ],
@@ -108,7 +77,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
+    MaterialModule,
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -119,18 +88,17 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(effects),
     NgbToastModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule,
-    MatCardModule, MatDialogModule, MatTableModule, MatMenuModule,
-    MatButtonModule, MatListModule, MatInputModule, MatDividerModule,
-    MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
-    MatGridListModule, MatPaginatorModule,MatExpansionModule, MatCheckboxModule,
     NgxImageZoomModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CategoryModule,
+    ProductModule,
+    AuthModule,
+    AppRoutingModule,
 
 
   ],
-  providers: [CookieService,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
     { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlerInterceptor, multi: true },
   ],

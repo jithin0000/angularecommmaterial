@@ -1,6 +1,7 @@
 import {Action} from '@ngrx/store';
 import {User} from '../../Models/User';
 import {LoginRequest} from '../../Models/LoginRequest';
+import { LoginSuccessResponseDto } from 'src/app/Models/LoginSuccessResponseDto';
 
 
 export const REGISTER_USER =  ' [USER] Register User ';
@@ -48,7 +49,7 @@ export class LoginUser  implements Action {
 // tslint:disable-next-line:class-name
 export class LoginUserSuccess  implements Action {
   readonly type = LOGIN_USER_SUCCESS;
-  constructor(public payload: any) {
+  constructor(public payload: LoginSuccessResponseDto) {
   }
 }
 

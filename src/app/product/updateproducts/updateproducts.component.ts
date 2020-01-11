@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Route, ActivatedRoute } from '@angular/router';
-import { Category } from '../Models/Category';
+import { Category } from '../../Models/Category';
 import {Observable} from 'rxjs';
-import {Product} from '../Models/Product';
+import {Product} from '../../Models/Product';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {LoadProductDetail} from '../redux/actions/productDetail.action';
-import {UpdateProduct} from '../redux/actions/product.action';
-import {LOAD_CATEGORIES} from '../redux/actions/category.action';
+import {AppState} from '../../Models/AppState';
+import {LoadProductDetail} from '../../redux/actions/productDetail.action';
+import {UpdateProduct} from '../../redux/actions/product.action';
+import {LOAD_CATEGORIES} from '../../redux/actions/category.action';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 

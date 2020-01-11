@@ -47,12 +47,16 @@ export class NavbarComponent implements OnInit {
 
     this.isAuthenticated$ = this.store.select(state=> state.auth.authenticated)
 
-    this.user$ = this.store.select(state => state.userDetail.data)
+    this.user$ = this.store.select(state => state.auth.data )
 
-    this.isAuthenticated$.subscribe(res => {
+    this.user$.subscribe(res => {
+      if (res === null) {
+        this.store.dispatch(new GetUser())
 
-      this.store.dispatch(new GetUser())
-    });
+        this.user$ = this.store.select(state=>state.userDetail.data)
+      }
+    })
+
 
 
   }

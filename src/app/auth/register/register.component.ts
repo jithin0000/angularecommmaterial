@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {RegisterUser} from '../redux/actions/authAction';
-import {AppToastService} from '../app-toast.service';
+import {AppState} from '../../Models/AppState';
+import {RegisterUser} from '../../redux/actions/authAction';
+import {AppToastService} from '../../app-toast.service';
 
 @Component({
   selector: 'app-register',

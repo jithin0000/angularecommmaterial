@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {LoadCategoryDetail} from '../redux/actions/categoryDetailAction';
-import {UpdateCategory} from '../redux/actions/category.action';
+import {AppState} from '../../Models/AppState';
+import {LoadCategoryDetail} from '../../redux/actions/categoryDetailAction';
 import {Observable} from 'rxjs';
-import {Category} from '../Models/Category';
+import {Category} from '../../Models/Category';
+import { UpdateCategory } from 'src/app/redux/actions/category.action';
 
 @Component({
   selector: 'app-updatecategory',

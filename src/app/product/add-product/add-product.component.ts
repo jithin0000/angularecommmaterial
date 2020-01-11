@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {CreateProduct} from '../redux/actions/product.action';
+import {CreateProduct} from '../../redux/actions/product.action';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
+import {AppState} from '../../Models/AppState';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {LOAD_CATEGORIES} from '../redux/actions/category.action';
+import {LOAD_CATEGORIES} from '../../redux/actions/category.action';
 import {Observable} from 'rxjs';
-import {Category} from '../Models/Category';
+import {Category} from '../../Models/Category';
 import {finalize} from 'rxjs/operators';
 
 @Component({

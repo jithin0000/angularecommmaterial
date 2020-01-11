@@ -5,13 +5,14 @@ import * as authActions from '../actions/authAction';
 
 // tslint:disable-next-line:class-name
 export interface AuthState {
+  token?: string,
   data: User;
   registered: boolean;
   authenticated: boolean;
 }
 
 export const initialState: AuthState = {
-  data: null , registered: false, authenticated: false
+  data: null , token: null, registered: false, authenticated: false
 };
 
 export function reducer(
@@ -33,7 +34,7 @@ export function reducer(
       return {...state, authenticated: false, registered: false};
 
     case authActions.LOGIN_USER_SUCCESS:
-      return { ...state , data: action.payload, authenticated: true};
+      return { ...state , data: action.payload.user, token: action.payload.token, authenticated: true};
 
     case authActions.LOGIN_USER_FAILURE:
       return {...state, authenticated: false};
