@@ -64,6 +64,7 @@ export class HomeComponent implements OnInit {
   }
 
   select(sortBy: string) {
+    console.log('indie this',sortBy)
     this.sortBy = sortBy;
     this.store.dispatch(new LOAD_PRODUCTS(sortBy));
   }

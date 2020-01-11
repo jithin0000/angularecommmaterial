@@ -9,10 +9,10 @@
            placeholder="search" #sinput (keyup)="search(sinput.value)" >
       </div>
       <div>
-        <select class="form-control" #sort (change)="select(sort)" name="sortby" id="sort">
+        <select class="form-control" #sort (change)="select(sort.value)" name="sortby" id="sort">
           <option value="">Sort By </option>
           <option value="name_asc">Name </option>
-          <option value="name_asc">Price </option>
+          <option value="price_asc">Price </option>
         </select>
       </div>
     </div>
