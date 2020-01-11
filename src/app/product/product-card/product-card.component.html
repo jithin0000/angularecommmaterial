@@ -1,7 +1,10 @@
 <mat-card class="product-card" [routerLink]="['/productdetails/',product.productId]">
     <img [src]="product.imageurl" alt="" mat-card-image>
     <mat-card-content>
-        <h6 class="title">{{product.name}}</h6>
+        <div class="d-flex justify-content-between">
+            <h6 class="title">{{product.name}}</h6>
+            <p class="price-text">&#36;{{product.price}}</p>
+        </div>
         <div class="rate-sec">
             <mat-icon class="rate">star</mat-icon>
             <mat-icon class="rate">star</mat-icon>
@@ -9,19 +12,15 @@
             <mat-icon class="rate">star_half</mat-icon>
             <mat-icon class="rate">star_border</mat-icon>
         </div>
-        <div class="price-section">
-            <p class="price-text">&#36;{{product.price}}</p>
-            <!-- <div class="alert alert-success">in stock</div> -->
+        
+        <div class="row mx-2 d-flex justify-content-between">
+            <button color="primary" mat-stroked-button>view more</button>
+        <button color="primary" class="text-right" mat-icon-button>
+            <mat-icon>add_shopping_cart</mat-icon>
+        </button>
         </div>
-
        
 
     </mat-card-content>
 
-    <mat-card-actions>
-        <button color="primary" mat-stroked-button>view more</button>
-        <button color="primary" class="text-right" mat-icon-button>
-            <mat-icon>add_shopping_cart</mat-icon>
-        </button>
-    </mat-card-actions>
 </mat-card>

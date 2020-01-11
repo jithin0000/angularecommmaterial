@@ -39,6 +39,7 @@ const routes: Routes = [
   {path: 'order', component: OrderComponent, canActivate: [AuthguardGuard]},
   {path: 'profile', component: ProfileComponent, data:{roles: ['Member']}, canActivate: [AuthguardGuard]},
   {path: 'add-product', component: AddProductComponent, canActivate: [AuthguardGuard]},
+  // { path: "**", component: PageNotFoundComponent}
 
 ];
 

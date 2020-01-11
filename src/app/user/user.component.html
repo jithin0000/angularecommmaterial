@@ -1,0 +1,28 @@
+<div class="e-container">
+    <div class="row mt-5">
+        <div class="col-lg-12 chart">
+            <table *ngIf="userRoles.length > 0" class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Role</th>
+                    <th>edit roles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of userRoles; let i=index" >
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{user.userName}}</td>
+                    <td>{{user.roles}}</td>
+                    <td>
+                        <button mat-raised-button color="primary" (click)="editRole(user)" >edit role</button>
+                    </td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+        </div>
+    </div>
+    
+</div>

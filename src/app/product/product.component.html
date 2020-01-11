@@ -53,7 +53,7 @@
 
     <ng-container matColumnDef="category">
       <th *matHeaderCellDef mat-header-cell> Description</th>
-      <td *matCellDef="let element" mat-cell> {{element.Category.categoryname}} </td>
+      <td *matCellDef="let element" mat-cell> {{element.category.categoryname}} </td>
     </ng-container>
 
 
@@ -61,7 +61,7 @@
     <ng-container matColumnDef="actions">
       <th *matHeaderCellDef mat-header-cell> Actions</th>
       <td *matCellDef="let element" mat-cell>
-        <button color="primary" mat-raised-button routerLink="/updateproducts/{{element.ProductId}}">edit</button>
+        <button color="primary" mat-raised-button routerLink="/updateproducts/{{element.productId}}">edit</button>
         <button (click)="deleteProduct(element.CategoryId)" class="ml-2" color="warn"
                 mat-raised-button>delete
         </button>
@@ -80,48 +80,3 @@
 
 
 </div>
-
-
-<!--<div class="row">-->
-<!--  <div class="col">-->
-<!--    <div class="conatiner">-->
-<!--      <table class="table table-dark table-stripped">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--          <th>Image</th>-->
-<!--          <th>Name</th>-->
-<!--          <th>Price</th>-->
-<!--          <th>description</th>-->
-<!--          <th>stock</th>-->
-<!--          <th>Size</th>-->
-<!--          <th>color</th>-->
-<!--          <th>Discount</th>-->
-<!--          <th>Status</th>-->
-<!--          <th>Category</th>-->
-<!--          <th>Actions</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr *ngFor="let item of productList$|async " >-->
-<!--          <td ><img [src]="item.imageurl" style="width:100px;height: 100px;"></td>-->
-<!--          <td>{{item.name}}</td>-->
-<!--          <td>{{item.price}}</td>-->
-<!--          <td>{{item.description}}</td>-->
-<!--          <td>{{item.stock}}</td>-->
-<!--          <td>{{item.size}}</td>-->
-<!--          <td>{{item.color}}</td>-->
-<!--          <td>{{item.discount}}</td>-->
-<!--          <td>{{item.status}}</td>-->
-<!--          <td>{{item.CategoryId}}</td>-->
-
-<!--          <td> <button routerLink="/updateproducts/{{item.ProductId}}"  class="btn btn-success">Update</button></td>-->
-<!--          <td> <button (click)="deleteProduct(item.ProductId)" class="btn btn-danger">Delete</button></td>-->
-
-<!--        </tr>-->
-
-<!--        </tbody>-->
-<!--      </table>-->
-<!--    </div>-->
-
-<!--  </div>-->
-<!--</div>-->

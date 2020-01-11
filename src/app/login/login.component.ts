@@ -36,7 +36,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
+    
+
     this.store.select(state => state.auth).subscribe(res => {
+      console.log(res)
       if (res.authenticated) {
         if (res.data !== null) {
           localStorage.setItem('token', res.data.token);

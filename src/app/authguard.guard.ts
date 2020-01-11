@@ -27,13 +27,14 @@ export class AuthguardGuard implements CanActivate {
       console.log(roles)
       if (roles) {
         const match = this.authService.checkRole(roles);
+        console.log(match)
         if (match) {
           return true;
         } else {
           this.dialog.open(DialogComponent,{
             role: 'alertdialog',
           });
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/login']);
 
         }
       }

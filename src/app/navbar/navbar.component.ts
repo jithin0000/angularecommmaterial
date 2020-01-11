@@ -19,8 +19,10 @@ import { GetUser } from '../redux/actions/userDetailAction';
 })
 export class NavbarComponent implements OnInit {
 
+  // TODO::// need to chage get user into auth action
+
   cart$: Observable<Cart>;
-  isAuthenticated: boolean;
+  isAuthenticated$: Observable<boolean>;
   user$: Observable<User>
 
   constructor(
@@ -33,8 +35,6 @@ export class NavbarComponent implements OnInit {
 
     this.store.dispatch(new IsUserAuthenticated());
 
-    this.store.dispatch(new GetUser())
-
     CartUtils.getOrCreateCart(this.store);
 
     this.cart$ = this.store.select(state => state.cart.data);
@@ -45,12 +45,14 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.store.select(state => state.auth).subscribe(res => {
-      this.isAuthenticated = res.authenticated;
-    });
+    this.isAuthenticated$ = this.store.select(state=> state.auth.authenticated)
 
     this.user$ = this.store.select(state => state.userDetail.data)
 
+    this.isAuthenticated$.subscribe(res => {
+
+      this.store.dispatch(new GetUser())
+    });
 
 
   }
@@ -64,10 +66,7 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('cart');
     this.router.navigate(['/login']);
     this.store.dispatch(new IsUserAuthenticated());
-    
     CartUtils.getOrCreateCart(this.store);
-
-
 
   }
 

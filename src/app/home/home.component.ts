@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
 import {LOAD_CATEGORIES} from '../redux/actions/category.action';
 import {PaginatedResponseDto} from '../Models/PaginatedResponseDto';
 import {MatPaginator, PageEvent} from '@angular/material';
+import { IsUserAuthenticated } from '../redux/actions/authAction';
 
 @Component({
   selector: 'app-home',
@@ -33,12 +34,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+
     this.productList$ = this.store.select(state => state.products.data);
     this.categoryList = this.store.select(state => state.categories.data);
 
     this.loading$ = this.store.select(state => state.products.loading);
 
-
+   
     this.store.dispatch(new LOAD_PRODUCTS());
     this.store.dispatch(new LOAD_CATEGORIES());
 

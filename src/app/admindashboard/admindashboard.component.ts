@@ -26,7 +26,7 @@ export class AdmindashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.component = 0;
+    this.component = 1;
 
   }
 

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -63,13 +63,16 @@ import {ErrorHandlerInterceptor} from './httpInterceptors/ErrorHandlerIntercepto
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ProductCardComponent } from './product/product-card/product-card.component'
 import {MatExpansionModule} from '@angular/material/expansion';
+import { UserComponent } from './user/user.component';
+import { RoleDialogComponent } from './role-dialog/role-dialog.component';
 
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
 // @ts-ignore
 @NgModule({
-  entryComponents: [DialogComponent],
+  entryComponents: [DialogComponent, RoleDialogComponent],
 
   declarations: [
     AppComponent,
@@ -95,6 +98,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ToastComponent,
     DialogComponent,
     ProductCardComponent,
+    UserComponent,
+    RoleDialogComponent,
 
 
   ],
@@ -119,8 +124,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCardModule, MatDialogModule, MatTableModule, MatMenuModule,
     MatButtonModule, MatListModule, MatInputModule, MatDividerModule,
     MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
-    MatGridListModule, MatPaginatorModule,MatExpansionModule,
-    NgxImageZoomModule.forRoot()
+    MatGridListModule, MatPaginatorModule,MatExpansionModule, MatCheckboxModule,
+    NgxImageZoomModule.forRoot(),
+    ReactiveFormsModule
 
 
   ],

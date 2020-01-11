@@ -3,10 +3,12 @@
     <span routerLink="/"><mat-icon>home</mat-icon></span>
     <span class="example-spacer"></span>
 
-    <li *ngIf="user$ | async as user" class="d-flex align-center">{{user.userName}}
-      <mat-icon *ngIf="isAuthenticated" matSuffice style="cursor: pointer" aria-hidden="false" aria-label="Example home icon" routerLink="/profile">
+    <li *ngIf="isAuthenticated$ | async as isAuthenticated" class="d-flex align-center">
+      <span *ngIf="user$ | async as user" >{{user.userName}} </span>
+      <mat-icon *ngIf="isAuthenticated$ | async as isAuthenticated" matSuffice style="cursor: pointer" aria-hidden="false" aria-label="Example home icon" routerLink="/profile">
         account_circle
       </mat-icon>
+     
     </li>
     <li class="nav-link" aria-hidden="false" aria-label="Example home icon"
         routerLink="/admindashboard">dashboard</li>
