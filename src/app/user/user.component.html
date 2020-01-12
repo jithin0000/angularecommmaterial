@@ -1,28 +1,38 @@
-<div class="e-container">
-    <div class="row mt-5">
-        <div class="col-lg-12 chart">
-            <table *ngIf="userRoles.length > 0" class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Role</th>
-                    <th>edit roles</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of userRoles; let i=index" >
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{user.userName}}</td>
-                    <td>{{user.roles}}</td>
-                    <td>
-                        <button mat-raised-button color="primary" (click)="editRole(user)" >edit role</button>
-                    </td>
-                  </tr>
-                 
-                </tbody>
-              </table>
-        </div>
-    </div>
+<div fxLayout="row" class="m-3"  fxLayoutAlign="start start" >
+  <div fxFlex="80%"  class="white mat-elevation-z8">
+
+    <div class="m-4" fxLaout="row" >
+      <h3 class="title" style="color: black;" >Manage Users</h3>
+    <p *ngIf="userRoles.length > 0" class="mat-body mat-display1">Total Number Users {{userRoles.length}}</p>
     
+    </div>
+    <table *ngIf="userRoles.length > 0" class="table pt-2">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th>edit roles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userRoles; let i=index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{user.userName}}</td>
+          <td>{{user.roles}}</td>
+          <td>
+            <button mat-raised-button color="primary" (click)="editRole(user)">Edit role</button>
+          </td>
+        </tr>
+  
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row mt-5">
+  <div class="col-lg-12 chart">
+   
+  </div>
 </div>

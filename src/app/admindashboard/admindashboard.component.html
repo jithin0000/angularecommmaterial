@@ -1,39 +1,58 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav class="sidenav" mode="side" opened class="mat-elevation-z8">
+<mat-drawer-container class="example-container">
+  <mat-drawer  mode="side" opened class="mat-elevation-z8">
 
     <div class="side-item-header my-3">
       <h3 class="title">Dashboard</h3>
     </div>
     <mat-divider></mat-divider>
 
-
-    <div class="side-item" *ngFor="let item of sideNavItemList" (click)="selectComponent(item.url)">
-      <div class="side-title">
-        <mat-icon class="side-icon">{{item.icon}}</mat-icon>
-        <p class="mt-2">{{item.title}}</p>
+    <div fxLayout="column" fxLayoutAlign="space" fxLayoutGap="10px">
+      <div class="pl-3 pt-2 side-item" fxFlex="100%" fxFlexOffse="2px" *ngFor="let item of sideNavItemList" (click)="selectComponent(item.url)">
+        <div  class="side-title">
+          <mat-icon class="side-icon">{{item.icon}}</mat-icon>
+          <p class="mt-2">{{item.title}}</p>
+        </div>
       </div>
-      <mat-icon class="side-icon">keyboard_arrow_right</mat-icon>
     </div>
+    
 
 
 
 
-  </mat-sidenav>
-  <mat-sidenav-content class="main-content">
+  </mat-drawer>
+  <mat-drawer-content class="main-content">
     <ng-container *ngIf="component === 0 ">
-      <app-dash></app-dash>
+     
+      <div fxLayout="row" fxLayoutAlign="center center" >
+        <div fxFlex="100%" >
+          <app-dash></app-dash>
+        </div>
+      </div>
+
     </ng-container>
     <ng-container *ngIf="component === 1 ">
+      <div fxLayout="row" fxLayoutAlign="center center" >
+        <div fxFlex="100%" >
            <app-user></app-user>
+           </div>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="component === 2 ">
+      <div fxLayout="row" fxLayoutAlign="center center" >
+        <div fxFlex="100%" >
       <app-category></app-category>
+        </div>
+      </div>
     </ng-container>
 
     <ng-container *ngIf="component === 3 ">
+      <div fxLayout="row" fxLayoutAlign="center center" >
+        <div fxFlex="100%" >
       <app-product></app-product>
+      </div>
+      </div>
     </ng-container>
 
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-drawer-content>
+</mat-drawer-container>

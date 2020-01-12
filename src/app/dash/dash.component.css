@@ -12,6 +12,17 @@
 
 }
 
+.a-image{
+  width:"50px";
+  height:"50px";
+}
+
+.a-card:hover .a-image{
+  transform: rotate(60deg);
+  transition: all 0.8s ease-in-out;
+  
+}
+
 .a-title{
   color: #837f6f;
 }

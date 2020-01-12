@@ -11,10 +11,11 @@ import { RoleDialogComponent } from '../role-dialog/role-dialog.component';
 })
 export class UserComponent implements OnInit {
   userRoles: UserRole[] =[];
+  roles = ["Admin", "Member"]
 
   constructor(
     private adminService: AdminService,
-    private dialog : MatDialog,
+    public dialog : MatDialog,
     ) { }
 
   ngOnInit() {
@@ -30,7 +31,10 @@ export class UserComponent implements OnInit {
 
   editRole(user: UserRole){
     this.dialog.open(RoleDialogComponent,{
-      data: { username: user.userName , roles : user.roles},
+
+
+
+      data: { username: user.userName , userRole : user.roles, roles: this.roles},
       width: '400px'
     })
   }

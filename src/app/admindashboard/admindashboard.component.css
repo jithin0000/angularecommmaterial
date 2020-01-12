@@ -1,5 +1,5 @@
 .example-container {
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   /*margin-top: 50px;*/
   bottom: 0;
@@ -8,18 +8,11 @@
   background-color: rgb(246, 240, 252);
 }
 
-mat-sidenav {
+mat-drawer {
   width: 200px;
 }
 
-.main-content {
-  padding-left: 15px;
-  padding-top: 25px;
-}
 
-.sidenav{
-  margin: 8px 16px;
-}
 
 .side-item {
   cursor: pointer;

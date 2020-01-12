@@ -32,7 +32,6 @@ export class AuthguardGuard implements CanActivate {
           return true;
         } else {
           this.dialog.open(DialogComponent,{
-            role: 'alertdialog',
           });
           this.router.navigate(['/']);
 

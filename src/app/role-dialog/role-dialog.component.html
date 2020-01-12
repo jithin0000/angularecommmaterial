@@ -1,8 +1,9 @@
 <h6 mat-diaolog-title >Edit role of {{data.username}}</h6>
 <div mat-dialog-content >
     <mat-list>
-        <mat-list-item><mat-checkbox [checked]="data.roles.includes('Admin')"  >Admin</mat-checkbox></mat-list-item>
-        <mat-list-item><mat-checkbox [checked]="data.roles.includes('Member')" >Member</mat-checkbox></mat-list-item>
+        <mat-list-item *ngFor="let role of data.roles" >
+            <mat-checkbox (click)="checkAndPush($event)" [checked]="data.userRole.includes(role)"  >{{role}}</mat-checkbox>
+        </mat-list-item>
     </mat-list>
 </div>
 

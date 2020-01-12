@@ -16,11 +16,8 @@ export class RoleDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
    private fb: FormBuilder,
    private matDialog: MatDialogRef<RoleDialogComponent>,) { 
-   this.roels =  [
-      { name: "Admin", value : "Admin", checked: false},
-      { name: "Member", value : "Member", checked: false},
-    ]
-  }
+   this.roels = ["first", "second", "third"]
+   }
 
 
   ngOnInit() {
@@ -29,6 +26,10 @@ export class RoleDialogComponent implements OnInit {
       role: []
     })
 
+  }
+
+  checkAndPush($event){
+    console.log($event)
   }
 
   close(){

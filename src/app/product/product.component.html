@@ -1,22 +1,19 @@
-<div class="container mt-5">
-
-  <div class="row pb-2">
-    <div class="col">
-      <h3 class="semi-title">Products</h3>
-    </div>
+<div fxLayout="row" fxLayoutAlign="center center" >
+  <div fxFlex="80%" class="m-3" fxFlexFill>
+    <h3 class="semi-title">Products</h3>
   </div>
+</div>
 
-    <div class="row">
-      <div class="col-lg-12">
-        <button routerLink="/product/add" mat-raised-button color="primary" >add product</button>
-      </div>
-    </div>
-
-  <hr>
-
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="80%" class="m-3">
+    <button routerLink="/product/add" mat-raised-button color="primary" >add product</button>
+  </div>
+</div>
 
 
-  <table *ngIf="productList$ | async as products  "
+<div fxLayout="row" fxLayoutAlign="center center" class="m-3">
+  <div fxFlex="80%">
+    <table *ngIf="productList$ | async as products  "
          [dataSource]="products" class="mat-elevation-z8" mat-table>
 
     <!--- Note that these columns can be defined in any order.
@@ -77,6 +74,6 @@
                  [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 
-
-
+  </div>
 </div>
+
