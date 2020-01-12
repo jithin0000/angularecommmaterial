@@ -1,17 +1,17 @@
-<div fxLayout="row" fxLayoutAlign="center center" >
+<div fxLayout="row" fxLayoutAlign="start start" >
   <div fxFlex="80%" class="m-3" fxFlexFill>
     <h3 class="semi-title">Products</h3>
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="center center">
+<div fxLayout="row" fxLayoutAlign="start start">
   <div fxFlex="80%" class="m-3">
     <button routerLink="/product/add" mat-raised-button color="primary" >add product</button>
   </div>
 </div>
 
 
-<div fxLayout="row" fxLayoutAlign="center center" class="m-3">
+<div fxLayout="row" fxLayoutAlign="start start" class="m-3">
   <div fxFlex="80%">
     <table *ngIf="productList$ | async as products  "
          [dataSource]="products" class="mat-elevation-z8" mat-table>

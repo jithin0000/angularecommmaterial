@@ -46,7 +46,7 @@ import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 
 import { FlexLayoutModule } from '@angular/flex-layout'
-
+import { SharedModule } from './shared/shared.module';
 
 // @ts-ignore
 @NgModule({
@@ -95,7 +95,7 @@ import { FlexLayoutModule } from '@angular/flex-layout'
     ProductModule,
     AuthModule,
     AppRoutingModule,
-    FlexLayoutModule
+    SharedModule
 
 
   ],

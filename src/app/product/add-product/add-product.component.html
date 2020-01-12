@@ -1,76 +1,138 @@
 
-<div class="row mt-5">
-  <div class="col">
-    <div class="container">
-      <div class="form-group">
-        <label for="productImageurl">Product Imageurl</label>
-        <input  name="productImageurl" #productImageurl (change)="uploadImage(productImageurl)"   type="file" class="form-control" required id="productImageurl" placeholder="productImageurl">
-        <!-- <div *ngIf="!productImageurl.valid && productImageurl.touched" class="alert alert-danger">This field is required</div> -->
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col">
-    <div class="container">
-      <form #product="ngForm" (ngSubmit)="onSubmit(product)" encType="multipart/form-data"  >
-
+<div class="container mt-3">
+  <div fxLayout="row" fxLayoutAlign="center start">
+  
+    <div fxFlex="50%">
+      <form #product="ngForm" (ngSubmit)="onSubmit(product)" encType="multipart/form-data">
+  
         <div class="form-group">
           <label for="name">Product </label>
-          <input ngModel #name="ngModel" type="text" name="name" id="name" required class="form-control" placeholder="Product Name" />
+          <input ngModel #name="ngModel" type="text" name="name" id="name" required class="form-control"
+            placeholder="Product Name" />
           <div *ngIf="!name.valid && name.touched" class="alert alert-danger">Product name required</div>
         </div>
         <div class="form-group">
           <label for="price">Product Price</label>
-          <input ngModel #price="ngModel"  type="text" name="price" id="price" class="form-control" placeholder="Product price" />
+          <input ngModel #price="ngModel" type="text" name="price" id="price" class="form-control"
+            placeholder="Product price" />
           <div *ngIf="!price.valid && price.touched" class="alert alert-danger">Product price required</div>
         </div>
         <div class="form-group">
           <label for="description">Product description</label>
-          <input ngModel #description="ngModel" type="text" name="description" id="description" class="form-control" placeholder="Product description" />
-          <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Product description required</div>
+          <input ngModel #description="ngModel" type="text" name="description" id="description" class="form-control"
+            placeholder="Product description" />
+          <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Product description required
+          </div>
         </div>
-
+  
         <div class="form-group">
           <label for="stock">Product stock</label>
-          <input ngModel #stock="ngModel"  type="text" name="stock" id="stock" class="form-control" placeholder="Product stock" />
+          <input ngModel #stock="ngModel" type="text" name="stock" id="stock" class="form-control"
+            placeholder="Product stock" />
           <div *ngIf="!stock.valid && stock.touched" class="alert alert-danger">Product stock required</div>
         </div>
         <div class="form-group">
           <label for="size">Product size</label>
-          <input ngModel #size="ngModel"  type="text" name="size" id="size" class="form-control" placeholder="Product size" />
+          <input ngModel #size="ngModel" type="text" name="size" id="size" class="form-control"
+            placeholder="Product size" />
           <div *ngIf="!size.valid && size.touched" class="alert alert-danger">Product size required</div>
         </div>
         <div class="form-group">
           <label for="color">Product color</label>
-          <input ngModel #color="ngModel"  type="text" name="color" id="color" class="form-control" placeholder="Product color" />
+          <input ngModel #color="ngModel" type="text" name="color" id="color" class="form-control"
+            placeholder="Product color" />
           <div *ngIf="!color.valid && color.touched" class="alert alert-danger">Product color required</div>
         </div>
         <div class="form-group">
           <label for="discount">Product discount</label>
-          <input ngModel #discount="ngModel"  type="text" name="discount" id="discount" class="form-control" placeholder="Product discount" />
+          <input ngModel #discount="ngModel" type="text" name="discount" id="discount" class="form-control"
+            placeholder="Product discount" />
           <div *ngIf="!discount.valid && discount.touched" class="alert alert-danger">Product discount required</div>
         </div>
-
+  
         <!-- <div class="form-group">
           <label for="categoryId">CategoryId</label>
           <input ngModel #categoryId="ngModel"  type="text" name="categoryId" id="categoryId" class="form-control" placeholder="Product " />
           <div *ngIf="!categoryId.valid && categoryId.touched" class="alert alert-danger">Product categoryId required</div>
         </div> -->
-
+  
         <div class="form-group">
           <label for="category">product Category</label>
-          <select id="category" ngModel name="CategoryId" #productCategory="ngModel" required class="form-control">
-            <option *ngFor="let cat of categoryList$ | async "
-                    [value]="cat.CategoryId" >{{cat.categoryname}}</option>
-            <div *ngIf="!productCategory.valid && productCategory.touched" class="alert alert-danger">This field is required</div>
+          <select id="category" ngModel name="categoryId" #productCategory="ngModel" required class="form-control">
+            <option *ngFor="let cat of categoryList$ | async " [value]="cat.categoryId">{{cat.categoryname}}</option>
+            <div *ngIf="!productCategory.valid && productCategory.touched" class="alert alert-danger">This field is
+              required</div>
           </select>
         </div>
         <button [disabled]="product.invalid" class="btn btn-primary">Create Product</button>
       </form>
-
-
+  
     </div>
+    <div fxFlex="50%">
+      <div class="col">
+        <h3>Select files</h3>
+        <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+          [uploader]="uploader" class="card p-3 bg-faded text-center mb-3 my-drop-zone">
+          <i class="fa fa-upload fa-3x"></i>
+          Base drop zone
+        </div>
+        Multiple
+        <input class="my-2" type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+        Single
+        <input type="file" ng2FileSelect [uploader]="uploader" />
+      </div>
+    
+      <div class="col" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length" >
+    
+        <h3>Upload queue</h3>
+        <p>Queue length: {{ uploader?.queue?.length }}</p>
+    
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="50%">Name</th>
+              <th>Size</th>
+              <th>Progress</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue">
+              <td><strong>{{ item?.file?.name }}</strong></td>
+              <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              <td *ngIf="uploader.options.isHTML5">
+                <div class="progress" style="margin-bottom: 0;">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                </div>
+              </td>
+              
+            </tr>
+          </tbody>
+        </table>
+    
+        <div>
+          <div >
+            Queue progress:
+            <div class="progress mb-2" style="">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-success  btn-s" (click)="uploader.uploadAll()"
+            [disabled]="!uploader.getNotUploadedItems().length">
+            <span class="fa fa-upload"></span> Upload 
+          </button>
+          <button type="button" class="btn btn-warning mx-2 btn-s" (click)="uploader.cancel()"
+            [disabled]="!uploader.isUploading">
+            <span class="fa fa-ban"></span> Cancel 
+          </button>
+          <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()"
+            [disabled]="!uploader.queue.length">
+            <span class="fa fa-trash"></span> Remove 
+          </button>
+        </div>
+    
+      </div>
+    </div>
+  
   </div>
 </div>

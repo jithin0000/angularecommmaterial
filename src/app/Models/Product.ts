@@ -1,4 +1,5 @@
 import {Category} from './Category';
+import { Photo } from './Photo';
 
 export interface Product {
   category?: Category;
@@ -14,4 +15,5 @@ export interface Product {
     discount?: number;
     status?: string;
     categoryId?: number;
+    photos: Photo[];
 }

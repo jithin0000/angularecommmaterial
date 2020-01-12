@@ -1,5 +1,5 @@
 <div fxLayout="row" class="m-3" fxLayoutAlign="start start">
-  <div fxFlex="60%">
+  <div fxFlex="80%">
     <div class="mat-card p-3">
       <h3 class="u-title">Add new Category</h3>
       <form #category="ngForm" (ngSubmit)="onSubmit(category)">
@@ -26,8 +26,8 @@
 </div>
 
 
-<div fxLayout="row" class="m-3" fxLayoutAlign="center center" fxLayoutGap="10px">
-  <div fxFlex="60%">
+<div fxLayout="row" class="m-3" fxLayoutAlign="start start" fxLayoutGap="10px">
+  <div fxFlex="80%">
     <table *ngIf="categoryList$ | async as categories  " [dataSource]="categories" class="mat-elevation-z8" mat-table>
 
       <!--- Note that these columns can be defined in any order.
@@ -36,7 +36,7 @@
       <!-- Position Column -->
       <ng-container matColumnDef="position">
         <th *matHeaderCellDef mat-header-cell> No.</th>
-        <td *matCellDef="let element" mat-cell> {{element.CategoryId}} </td>
+        <td *matCellDef="let element" mat-cell> {{element.categoryId}} </td>
       </ng-container>
 
       <!-- Name Column -->

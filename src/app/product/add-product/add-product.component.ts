@@ -7,6 +7,10 @@ import {LOAD_CATEGORIES} from '../../redux/actions/category.action';
 import {Observable} from 'rxjs';
 import {Category} from '../../Models/Category';
 import {finalize} from 'rxjs/operators';
+import { FileUploader } from 'ng2-file-upload';
+import { environment } from 'src/environments/environment';
+import { Product } from 'src/app/Models/Product';
+import { Photo } from 'src/app/Models/Photo';
 
 @Component({
   selector: 'app-add-product',
@@ -15,8 +19,14 @@ import {finalize} from 'rxjs/operators';
 })
 export class AddProductComponent implements OnInit {
 
+  uploader: FileUploader;
+  hasBaseDropZoneOver = false;
+  response: string;
+
+
   categoryList$: Observable<Category[]>;
   imageUrl = '';
+  productImages: Photo[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -28,8 +38,40 @@ export class AddProductComponent implements OnInit {
     this.categoryList$ = this.store.select(state => state.categories.data);
     this.store.dispatch(new LOAD_CATEGORIES());
 
+    this.initFileUploader();
 
   }
+  initFileUploader() {
+    this.uploader = new FileUploader({
+      url: "http://localhost:5000/api/imageupload/product/2673/upload",
+      authTokenHeader: 'Bearer '+localStorage.getItem('token'),
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 20 * 1024 * 1024
+    });
+
+    this.uploader.onAfterAddingFile = (file)=> { file.withCredentials =false}
+
+    this.uploader.onSuccessItem = (item, imResponse, status, header) => {
+      if (imResponse) {
+
+        console.log(imResponse,item)
+
+        // this.productImages = res.photos
+      }
+    }
+
+    this.uploader.onErrorItem = (item ,response , status) =>{
+      console.log(response, status)
+    }
+  }
+
+  public fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
 
   onSubmit(product) {
     const formdata = {

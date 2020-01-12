@@ -21,6 +21,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { FileUploadModule } from 'ng2-file-upload'
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 @NgModule({
   declarations: [],
@@ -35,6 +38,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
     MatGridListModule, MatPaginatorModule,NgxImageZoomModule, MatCheckboxModule,
     FormsModule,ReactiveFormsModule,
+    FileUploadModule,
+    FlexLayoutModule,
+
+
   ]
 })
 export class SharedModule { }
