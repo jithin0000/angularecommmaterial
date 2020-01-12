@@ -33,11 +33,15 @@ export function reducer(
     case pdtAction.FILTER_PRODUCT_BY_CATEGORY:
       return { ...state, data: { ...state.data,
           products: state.data.products.filter(item => item.categoryId === action.categoryId)}  };
-
       case pdtAction.FILTER_PRODUCT_BY_NAME:
-      return { ...state, data: { ...state.data,
-          products: state.data.products.filter(item => item.name
-            .toLowerCase().includes(action.name.toLowerCase()))}  };
+      return { ...state, loading: true, loaded: false }
+
+      case pdtAction.FILTER_PRODUCT_BY_NAME_SUCCESS:
+      return { ...state, loading: false, loaded: true, data: action.payload }
+
+      case pdtAction.FILTER_PRODUCT_BY_NAME_FAILURE:
+        console.log("error", action.payload)
+      return { ...state, loading: true, loaded: false }
 
     case pdtAction.CREATE_PRODUCT:
       return {...state, loaded: false, loading: true};

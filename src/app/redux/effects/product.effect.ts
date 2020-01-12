@@ -6,7 +6,7 @@ import * as productDetailActions from '../actions/productDetail.action';
 
 import {ProductService} from '../../product.service';
 import {catchError, map, switchMap} from 'rxjs/internal/operators';
-import {of} from 'rxjs';
+import {of, Subject} from 'rxjs';
 import {Product} from '../../Models/Product';
 
 
@@ -19,13 +19,26 @@ export class ProductEffect {
   @Effect()
   loadProduct$ = this.actions$.pipe(
     ofType(productActions.LOAD_PRODUCT),
-    switchMap((payload: { sortBy: string, pageNumber: number, pageSize: number}) => {
+    switchMap((payload: { sortBy: string,
+       pageNumber: number, pageSize: number}) => {
       console.log(payload)
       return this.productService
         .getAllBySortedAndFilteredAndPaginated(payload.sortBy,
           payload.pageNumber, payload.pageSize).pipe(
         map(product => new productActions.LOAD_PRODUCTS_SUCCESS(product)),
         catchError(err => of(new productActions.LOAD_PRODUCTS_FAIL(err)))
+      );
+    })
+  );
+
+  @Effect()
+  filterProductByName$ = this.actions$.pipe(
+    ofType(productActions.FILTER_PRODUCT_BY_NAME),
+    switchMap((payload: { name: Subject<string>}) => {
+      return this.productService
+        .filterPaginatedProductByname(payload.name).pipe(
+        map(product => new productActions.FilterProductsByNameSuccess(product)),
+        catchError(err => of(new productActions.FilterProductsByNameFailure(err)))
       );
     })
   );

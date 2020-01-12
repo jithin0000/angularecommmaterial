@@ -22,7 +22,7 @@ export class AuthguardGuard implements CanActivate {
     boolean {
 
     if (next !== null) {
-
+      console.log(next.url)
       const roles = next.data.roles as Array<string>;
       console.log(roles)
       if (roles) {
@@ -34,7 +34,7 @@ export class AuthguardGuard implements CanActivate {
           this.dialog.open(DialogComponent,{
             role: 'alertdialog',
           });
-          // this.router.navigate(['/login']);
+          this.router.navigate(['/']);
 
         }
       }

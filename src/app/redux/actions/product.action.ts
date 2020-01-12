@@ -1,6 +1,7 @@
 import {Action} from '@ngrx/store';
 import {Product} from '../../Models/Product';
 import {PaginatedResponseDto} from '../../Models/PaginatedResponseDto';
+import { Subject } from 'rxjs';
 
 
 export const LOAD_PRODUCT =  ' [PRODUCT] Load Product ';
@@ -10,6 +11,8 @@ export const LOAD_PRODUCT_FAILURE = ' [PRODUCT] Load Product Failure ';
 
 export const FILTER_PRODUCT_BY_CATEGORY =  ' [PRODUCT] Load Product By category ';
 export const FILTER_PRODUCT_BY_NAME =  ' [PRODUCT] Load Product By NAME ';
+export const FILTER_PRODUCT_BY_NAME_SUCCESS =  ' [PRODUCT] Load Product By NAME Success ';
+export const FILTER_PRODUCT_BY_NAME_FAILURE =  ' [PRODUCT] Load Product By NAME Failure ';
 
 
 export const CREATE_PRODUCT =  ' [PRODUCT] Create Product ';
@@ -28,7 +31,8 @@ export const UPDATE_PRODUCT_FAILURE = ' [PRODUCT] Update Product Failure ';
 
 // tslint:disable-next-line:class-name
 export class LOAD_PRODUCTS implements Action {
-  constructor(public sortBy?: string, public pageNumber?: number, public pageSize?: number) {
+  constructor(public sortBy?: string,
+     public pageNumber?: number, public pageSize?: number) {
 
   }
 
@@ -60,7 +64,19 @@ export class FilterProductsByCategory implements Action {
 // tslint:disable-next-line:class-name
 export class FilterProductsByName implements Action {
   readonly type = FILTER_PRODUCT_BY_NAME;
-  constructor(public name: string) {
+  constructor(public name: Subject<string>) {
+  }
+}
+
+export class FilterProductsByNameSuccess implements Action {
+  readonly type = FILTER_PRODUCT_BY_NAME_SUCCESS;
+  constructor(public payload:PaginatedResponseDto) {
+  }
+}
+
+export class FilterProductsByNameFailure implements Action {
+  readonly type = FILTER_PRODUCT_BY_NAME_FAILURE;
+  constructor(public payload:any) {
   }
 }
 
@@ -135,9 +151,10 @@ export class UpdateProductFailure implements Action {
 
 
 export type ProductActions = LOAD_PRODUCTS | LOAD_PRODUCTS_SUCCESS | LOAD_PRODUCTS_FAIL
-  | FilterProductsByCategory | FilterProductsByName |
+  | FilterProductsByCategory |
   CreateProduct | CreateProductSuccess | CreateProductFailure |
   DeleteProduct | DeleteProductSuccess | DeleteProductFailure |
+  FilterProductsByName | FilterProductsByNameFailure | FilterProductsByNameSuccess |
   UpdateProduct | UpdateProductSuccess | UpdateProductFailure ;
 
 

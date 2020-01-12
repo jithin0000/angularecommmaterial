@@ -20,6 +20,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -34,6 +35,7 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule, MatListModule, MatInputModule, MatDividerModule,
     MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
     MatGridListModule, MatPaginatorModule,MatExpansionModule, MatCheckboxModule,
+    MatAutocompleteModule
   ]
 
 })

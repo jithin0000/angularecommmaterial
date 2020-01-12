@@ -11,18 +11,13 @@
   text-transform: capitalize;
 }
 
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
 .sort-sec{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+
+.side-bar{
+  max-height: 100%;
 }

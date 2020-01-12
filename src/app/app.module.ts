@@ -45,6 +45,7 @@ import { ProductModule } from './product/product.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 
+import { FlexLayoutModule } from '@angular/flex-layout'
 
 
 // @ts-ignore
@@ -94,6 +95,7 @@ import { CategoryModule } from './category/category.module';
     ProductModule,
     AuthModule,
     AppRoutingModule,
+    FlexLayoutModule
 
 
   ],
