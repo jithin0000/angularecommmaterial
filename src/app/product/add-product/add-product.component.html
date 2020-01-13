@@ -3,23 +3,23 @@
   <div fxLayout="row" fxLayoutAlign="center start">
   
     <div fxFlex="50%">
-      <form #product="ngForm" (ngSubmit)="onSubmit(product)" encType="multipart/form-data">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" >
   
         <div class="form-group">
           <label for="name">Product </label>
-          <input ngModel #name="ngModel" type="text" name="name" id="name" required class="form-control"
+          <input formControlName="name"  id="name" required class="form-control"
             placeholder="Product Name" />
           <div *ngIf="!name.valid && name.touched" class="alert alert-danger">Product name required</div>
         </div>
         <div class="form-group">
-          <label for="price">Product Price</label>
-          <input ngModel #price="ngModel" type="text" name="price" id="price" class="form-control"
+          <label  for="price">Product Price</label>
+          <input formControlName="price"  id="price" class="form-control" type="number"
             placeholder="Product price" />
           <div *ngIf="!price.valid && price.touched" class="alert alert-danger">Product price required</div>
         </div>
         <div class="form-group">
           <label for="description">Product description</label>
-          <input ngModel #description="ngModel" type="text" name="description" id="description" class="form-control"
+          <input formControlName="description" id="description" class="form-control"
             placeholder="Product description" />
           <div *ngIf="!description.valid && description.touched" class="alert alert-danger">Product description required
           </div>
@@ -27,48 +27,43 @@
   
         <div class="form-group">
           <label for="stock">Product stock</label>
-          <input ngModel #stock="ngModel" type="text" name="stock" id="stock" class="form-control"
+          <input formControlName="stock" id="stock" type="number" class="form-control"
             placeholder="Product stock" />
           <div *ngIf="!stock.valid && stock.touched" class="alert alert-danger">Product stock required</div>
         </div>
         <div class="form-group">
           <label for="size">Product size</label>
-          <input ngModel #size="ngModel" type="text" name="size" id="size" class="form-control"
+          <input formControlName="size" type="number" id="size" class="form-control"
             placeholder="Product size" />
           <div *ngIf="!size.valid && size.touched" class="alert alert-danger">Product size required</div>
         </div>
         <div class="form-group">
           <label for="color">Product color</label>
-          <input ngModel #color="ngModel" type="text" name="color" id="color" class="form-control"
+          <input formControlName="color" type="text" id="color" class="form-control"
             placeholder="Product color" />
           <div *ngIf="!color.valid && color.touched" class="alert alert-danger">Product color required</div>
         </div>
         <div class="form-group">
           <label for="discount">Product discount</label>
-          <input ngModel #discount="ngModel" type="text" name="discount" id="discount" class="form-control"
+          <input formControlName="discount" type="number" id="discount" class="form-control"
             placeholder="Product discount" />
           <div *ngIf="!discount.valid && discount.touched" class="alert alert-danger">Product discount required</div>
         </div>
   
-        <!-- <div class="form-group">
-          <label for="categoryId">CategoryId</label>
-          <input ngModel #categoryId="ngModel"  type="text" name="categoryId" id="categoryId" class="form-control" placeholder="Product " />
-          <div *ngIf="!categoryId.valid && categoryId.touched" class="alert alert-danger">Product categoryId required</div>
-        </div> -->
   
         <div class="form-group">
           <label for="category">product Category</label>
-          <select id="category" ngModel name="categoryId" #productCategory="ngModel" required class="form-control">
+          <select id="category" formControlName="categoryId" required class="form-control">
             <option *ngFor="let cat of categoryList$ | async " [value]="cat.categoryId">{{cat.categoryname}}</option>
-            <div *ngIf="!productCategory.valid && productCategory.touched" class="alert alert-danger">This field is
+            <div *ngIf="!categoryId.valid && categoryId.touched" class="alert alert-danger">This field is
               required</div>
           </select>
         </div>
-        <button [disabled]="product.invalid" class="btn btn-primary">Create Product</button>
+        <button [disabled]="productForm.invalid" class="btn btn-primary">Create Product</button>
       </form>
   
     </div>
-    <div fxFlex="50%">
+    <!-- <div fxFlex="50%">
       <div class="col">
         <h3>Select files</h3>
         <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
@@ -132,7 +127,7 @@
         </div>
     
       </div>
-    </div>
+    </div> -->
   
   </div>
 </div>

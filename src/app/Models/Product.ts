@@ -15,5 +15,5 @@ export interface Product {
     discount?: number;
     status?: string;
     categoryId?: number;
-    photos: Photo[];
+    photos?: Photo[];
 }

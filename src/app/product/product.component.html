@@ -59,7 +59,7 @@
       <th *matHeaderCellDef mat-header-cell> Actions</th>
       <td *matCellDef="let element" mat-cell>
         <button color="primary" mat-raised-button routerLink="/product/update/{{element.productId}}">edit</button>
-        <button (click)="deleteProduct(element.CategoryId)" class="ml-2" color="warn"
+        <button (click)="deleteProduct(element.productId)" class="ml-2" color="warn"
                 mat-raised-button>delete
         </button>
       </td>

@@ -10,10 +10,12 @@ export interface ProductState {
   loading: boolean;
   added: boolean;
   updated: boolean;
+  item: Product,
 }
 
 export const initialState: ProductState = {
-  data: null , loading: false, loaded: false, added: false, updated: false
+  data: { totalItems: 0, totalPages: 1 , products: [], pageIndex: 1 } , 
+  loading: false, loaded: false, added: false, updated: false, item: null
 };
 
 export function reducer(
@@ -21,20 +23,20 @@ export function reducer(
 ): ProductState {
   switch (action.type) {
     case pdtAction.LOAD_PRODUCT:
-      return { ...state,  loading: true};
+      return { ...state,  loading: true, added: false};
 
     case pdtAction.LOAD_PRODUCT_SUCCESS:
       return { ...state, data: action.payload, loading: false, loaded: true};
 
     case pdtAction.LOAD_PRODUCT_FAILURE:
-      return { ...state,   loading: false, loaded: false};
+      return { ...state,   loading: false, loaded: false, added: false};
 
 
     case pdtAction.FILTER_PRODUCT_BY_CATEGORY:
-      return { ...state, data: { ...state.data,
+      return { ...state, added: false, data: { ...state.data,
           products: state.data.products.filter(item => item.categoryId === action.categoryId)}  };
       case pdtAction.FILTER_PRODUCT_BY_NAME:
-      return { ...state, loading: true, loaded: false }
+      return { ...state, loading: true, loaded: false,added: false, }
 
       case pdtAction.FILTER_PRODUCT_BY_NAME_SUCCESS:
       return { ...state, loading: false, loaded: true, data: action.payload }
@@ -44,16 +46,16 @@ export function reducer(
       return { ...state, loading: true, loaded: false }
 
     case pdtAction.CREATE_PRODUCT:
-      return {...state, loaded: false, loading: true};
+      return {...state, loaded: false, loading: true, added: false};
 
     case pdtAction.CREATE_PRODUCT_SUCCESS:
-      return { ...state , data: {...state.data, products: [...state.data.products, action.product]}, loading: false, loaded: true};
+      return { ...state , added: true, item: action.product, data: {...state.data, products: [...state.data.products, action.product]}, loading: false, loaded: true};
 
     case pdtAction.CREATE_PRODUCT_FAILURE:
-      return {...state, loading: false, loaded: false};
+      return {...state, loading: false, loaded: false,added: false};
 
     case pdtAction.DELETE_PRODUCT:
-      return {...state, loaded: false, loading: true};
+      return {...state, loaded: false, loading: true,added: false,};
 
     case pdtAction.DELETE_PRODUCT_SUCCESS:
       return { ...state , data: {
