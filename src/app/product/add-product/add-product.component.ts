@@ -97,7 +97,7 @@ export class AddProductComponent implements OnInit {
   public get categoryId()  {
     return this.productForm.get('categoryId')
   }
-  onSubmit(product) {
+  onSubmit() {
     if (this.productForm.valid  ) {
       
       this.store.dispatch(new CreateProduct(this.productForm.value))
