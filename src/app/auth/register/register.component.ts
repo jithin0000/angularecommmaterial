@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
       if (res.registered) {
 
         this.toastService.show('SuccessFully registered ')
-        this.router.navigate(['/login']);
+        this.router.navigate(['/auth/login']);
 
       }
     });

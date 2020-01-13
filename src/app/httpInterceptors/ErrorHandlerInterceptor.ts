@@ -33,7 +33,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     // errorMessage = 'something bad happened try again later';
 
-    window.alert(errorMessage);
 
     return throwError(errorMessage);
 
