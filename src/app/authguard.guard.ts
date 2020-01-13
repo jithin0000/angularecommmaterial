@@ -3,8 +3,8 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AuthService} from './auth.service';
 import {MatDialog} from '@angular/material';
 import {AppToastService} from './app-toast.service';
-import {ToastComponent} from './toast/toast.component';
-import {DialogComponent} from './dialog/dialog.component';
+import {ToastComponent} from './widget/toast/toast.component';
+import {DialogComponent} from './widget/dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'

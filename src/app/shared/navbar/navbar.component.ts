@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {CartUtils} from '../utils/CartUtils';
+import {CartUtils} from '../../utils/CartUtils';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
+import {AppState} from '../../Models/AppState';
 import {Observable} from 'rxjs';
-import {Cart} from '../Models/Cart';
-import {IsUserAuthenticated} from '../redux/actions/authAction';
+import {Cart} from '../../Models/Cart';
+import {IsUserAuthenticated} from '../../redux/actions/authAction';
 
 import { AngularFireAuth } from '@angular/fire/auth/auth';
-import { AuthService } from '../auth.service';
-import { User } from '../Models/User';
-import { GetUser } from '../redux/actions/userDetailAction';
+import { AuthService } from '../../auth.service';
+import { User } from '../../Models/User';
+import { GetUser } from '../../redux/actions/userDetailAction';
 
 @Component({
   selector: 'app-navbar',

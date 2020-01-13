@@ -7,6 +7,7 @@ import { UpdateproductsComponent } from './updateproducts/updateproducts.compone
 import { AddProductComponent } from './add-product/add-product.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProductRoutingModule } from './product-routing.module';
+import { UploadComponent } from '../widget/upload/upload.component';
 
 
 
@@ -16,12 +17,13 @@ import { ProductRoutingModule } from './product-routing.module';
     ProductCardComponent,
     UpdateproductsComponent,
     AddProductComponent,
-    ProductdetailsComponent
+    ProductdetailsComponent,UploadComponent
     
   ],
   imports: [
     SharedModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    
     
   ],
   exports: [

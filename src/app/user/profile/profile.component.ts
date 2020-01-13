@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {GetUser} from '../redux/actions/userDetailAction';
+import {AppState} from '../../Models/AppState';
+import {GetUser} from '../../redux/actions/userDetailAction';
 import {Observable} from 'rxjs';
-import {User} from '../Models/User';
+import {User} from '../../Models/User';
 
 @Component({
   selector: 'app-profile',

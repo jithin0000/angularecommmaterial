@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Category} from '../Models/Category';
-import {Product} from '../Models/Product';
+import {Category} from '../../Models/Category';
+import {Product} from '../../Models/Product';
 import {Observable} from 'rxjs';
-import {User} from '../Models/User';
+import {User} from '../../Models/User';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {LOAD_CATEGORIES} from '../redux/actions/category.action';
-import {LOAD_PRODUCTS} from '../redux/actions/product.action';
-import {LOAD_USERS} from '../redux/actions/user.action';
+import {AppState} from '../../Models/AppState';
+import {LOAD_CATEGORIES} from '../../redux/actions/category.action';
+import {LOAD_PRODUCTS} from '../../redux/actions/product.action';
+import {LOAD_USERS} from '../../redux/actions/user.action';
 import {Chart} from 'chart.js';
 
 

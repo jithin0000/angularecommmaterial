@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../service/admin.service';
 import { UserRole } from '../Models/UserRole.model';
 import { MatDialog } from '@angular/material';
-import { RoleDialogComponent } from '../role-dialog/role-dialog.component';
+import { RoleDialogComponent } from '../widget/role-dialog/role-dialog.component';
 
 @Component({
   selector: 'app-user',

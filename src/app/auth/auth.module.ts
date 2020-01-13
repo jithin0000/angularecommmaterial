@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
   imports: [
     SharedModule,
     AuthRoutingModule,
+    
   ],
   exports: [
     LoginComponent,RegisterComponent

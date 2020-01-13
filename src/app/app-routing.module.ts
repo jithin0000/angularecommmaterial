@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthguardGuard } from './authguard.guard';
-import { ViewcartComponent } from './viewcart/viewcart.component';
+import { ViewcartComponent } from './cart/viewcart/viewcart.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
-import { AddressComponent } from './address/address.component';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderComponent } from './order/order.component';
-import { ProfileComponent } from './profile/profile.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfileComponent } from './user/profile/profile.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 
 
 
@@ -21,7 +20,6 @@ const routes: Routes = [
     component: AdmindashboardComponent,
     data: { roles: ['Admin'] }, canActivate: [AuthguardGuard]
   },
-  { path: 'address', component: AddressComponent, canActivate: [AuthguardGuard] },
   { path: 'payment', component: PaymentComponent, canActivate: [AuthguardGuard] },
   { path: 'order', component: OrderComponent, canActivate: [AuthguardGuard] },
   { path: 'profile', component: ProfileComponent, data: { roles: ['Member'] }, canActivate: [AuthguardGuard] },

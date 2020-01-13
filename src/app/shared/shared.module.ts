@@ -21,8 +21,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { FileUploadModule } from 'ng2-file-upload'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 
 @NgModule({
@@ -38,8 +38,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatToolbarModule, MatIconModule, MatBadgeModule, MatSidenavModule,
     MatGridListModule, MatPaginatorModule,NgxImageZoomModule, MatCheckboxModule,
     FormsModule,ReactiveFormsModule,
-    FileUploadModule,
-    FlexLayoutModule,
+    FlexLayoutModule,NgxFileDropModule
+
 
 
   ]

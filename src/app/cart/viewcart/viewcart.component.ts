@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Cart} from '../Models/Cart';
+import {Cart} from '../../Models/Cart';
 import {Store} from '@ngrx/store';
-import {AppState} from '../Models/AppState';
-import {CartUtils} from '../utils/CartUtils';
+import {AppState} from '../../Models/AppState';
+import {CartUtils} from '../../utils/CartUtils';
 
 @Component({
   selector: 'app-viewcart',
